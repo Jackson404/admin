@@ -1,1 +1,50 @@
-<p>resume-m works!</p>
+<button style="margin-bottom: 25px" nz-button>添加简历</button>
+
+<nz-table #basicTable [nzData]="listOfData"
+          nzShowPagination='false'
+>
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>姓名</th>
+    <th>手机</th>
+    <th>性别</th>
+    <th>年龄</th>
+    <th>工作年限</th>
+    <th>教育经历</th>
+    <th>期望薪资</th>
+    <th>技能描述</th>
+    <th>自我评价</th>
+    <th>入伍时间</th>
+    <th>服役时长</th>
+    <th>兵种</th>
+    <th>创建时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{ data.id }}</td>
+    <td>{{ data.name }}</td>
+    <td>{{ data.phone }}</td>
+    <td>{{ data.gender }}</td>
+    <td>{{ data.age }}</td>
+    <td>{{ data.workYear }}</td>
+    <td>{{ data.education }}</td>
+    <td>{{ data.salary }}</td>
+    <td>{{ data.skills }}</td>
+    <td>{{ data.selfEvaluation }}</td>
+    <td>{{ data.militaryTime }}</td>
+    <td>{{ data.attendedTime }}</td>
+    <td>{{ data.corps }}</td>
+    <td>{{ data.createTime }}</td>
+    <td>
+      <a>投递记录</a>
+    </td>
+  </tr>
+  </tbody>
+
+</nz-table>
+<div style="margin-top: 25px"></div>
+<nz-pagination style="float: right;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="pageTotal"
+               (nzPageIndexChange)="getByPage()"></nz-pagination>

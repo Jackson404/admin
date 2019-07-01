@@ -23,9 +23,8 @@ export class HttpService {
     const params = 'grantType=' + grantType + '&webId=' + webId + '&webSecret=' + webSecret;
     this.http.post(this.config.baseUrl + url, params, this.config.httpPostOptions).subscribe(
       res => {
-        if (res.errorCode == '0') {
-          localStorage.setItem('accessToken', res.data.access_token);
-          console.log(localStorage.getItem('accessToken'));
+        if (res['errorCode'] == '0') {
+          localStorage.setItem('accessToken', res['data'].access_token);
         }
       }
     )

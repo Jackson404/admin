@@ -1,1 +1,29 @@
-<p>cate-m works!</p>
+<nz-table #expandTable [nzData]="listOfMapData">
+  <thead>
+  <tr>
+    <th nzWidth="40%">名字</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let data of expandTable.data">
+    <ng-container *ngFor="let item of mapOfExpandedData[data.id]">
+      <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
+        <td
+          [nzIndentSize]="item.level * 20"
+          [nzShowExpand]="!!item.son"
+          [(nzExpand)]="item.expand"
+          (nzExpandChange)="collapse(mapOfExpandedData[data.id], item, $event)"
+        >
+          {{ item.name }}
+        </td>
+        <td>
+          <a href="">编辑</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a href="">删除</a>
+        </td>
+      </tr>
+    </ng-container>
+  </ng-container>
+  </tbody>
+</nz-table>

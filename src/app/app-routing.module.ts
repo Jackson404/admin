@@ -7,6 +7,7 @@ import {PositionMComponent} from "./contentM/position-m/position-m.component";
 import {LabelMComponent} from "./contentM/label-m/label-m.component";
 import {CompanyMComponent} from "./contentM/company-m/company-m.component";
 import {CateMComponent} from "./contentM/cate-m/cate-m.component";
+import {AddNewsComponent} from "./contentM/news-m/add-news/add-news.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/welcome'},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'labelM', component: LabelMComponent},
   {path: 'companyM', component: CompanyMComponent},
   {path: 'cateM', component: CateMComponent},
+  {path: 'add-news', component: AddNewsComponent},
 ];
 
 @NgModule({

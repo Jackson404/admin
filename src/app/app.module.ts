@@ -17,6 +17,8 @@ import { PositionMComponent } from './contentM/position-m/position-m.component';
 import { CompanyMComponent } from './contentM/company-m/company-m.component';
 import { CateMComponent } from './contentM/cate-m/cate-m.component';
 import { LabelMComponent } from './contentM/label-m/label-m.component';
+import { AddNewsComponent } from './contentM/news-m/add-news/add-news.component';
+import {DelonFormModule} from "@delon/form";
 
 registerLocaleData(zh);
 
@@ -30,6 +32,7 @@ registerLocaleData(zh);
     CompanyMComponent,
     CateMComponent,
     LabelMComponent,
+    AddNewsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ registerLocaleData(zh);
     NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DelonFormModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LabelMService} from "../../service/labelM/label-m.service";
+import {NzMessageService} from "ng-zorro-antd";
 
 @Component({
   selector: 'app-label-m',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LabelMComponent implements OnInit {
 
-  constructor() { }
+  listOfData: any;
+  pageIndex: any = 1;
+  pageSize: any = 10;
+  pageTotal: any;
 
-  ngOnInit() {
+  constructor(
+    public labelMService: LabelMService,
+    private msg: NzMessageService
+  ) {
   }
 
+  ngOnInit() {
+    this.getByPage()
+  }
+
+  getByPage(): void {
+    this.labelMService.getByPage(this.pageIndex, this.pageSize).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.listOfData = res.data.page.data;
+          this.pageTotal = res.data.page.total;
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    )
+  }
 }

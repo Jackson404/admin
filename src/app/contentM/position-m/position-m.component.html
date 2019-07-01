@@ -1,1 +1,40 @@
-<p>position-m works!</p>
+<button style="margin-bottom: 25px" nz-button>添加职位</button>
+
+<nz-table #basicTable [nzData]="listOfData"
+          nzShowPagination='false'
+>
+  <thead>
+  <tr>
+    <th>岗位id</th>
+    <th>职位</th>
+    <th>岗位类型</th>
+    <th>公司名称</th>
+    <th>薪资</th>
+    <th>投递数量</th>
+    <th>发布时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{ data.id }}</td>
+    <td>{{ data.name }}</td>
+    <td>{{ data.positionCateName }}</td>
+    <td>{{ data.companyName }}</td>
+    <td>{{ data.pay }}</td>
+    <td>{{ data.applyCount }}</td>
+    <td>{{ data.createTime }}</td>
+    <td>
+      <a>简历管理</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>编辑</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>删除</a>
+    </td>
+  </tr>
+  </tbody>
+
+</nz-table>
+<div style="margin-top: 25px"></div>
+<nz-pagination style="float: right;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="pageTotal"
+               (nzPageIndexChange)="getByPage()"></nz-pagination>
