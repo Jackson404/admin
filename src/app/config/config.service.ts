@@ -12,8 +12,7 @@ export class ConfigService {
   httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'})};
 
   httpPostOptions = {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})};
-
-  accessToken = '';
+  httpPostFormData = {headers: new HttpHeaders({'Content-Type': 'multipart/form-data'})};
 
   constructor() {
   }

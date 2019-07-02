@@ -18,7 +18,8 @@ import { CompanyMComponent } from './contentM/company-m/company-m.component';
 import { CateMComponent } from './contentM/cate-m/cate-m.component';
 import { LabelMComponent } from './contentM/label-m/label-m.component';
 import { AddNewsComponent } from './contentM/news-m/add-news/add-news.component';
-import {DelonFormModule} from "@delon/form";
+import { NgxNeditorModule } from '@notadd/ngx-neditor';
+import { LoginComponent } from './user/login/login.component';
 
 registerLocaleData(zh);
 
@@ -32,7 +33,8 @@ registerLocaleData(zh);
     CompanyMComponent,
     CateMComponent,
     LabelMComponent,
-    AddNewsComponent
+    AddNewsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,7 @@ registerLocaleData(zh);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    DelonFormModule
+    NgxNeditorModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]

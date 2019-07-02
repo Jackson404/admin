@@ -55,6 +55,7 @@ export class HttpService {
       }
 
       params += '&accessToken=' + localStorage.getItem('accessToken');
+      console.log(localStorage.getItem('accessToken'));
       this.http.post(this.config.baseUrl + url, params, this.config.httpPostOptions).subscribe(
         response => {
           observer.next(response);
@@ -65,18 +66,26 @@ export class HttpService {
     });
   }
 
-  doPostForUpload(url: any, formData?: any) {
+  // post请求
+  doPostFormData(url: any, params?: any) {
     return new Observable(observer => {
-      this.http.post(this.config.baseUrl + url, formData).subscribe(
+
+      if (localStorage.getItem('accessToken') == null) {
+        this.getAccessToken();
+      }
+
+      url += '?accessToken=' + localStorage.getItem('accessToken');
+
+      this.http.post(this.config.baseUrl + url, params).subscribe(
         response => {
           observer.next(response);
         },
-        (err) => {
+        err => {
           observer.error(err);
-        }
-      );
+        });
     });
   }
+
 
 
 }
