@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IconsProviderModule } from './icons-provider.module';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
@@ -20,6 +20,7 @@ import { LabelMComponent } from './contentM/label-m/label-m.component';
 import { AddNewsComponent } from './contentM/news-m/add-news/add-news.component';
 import { NgxNeditorModule } from '@notadd/ngx-neditor';
 import { LoginComponent } from './user/login/login.component';
+import { IndexComponent } from './index/index/index.component';
 
 registerLocaleData(zh);
 
@@ -34,7 +35,8 @@ registerLocaleData(zh);
     CateMComponent,
     LabelMComponent,
     AddNewsComponent,
-    LoginComponent
+    LoginComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ registerLocaleData(zh);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxNeditorModule
+    NgxNeditorModule,
+    ReactiveFormsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]

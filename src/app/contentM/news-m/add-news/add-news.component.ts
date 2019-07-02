@@ -57,7 +57,7 @@ export class AddNewsComponent implements OnInit {
   // upload 缩略图上传
 
   handleUpload = (item: any) => {
-    console.log(item);
+
     const formData = new FormData();
     formData.append(item.name, item.file as any, this.uploadFileName);
 
@@ -107,7 +107,8 @@ export class AddNewsComponent implements OnInit {
   }
 
   addNews(): void {
-    this.newsService.addNews(this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl).subscribe(
+    const idToken = window.localStorage.getItem('idToken');
+    this.newsService.addNews(this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl, idToken).subscribe(
       res => {
         console.log(res);
       }

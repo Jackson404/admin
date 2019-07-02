@@ -1,0 +1,79 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+            nzCollapsible
+            nzWidth="256px"
+            nzBreakpoint="md"
+            [(nzCollapsed)]="isCollapsed"
+            [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a href="https://ng.ant.design/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>正步后台管理</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu nzOpen nzTitle="常用功能" nzIcon="dashboard">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/welcome">用户管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>权限管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>日志管理</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="内容管理" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/home/newsM">新闻管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/home/slideM">轮播图</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/home/resumeM">简历管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/home/positionM">职位管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/home/companyM">公司管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/home/cateM">类型管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/home/labelM">标签管理</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="数据管理" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a>数据搜索</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <i class="trigger"
+               nz-icon
+               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            ></i>
+        </span>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

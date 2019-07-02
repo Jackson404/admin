@@ -23,10 +23,11 @@ export class NewsMService {
     return this.http.doPost(url, params);
   }
 
-  addNews(categoryId, title, keywords, description, content, imgUrl) {
+  addNews(categoryId, title, keywords, description, content, imgUrl, idToken) {
 
     const url = '/public/index.php/api/v1.News/add';
-    const params = 'categoryId=' + categoryId + '&title=' + title + '&keywords=' + keywords + '&description=' + description + '&content=' + content + '&imgUrl=' + imgUrl;
+    const params = 'categoryId=' + categoryId + '&title=' + title + '&keywords=' + keywords + '&description=' + description
+      + '&content=' + content + '&imgUrl=' + imgUrl + '&id_token=' + idToken;
 
     return this.http.doPost(url, params);
 

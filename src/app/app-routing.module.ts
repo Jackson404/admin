@@ -8,21 +8,25 @@ import {LabelMComponent} from "./contentM/label-m/label-m.component";
 import {CompanyMComponent} from "./contentM/company-m/company-m.component";
 import {CateMComponent} from "./contentM/cate-m/cate-m.component";
 import {AddNewsComponent} from "./contentM/news-m/add-news/add-news.component";
+import {LoginComponent} from './user/login/login.component';
+import {IndexComponent} from './index/index/index.component';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: '/welcome'},
+  {path: '', pathMatch: 'full', redirectTo: '/login'},
   {
-    path: 'welcome',
-    loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)
+    path: 'login',component:LoginComponent
   },
-  {path: 'newsM', component: NewsMComponent},
-  {path: 'slideM', component: SlideMComponent},
-  {path: 'resumeM', component: ResumeMComponent},
-  {path: 'positionM', component: PositionMComponent},
-  {path: 'labelM', component: LabelMComponent},
-  {path: 'companyM', component: CompanyMComponent},
-  {path: 'cateM', component: CateMComponent},
-  {path: 'add-news', component: AddNewsComponent},
+  {path: 'home', component: IndexComponent,
+    children: [
+      {path: 'newsM', component: NewsMComponent},
+      {path: 'slideM', component: SlideMComponent},
+      {path: 'resumeM', component: ResumeMComponent},
+      {path: 'positionM', component: PositionMComponent},
+      {path: 'labelM', component: LabelMComponent},
+      {path: 'companyM', component: CompanyMComponent},
+      {path: 'cateM', component: CateMComponent},
+      {path: 'add-news', component: AddNewsComponent},
+    ]},
 ];
 
 @NgModule({
