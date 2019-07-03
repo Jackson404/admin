@@ -1,0 +1,88 @@
+<div style="width: 80%;">
+
+  <div>
+    <div>职位分类</div>
+    <nz-tree-select
+      style="width: 250px"
+      [nzNodes]="nodes"
+      nzPlaceHolder="选择职位类别"
+      [nzShowLine] = true
+      [(ngModel)]="positionCateId"
+      (ngModelChange)="onChange($event)"
+    >
+    </nz-tree-select>
+  </div>
+  <div style="margin-top: 20px;">
+    <div >职位名字：</div>
+    <input  nz-input  [(ngModel)]="name" />
+  </div>
+  <div style="margin-top: 20px;">
+    <div>公司</div>
+    <nz-select style="width: 120px;"  [(ngModel)]="companyId" nzAllowClear nzPlaceHolder="请选择公司">
+      <nz-option *ngFor="let company of companyList" nzValue="{{company.id}}" nzLabel="{{company.name}}"></nz-option>
+    </nz-select>
+  </div>
+  <div style="margin-top: 20px;">
+    <div>最低薪资：</div>
+    <nz-input-number [(ngModel)]="minPay" [nzMin]="1"  [nzStep]="1"></nz-input-number>
+  </div>
+  <div style="margin-top: 20px;">
+    <div>最高薪资：</div>
+    <nz-input-number [(ngModel)]="maxPay" [nzMin]="1"  [nzStep]="1"></nz-input-number>
+  </div>
+  <div style="margin-top: 20px;">
+    <div>最低工作年限：</div>
+    <input nz-input  [(ngModel)]="minWorkExp" />
+  </div>
+  <div style="margin-top: 20px;">
+    <div>最高工作年限：</div>
+    <input nz-input  [(ngModel)]="maxWorkExp" />
+  </div>
+  <div style="margin-top: 20px;">
+    <div>学历：</div>
+    <input nz-input  [(ngModel)]="education" />
+  </div>
+  <div style="margin-top: 20px;">
+    <div>年龄：</div>
+    <input nz-input  [(ngModel)]="age" />
+  </div>
+  <div style="margin-top: 20px;">
+    <div>招聘数量：</div>
+    <input nz-input  [(ngModel)]="num" />
+  </div>
+  <div style="margin-top: 20px;">
+    <div>标签：</div>
+    <nz-tag
+      *ngFor="let label of labels"
+      nzMode="checkable"
+      [nzChecked]="selectedTags.indexOf(label) > -1"
+      (nzCheckedChange)="handleChange($event, label.name)"
+    >
+      {{ label.name }}
+    </nz-tag>
+  </div>
+  <div style="margin-top: 20px">
+    <div>军人优先：</div><nz-select style="width: 120px;" [(ngModel)]="isSoldierPriority"  nzPlaceHolder="请选择">
+    <nz-option nzValue="1" nzLabel="是"></nz-option>
+    <nz-option nzValue="0" nzLabel="否"></nz-option>
+  </nz-select>
+  </div>
+  <div style="margin-top: 20px;">
+    <div>公司地址：</div>
+    <input nz-input  [(ngModel)]="address" />
+  </div>
+  <div style="margin-top: 20px;">
+    <div>岗位职责：</div>
+    <ngx-neditor style="width: 100%;height: 300px;" [(ngModel)]="positionRequirement" #neditor [config]="neditorConfig"></ngx-neditor>
+  </div>
+  <div style="margin-top: 20px">
+    <div>展示状态：</div><nz-select style="width: 120px;" [(ngModel)]="isShow"  nzPlaceHolder="请选择">
+    <nz-option nzValue="1" nzLabel="展示"></nz-option>
+    <nz-option nzValue="0" nzLabel="不展示"></nz-option>
+  </nz-select>
+  </div>
+
+  <div style="margin-top: 20px">
+    <button nz-button nzType="primary"  (click)="addPosition()" >添加</button>
+  </div>
+</div>

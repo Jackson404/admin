@@ -1,28 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {NzMessageService} from 'ng-zorro-antd';
-import {UploadFile} from 'ng-zorro-antd';
+import {NzMessageService, UploadFile} from 'ng-zorro-antd';
 import {UploadService} from '../../../service/upload.service';
-import {NewsMService} from '../../../service/newsM/news-m.service';
-import {ActivatedRoute, Router} from '@angular/router';
-
+import {Router} from '@angular/router';
+import {SlideMService} from '../../../service/slideM/slide-m.service';
 
 @Component({
-  selector: 'app-add-news',
-  templateUrl: './add-news.component.html',
-  styleUrls: ['./add-news.component.css'],
-
+  selector: 'app-add-slide',
+  templateUrl: './add-slide.component.html',
+  styleUrls: ['./add-slide.component.css']
 })
-export class AddNewsComponent implements OnInit {
+export class AddSlideComponent implements OnInit {
 
-  public newsCateList: any;
-  public newsCateValue: any;
-  public newsTitle: any;
-  public keywords: any;
-  public newsDes: any;
-  public newsContent: any;
-  public newsFrom: any;
-  public isShow: any;
-
+  remark: any;
+  turnUrl: any;
 
   // upload 缩略图
   fileList: UploadFile[];
@@ -42,28 +32,17 @@ export class AddNewsComponent implements OnInit {
 
   // upload --
 
-  // ueditor 配置
-  neditorConfig = {
-    'initialContent': '请输入内容',
-    'autoClearinitialContent': true,
-    'initialFrameWidth': 800,
-    'initialFrameHeight': 300,
-
-  };
 
   constructor(
-    public newsService: NewsMService,
+    public slideService: SlideMService,
     public uploadService: UploadService,
     public msg: NzMessageService,
     public router: Router,
-    public activatedRoute: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
-    this.getNewsCateList();
   }
-
 
   // upload 缩略图上传
 
@@ -102,43 +81,20 @@ export class AddNewsComponent implements OnInit {
 
   // upload --
 
-
-  //获取新闻分类列表
-  getNewsCateList(): void {
-    this.newsService.getNewsCategoryList().subscribe(
-      res => {
-        if (res.errorCode == 0) {
-          this.newsCateList = res.data.list;
-        }
-      },
-      err => {
-        this.msg.error('服务出现异常');
-      }
-    );
-  }
-
-  addNews(): void {
+  addSlide(): void {
     const idToken = window.localStorage.getItem('idToken');
-    this.newsService.addNews(this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl, idToken).subscribe(
+    this.slideService.addSlide(this.imgUrl, this.remark, this.turnUrl, idToken).subscribe(
       res => {
-        // console.log(res);
-        // @ts-ignore
         if (res.errorCode == 0) {
-          this.msg.success('添加新闻成功');
-          this.router.navigateByUrl('/home/newsM');
+          this.msg.success('添加成功');
+          this.router.navigateByUrl('/home/slideM');
         } else {
-          // @ts-ignore
           this.msg.warning(res.msg);
         }
       }, err => {
         this.msg.error('服务异常');
       }
     );
-
   }
-
-
-
-
 
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CompanyMService} from "../../service/companyM/company-m.service";
-import {NzMessageService} from "ng-zorro-antd";
+import {CompanyMService} from '../../service/companyM/company-m.service';
+import {NzMessageService} from 'ng-zorro-antd';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-company-m',
@@ -16,7 +17,8 @@ export class CompanyMComponent implements OnInit {
 
   constructor(
     public companyMService: CompanyMService,
-    private  msg: NzMessageService
+    private  msg: NzMessageService,
+    private router: Router
   ) {
   }
 
@@ -34,7 +36,23 @@ export class CompanyMComponent implements OnInit {
       }, err => {
         this.msg.error('服务器异常');
       }
-    )
+    );
+  }
+
+  delCompany(companyId): void {
+    const idToken = window.localStorage.getItem('idToken');
+    this.companyMService.delCompany(companyId, idToken).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.msg.success('删除成功');
+          this.getByPage();
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
   }
 
 }

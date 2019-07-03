@@ -1,4 +1,4 @@
-<button style="margin-bottom: 25px" nz-button>添加公司</button>
+<button style="margin-bottom: 25px" nz-button routerLink="/home/companyM/add-company">添加公司</button>
 
 <nz-table #basicTable [nzData]="listOfData"
           nzShowPagination='false'
@@ -25,11 +25,11 @@
     <td>{{ data.positionCount }}</td>
     <td>{{ data.createTime }}</td>
     <td>
-      <a>职位管理</a>
+      <a routerLink="/home/companyM/position-page" [queryParams]="{companyId:data.id}">职位管理</a>
       <nz-divider nzType="vertical"></nz-divider>
       <a>编辑</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a>删除</a>
+      <a (click)="delCompany(data.id)">删除</a>
     </td>
   </tr>
   </tbody>

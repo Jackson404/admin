@@ -55,7 +55,7 @@ export class HttpService {
       }
 
       params += '&accessToken=' + localStorage.getItem('accessToken');
-      console.log(localStorage.getItem('accessToken'));
+      // console.log(localStorage.getItem('accessToken'));
       this.http.post(this.config.baseUrl + url, params, this.config.httpPostOptions).subscribe(
         response => {
           observer.next(response);

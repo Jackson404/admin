@@ -21,6 +21,12 @@ import { AddNewsComponent } from './contentM/news-m/add-news/add-news.component'
 import { NgxNeditorModule } from '@notadd/ngx-neditor';
 import { LoginComponent } from './user/login/login.component';
 import { IndexComponent } from './index/index/index.component';
+import { EditNewsComponent } from './contentM/news-m/edit-news/edit-news.component';
+import { AddSlideComponent } from './contentM/slide-m/add-slide/add-slide.component';
+import { AddCompanyComponent } from './contentM/company-m/add-company/add-company.component';
+import { PositionPageComponent } from './contentM/company-m/position-page/position-page.component';
+import { AddPositionComponent } from './contentM/position-m/add-position/add-position.component';
+import { AddCateComponent } from './contentM/cate-m/add-cate/add-cate.component';
 
 registerLocaleData(zh);
 
@@ -36,7 +42,13 @@ registerLocaleData(zh);
     LabelMComponent,
     AddNewsComponent,
     LoginComponent,
-    IndexComponent
+    IndexComponent,
+    EditNewsComponent,
+    AddSlideComponent,
+    AddCompanyComponent,
+    PositionPageComponent,
+    AddPositionComponent,
+    AddCateComponent
   ],
   imports: [
     BrowserModule,

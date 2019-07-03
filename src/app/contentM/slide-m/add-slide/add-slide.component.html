@@ -1,0 +1,49 @@
+<div style="width: 80%;">
+
+  <div style="margin-top: 20px;">
+    <div>图片：</div><div class="clearfix">
+    <nz-upload
+      nzAction="http://localhost:9090/public/index.php/api/v1.File/upload"
+      nzListType="picture-card"
+      [nzBeforeUpload]="beforeUpload"
+      [nzCustomRequest]="handleUpload"
+      [nzName]="'img'"
+      [nzDisabled] = 'imgNzDisabled'
+      [(nzFileList)]="fileList"
+      [nzShowUploadList]="showUploadList"
+      [nzPreview]="handlePreview"
+    >
+      <i nz-icon nzType="plus"></i>
+      <div class="ant-upload-text">Upload</div>
+    </nz-upload>
+    <nz-modal
+      [nzVisible]="previewVisible"
+      [nzContent]="modalContent"
+      [nzFooter]="null"
+      (nzOnCancel)="previewVisible = false"
+    >
+      <ng-template #modalContent>
+        <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+      </ng-template>
+    </nz-modal>
+  </div>
+  </div>
+
+  <div style="margin-top: 20px;">
+    <div>备注：</div> <textarea
+    nz-input
+    placeholder="请输入备注..."
+    [(ngModel)]="remark"
+    [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+  ></textarea>
+  </div>
+
+
+  <div style="margin-top: 20px">
+    <div>链接地址：</div><input nz-input placeholder="请输入链接地址" [(ngModel)]="turnUrl" />
+  </div>
+
+  <div style="margin-top: 20px">
+    <button nz-button nzType="primary"  (click)="addSlide()" >添加</button>
+  </div>
+</div>

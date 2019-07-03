@@ -1,5 +1,5 @@
 
-<button style="margin-bottom: 25px" nz-button routerLink="/home/add-news">添加新闻</button>
+<button style="margin-bottom: 25px" nz-button routerLink="/home/newsM/add-news">添加新闻</button>
 
 <nz-table #basicTable [nzData]="listOfData.data"
           nzShowPagination='false'
@@ -24,9 +24,9 @@
     <td style="color: gray;" *ngIf="data.isShow == 0">展示</td>
     <!--    <td *ngIf="data.isShow == 1">{{ data.isShow }}</td>-->
     <td>
-      <a>编辑</a>
+      <a routerLink="/home/newsM/edit-news" [queryParams]="{newsId:data.id}">编辑</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a>删除</a>
+      <a (click)="delNews(data.id)">删除</a>
     </td>
   </tr>
   </tbody>

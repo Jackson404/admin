@@ -30,6 +30,13 @@ export class NewsMService {
       + '&content=' + content + '&imgUrl=' + imgUrl + '&id_token=' + idToken;
 
     return this.http.doPost(url, params);
-
   }
+
+  delNews(newsId, idToken): Observable<any> {
+    const url = '/public/index.php/api/v1.News/del';
+    const params = 'newsId=' + newsId + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
+  }
+
+
 }

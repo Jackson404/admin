@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {NewsMService} from "../../service/newsM/news-m.service";
-import {NzMessageService} from "ng-zorro-antd";
-import {HttpService} from "../../service/http.service";
+import {NewsMService} from '../../service/newsM/news-m.service';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-news-m',
@@ -13,7 +12,7 @@ export class NewsMComponent implements OnInit {
   listOfData: any = {};
   pageIndex: any = 1;
   pageSize: any = 10;
-  pageTotal:any;
+  pageTotal: any;
 
   constructor(
     public NewMService: NewsMService,
@@ -39,6 +38,24 @@ export class NewsMComponent implements OnInit {
         }
       },
       err => {
+        this.msg.error('服务异常');
+      }
+    );
+  }
+
+  // 删除新闻
+  delNews(newsId): void {
+
+    const idToken = window.localStorage.getItem('idToken');
+    this.NewMService.delNews(newsId, idToken).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.msg.success('删除成功');
+          this.getByPage();
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
         this.msg.error('服务异常');
       }
     );

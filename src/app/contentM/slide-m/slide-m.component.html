@@ -1,5 +1,5 @@
 
-<button style="margin-bottom: 25px" nz-button >添加轮播图</button>
+<button style="margin-bottom: 25px" nz-button routerLink="/home/slideM/add-slide">添加轮播图</button>
 
 <nz-table #basicTable [nzData]="listOfData"
           nzShowPagination='false'
@@ -20,7 +20,7 @@
     <td>
       <a>编辑</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a>删除</a>
+      <a (click)="delSlide(data.id)">删除</a>
     </td>
   </tr>
   </tbody>

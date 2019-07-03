@@ -12,9 +12,15 @@ export class LabelMService {
   ) {
   }
 
-  public getByPage(pageIndex, pageSize): Observable<any> {
+  getByPage(pageIndex, pageSize): Observable<any> {
     const url = '/public/index.php/api/v1.LabelManagement/getByPage';
     const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize;
     return this.http.doPost(url, params);
   }
+
+  getAllLabels():Observable<any>{
+    const url = '/public/index.php/api/v1.LabelManagement/getAllLabels';
+    return this.http.doPost(url,'');
+  }
+
 }
