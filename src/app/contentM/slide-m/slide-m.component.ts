@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SlideMService} from '../../service/slideM/slide-m.service';
 import {NzMessageService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
+import {ConfigService} from '../../config/config.service';
 
 @Component({
   selector: 'app-slide-m',
@@ -10,17 +11,20 @@ import {Router} from '@angular/router';
 })
 export class SlideMComponent implements OnInit {
 
+  serverName:any;
   listOfData: any;
 
   constructor(
     public slideMService: SlideMService,
     private msg: NzMessageService,
-    private router: Router
+    private router: Router,
+    private config:ConfigService
   ) {
   }
 
   ngOnInit() {
     this.getAllSlide();
+    this.serverName = this.config.baseUrl;
   }
 
   getAllSlide(): void {

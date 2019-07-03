@@ -11,8 +11,8 @@ import {SlideMService} from '../../../service/slideM/slide-m.service';
 })
 export class AddSlideComponent implements OnInit {
 
-  remark: any;
-  turnUrl: any;
+  remark: any = '';
+  turnUrl: any = '';
 
   // upload 缩略图
   fileList: UploadFile[];

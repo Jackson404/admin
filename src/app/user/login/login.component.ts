@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../service/user/login.service';
 import {NzMessageService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
+import {HttpService} from '../../service/http.service';
 
 @Component({
   selector: 'app-login',
@@ -18,11 +19,13 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private loginService: LoginService,
     private msg: NzMessageService,
-    private router: Router
+    private router: Router,
+    private http:HttpService
   ) {
   }
 
   ngOnInit(): void {
+    this.http.getAccessToken();
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
