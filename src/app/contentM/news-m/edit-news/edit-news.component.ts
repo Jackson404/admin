@@ -147,7 +147,7 @@ export class EditNewsComponent implements OnInit {
 
   addNews(): void {
     const idToken = window.localStorage.getItem('idToken');
-    this.newsService.addNews(this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl, idToken).subscribe(
+    this.newsService.addNews(this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl,this.isShow, idToken).subscribe(
       res => {
         // console.log(res);
         // @ts-ignore
