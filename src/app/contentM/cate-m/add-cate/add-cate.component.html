@@ -1,0 +1,19 @@
+<div>
+  <div>职位分类:(不选则是一级分类)</div>
+  <nz-tree-select
+    style="width: 250px"
+    [nzNodes]="nodes"
+    nzPlaceHolder="选择分类"
+    [nzShowLine] = true
+    [(ngModel)]="pid"
+    (ngModelChange)="onChange($event)"
+  >
+  </nz-tree-select>
+</div>
+<div style="margin-top: 20px;">
+  <div >分类名字：</div>
+  <input  nz-input  [(ngModel)]="name" />
+</div>
+<div style="margin-top: 20px">
+  <button nz-button nzType="primary"  (click)="addCate()" >添加</button>
+</div>

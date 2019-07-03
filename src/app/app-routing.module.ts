@@ -16,6 +16,7 @@ import {AddCompanyComponent} from './contentM/company-m/add-company/add-company.
 import {PositionPageComponent} from './contentM/company-m/position-page/position-page.component';
 import {AddPositionComponent} from './contentM/position-m/add-position/add-position.component';
 import {AddCateComponent} from './contentM/cate-m/add-cate/add-cate.component';
+import {AddLabelComponent} from './contentM/label-m/add-label/add-label.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'},
@@ -37,6 +38,7 @@ const routes: Routes = [
       {path: 'positionM/add-position', component: AddPositionComponent},
 
       {path: 'labelM', component: LabelMComponent},
+      {path: 'labelM/add-label', component: AddLabelComponent},
 
       {path: 'companyM', component: CompanyMComponent},
       {path: 'companyM/add-company', component: AddCompanyComponent},

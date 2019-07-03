@@ -1,4 +1,4 @@
-<button style="margin-bottom: 25px" nz-button>添加标签</button>
+<button style="margin-bottom: 25px" nz-button routerLink="/home/labelM/add-label">添加标签</button>
 
 <nz-table #basicTable [nzData]="listOfData"
           nzShowPagination='false'
@@ -19,7 +19,7 @@
     <td>
       <a>编辑</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a>删除</a>
+      <a (click)="delLabel(data.id)">删除</a>
     </td>
   </tr>
   </tbody>

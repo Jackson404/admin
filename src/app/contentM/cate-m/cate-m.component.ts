@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import {CateMService} from "../../service/cateM/cate-m.service";
+import {Component, OnInit} from '@angular/core';
+import {CateMService} from '../../service/cateM/cate-m.service';
+import {NzMessageService} from 'ng-zorro-antd';
 
 export interface TreeNodeInterface {
   id: number;
   name: string;
-  pid:number;
-  isDelete:number;
-  createTime:any;
-  createBy:any;
-  updateTime:any;
-  updateBy:any;
+  pid: number;
+  isDelete: number;
+  createTime: any;
+  createBy: any;
+  updateTime: any;
+  updateBy: any;
   level: number;
   expand: boolean;
   son?: TreeNodeInterface[];
@@ -23,13 +24,20 @@ export interface TreeNodeInterface {
 
 export class CateMComponent implements OnInit {
 
-  listOfData:any;
+  listOfData: any;
 
-  listOfMapData:any;
+  listOfMapData: any;
 
   constructor(
-    public cateMService:CateMService
-  ) { }
+    public cateMService: CateMService,
+    private msg: NzMessageService
+  ) {
+  }
+
+  ngOnInit() {
+    this.getAllByTree();
+  }
+
   mapOfExpandedData: { [id: string]: TreeNodeInterface[] } = {};
 
   collapse(array: TreeNodeInterface[], data: TreeNodeInterface, $event: boolean): void {
@@ -50,14 +58,14 @@ export class CateMComponent implements OnInit {
     const stack: any[] = [];
     const array: any[] = [];
     const hashMap = {};
-    stack.push({ ...root, level: 0, expand: false });
+    stack.push({...root, level: 0, expand: false});
 
     while (stack.length !== 0) {
       const node = stack.pop();
       this.visitNode(node, hashMap, array);
       if (node.son) {
         for (let i = node.son.length - 1; i >= 0; i--) {
-          stack.push({ ...node.son[i], level: node.level + 1, expand: false, parent: node });
+          stack.push({...node.son[i], level: node.level + 1, expand: false, parent: node});
         }
       }
     }
@@ -72,26 +80,39 @@ export class CateMComponent implements OnInit {
     }
   }
 
-  getAllByTree():void{
+  //
+  getAllByTree(): void {
     this.cateMService.getAllByTree().subscribe(
-      res=>{
-        if (res.errorCode == 0){
+      res => {
+        if (res.errorCode == 0) {
           // this.listOfData = res.data;
           this.listOfMapData = res.data;
           res.data.forEach(
-            item=>{
+            item => {
               this.mapOfExpandedData[item.id] = this.convertTreeToList(item);
             }
-          )
+          );
         }
       }
-    )
+    );
   }
 
-
-
-  ngOnInit() {
-    this.getAllByTree();
+  //删除分类
+  delCate(cateId): void {
+    const idToken = window.localStorage.getItem('idToken');
+    this.cateMService.delCate(cateId, idToken).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.msg.success('删除成功');
+          this.getAllByTree();
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
   }
+
 
 }

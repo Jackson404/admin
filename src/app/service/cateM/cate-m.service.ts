@@ -23,4 +23,14 @@ export class CateMService {
     const params = 'name=' + name + '&pid=' + pid + '&id_token=' + idToken;
     return this.http.doPost(url, params);
   }
+
+  delCate(categoryId, idToken): Observable<any> {
+    const url = '/public/index.php/api/v1.CategoryManagement/del';
+    const params = 'categoryId=' + categoryId + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
+  }
+
+
+
+
 }

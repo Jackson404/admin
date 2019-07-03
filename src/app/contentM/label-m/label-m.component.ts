@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {LabelMService} from "../../service/labelM/label-m.service";
-import {NzMessageService} from "ng-zorro-antd";
+import {LabelMService} from '../../service/labelM/label-m.service';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-label-m',
@@ -21,7 +21,7 @@ export class LabelMComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getByPage()
+    this.getByPage();
   }
 
   getByPage(): void {
@@ -34,6 +34,22 @@ export class LabelMComponent implements OnInit {
       }, err => {
         this.msg.error('服务异常');
       }
-    )
+    );
+  }
+
+  delLabel(labelId): void {
+    const idToken = window.localStorage.getItem('idToken');
+    this.labelMService.delLabel(labelId, idToken).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.msg.success('删除成功');
+          this.getByPage();
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
   }
 }

@@ -27,6 +27,7 @@ import { AddCompanyComponent } from './contentM/company-m/add-company/add-compan
 import { PositionPageComponent } from './contentM/company-m/position-page/position-page.component';
 import { AddPositionComponent } from './contentM/position-m/add-position/add-position.component';
 import { AddCateComponent } from './contentM/cate-m/add-cate/add-cate.component';
+import { AddLabelComponent } from './contentM/label-m/add-label/add-label.component';
 
 registerLocaleData(zh);
 
@@ -48,7 +49,8 @@ registerLocaleData(zh);
     AddCompanyComponent,
     PositionPageComponent,
     AddPositionComponent,
-    AddCateComponent
+    AddCateComponent,
+    AddLabelComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from "../http.service";
-import {Observable} from "rxjs";
+import {HttpService} from '../http.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +18,21 @@ export class LabelMService {
     return this.http.doPost(url, params);
   }
 
-  getAllLabels():Observable<any>{
+  getAllLabels(): Observable<any> {
     const url = '/public/index.php/api/v1.LabelManagement/getAllLabels';
-    return this.http.doPost(url,'');
+    return this.http.doPost(url, '');
+  }
+
+  addLabel(name, idToken): Observable<any> {
+    const url = '/public/index.php/api/v1.LabelManagement/add';
+    const params = 'name=' + name + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
+  }
+
+  delLabel(labelId, idToken): Observable<any> {
+    const url = '/public/index.php/api/v1.LabelManagement/del';
+    const params = 'labelId=' + labelId + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
   }
 
 }
