@@ -12,7 +12,7 @@ export class NewsMService {
 
   getByPage(pageIndex, pageSize): Observable<any> {
     const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize;
-    const url = '/public/index.php/api/v1.News/getByPage';
+    const url = '/public/index.php/api/v1.News/getByPageWithAdmin';
 
     return this.http.doPost(url, params);
   }
@@ -23,11 +23,11 @@ export class NewsMService {
     return this.http.doPost(url, params);
   }
 
-  addNews(categoryId, title, keywords, description, content, imgUrl, idToken) {
+  addNews(categoryId, title, keywords, description, content, imgUrl, isShow, idToken) {
 
     const url = '/public/index.php/api/v1.News/add';
     const params = 'categoryId=' + categoryId + '&title=' + title + '&keywords=' + keywords + '&description=' + description
-      + '&content=' + content + '&imgUrl=' + imgUrl + '&id_token=' + idToken;
+      + '&content=' + content + '&imgUrl=' + imgUrl + '&isShow=' + isShow + '&id_token=' + idToken;
 
     return this.http.doPost(url, params);
   }
@@ -35,6 +35,12 @@ export class NewsMService {
   delNews(newsId, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.News/del';
     const params = 'newsId=' + newsId + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
+  }
+
+  getNewsDetail(newsId): Observable<any> {
+    const url = '/public/index.php/api/v1.News/getDetail';
+    const params = 'newsId=' + newsId;
     return this.http.doPost(url, params);
   }
 
