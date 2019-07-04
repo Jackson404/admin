@@ -20,7 +20,7 @@
     <td>{{ data.remark }}</td>
     <td>{{ data.turnUrl }}</td>
     <td>
-      <button nz-button nzType="primary">编辑</button>
+      <button nz-button nzType="primary" routerLink="/home/slideM/edit-slide" [queryParams]="{slideId:data.id}">编辑</button>
       <nz-divider nzType="vertical"></nz-divider>
       <button nz-button nzType="danger" (click)="delSlide(data.id)">删除</button>
     </td>

@@ -17,6 +17,7 @@ import {PositionPageComponent} from './contentM/company-m/position-page/position
 import {AddPositionComponent} from './contentM/position-m/add-position/add-position.component';
 import {AddCateComponent} from './contentM/cate-m/add-cate/add-cate.component';
 import {AddLabelComponent} from './contentM/label-m/add-label/add-label.component';
+import {EditSlideComponent} from './contentM/slide-m/edit-slide/edit-slide.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'},
@@ -31,6 +32,7 @@ const routes: Routes = [
 
       {path: 'slideM', component: SlideMComponent},
       {path: 'slideM/add-slide', component: AddSlideComponent},
+      {path: 'slideM/edit-slide', component: EditSlideComponent},
 
       {path: 'resumeM', component: ResumeMComponent},
 

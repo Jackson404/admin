@@ -1,20 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {NzMessageService, UploadFile} from 'ng-zorro-antd';
-import {UploadService} from '../../../service/upload.service';
-import {Router} from '@angular/router';
 import {SlideMService} from '../../../service/slideM/slide-m.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ConfigService} from '../../../config/config.service';
 
 @Component({
-  selector: 'app-add-slide',
-  templateUrl: './add-slide.component.html',
-  styleUrls: ['./add-slide.component.css']
+  selector: 'app-edit-slide',
+  templateUrl: './edit-slide.component.html',
+  styleUrls: ['./edit-slide.component.css']
 })
-export class AddSlideComponent implements OnInit {
+export class EditSlideComponent implements OnInit {
 
+  slideId: any;
   remark: any = '';
   turnUrl: any = '';
-  imgUrl:any = '';
+  imgUrl: any = '';
 
   // upload 缩略图
   uploadServeName: any;
@@ -31,17 +31,25 @@ export class AddSlideComponent implements OnInit {
     this.previewImage = file.url || file.thumbUrl;
     this.previewVisible = true;
   };
+
   // upload --
 
   constructor(
     public slideService: SlideMService,
     public msg: NzMessageService,
     public router: Router,
-    private config:ConfigService
+    private config: ConfigService,
+    private activatedRouter: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
+    this.activatedRouter.queryParams.subscribe(
+      params => {
+        this.slideId = params.slideId;
+        this.getDetail();
+      }
+    );
     const accessToken = window.localStorage.getItem('accessToken');
     this.uploadServeName = this.config.baseUrl + '/public/index.php/api/v1.File/upload?accessToken=' + accessToken;
   }
@@ -62,6 +70,22 @@ export class AddSlideComponent implements OnInit {
 
   // upload --
 
+  getDetail(): void {
+    this.slideService.getDetail(this.slideId).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.imgUrl = res.data.detail.imgUrl;
+          this.remark = res.data.detail.remark;
+          this.turnUrl = res.data.detail.turnUrl;
+
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
+  }
 
   addSlide(): void {
     const idToken = window.localStorage.getItem('idToken');
@@ -79,4 +103,20 @@ export class AddSlideComponent implements OnInit {
     );
   }
 
+  edit(): void {
+
+    const idToken = window.localStorage.getItem('idToken');
+    this.slideService.editSlide(this.slideId, this.imgUrl, this.remark, this.turnUrl, idToken).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.msg.success('编辑成功');
+          this.router.navigateByUrl('/home/slideM');
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
+  }
 }

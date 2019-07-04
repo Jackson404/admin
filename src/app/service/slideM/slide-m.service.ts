@@ -25,9 +25,21 @@ export class SlideMService {
   }
 
   //删除轮播图
-  delSlide(slideId,idToken):Observable<any>{
+  delSlide(slideId, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.SlideShow/delById';
-    const params = 'id='+slideId+'&id_token='+idToken;
-    return this.http.doPost(url,params);
+    const params = 'id=' + slideId + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
+  }
+
+  getDetail(slideId): Observable<any> {
+    const url = '/public/index.php/api/v1.SlideShow/getDetail';
+    const params = 'id=' + slideId;
+    return this.http.doPost(url, params);
+  }
+
+  editSlide(slideId, imgUrl, remark, turnUrl, idToken): Observable<any> {
+    const url = '/public/index.php/api/v1.SlideShow/edit';
+    const params = 'id=' + slideId + '&imgUrl=' + imgUrl + '&remark=' + remark + '&turnUrl=' + turnUrl + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
   }
 }
