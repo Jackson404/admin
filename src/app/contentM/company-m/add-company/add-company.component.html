@@ -1,67 +1,61 @@
-<div style="width: 80%;">
-
-  <div>
-    <div>公司名称：</div>
+<div style="width: 10%;float: left;">
+  <div class="left">公司名称：</div>
+  <div class="left">省：</div>
+  <div class="left">市：</div>
+  <div class="left" >区：</div>
+  <div class="left" >详细地址：</div>
+  <div class="left">手机号：</div>
+  <div class="left">公司性质：</div>
+  <div class="left">公司简介：</div>
+  <div class="left" style="margin-top: 382px">公司备注：</div>
+  <div class="left" style="margin-top: 40px">联系人：</div>
+  <div class="left">微信号：</div>
+  <div class="left">负责人：</div>
+</div>
+<div style="width: 90%;float: left;">
+  <div class="right">
     <input nz-input  [(ngModel)]="name"/>
   </div>
-  <div style="margin-top: 20px;">
-    <div>省：</div>
+  <div class="right">
     <input nz-input  [(ngModel)]="province"/>
   </div>
-  <div style="margin-top: 20px;">
-    <div>市：</div>
+  <div class="right">
     <input nz-input  [(ngModel)]="city"/>
   </div>
-  <div style="margin-top: 20px;">
-    <div>区：</div>
+  <div class="right">
     <input nz-input  [(ngModel)]="area"/>
   </div>
-  <div style="margin-top: 20px;">
-    <div>详细地址：</div>
+  <div class="right">
     <input nz-input  [(ngModel)]="address"/>
   </div>
-  <div style="margin-top: 20px;">
-    <div>手机号：</div>
+  <div class="right">
     <input nz-input  [(ngModel)]="phone"/>
   </div>
-  <div style="margin-top: 20px;">
-    <div>公司性质：</div>
+  <div class="right">
     <input nz-input  [(ngModel)]="nature"/>
   </div>
-
-  <div style="margin-top: 20px;">
-    <div>公司简介：</div>
+  <div class="right">
     <ngx-neditor style="width: 100%;height: 300px;" [(ngModel)]="profile" #neditor
                  [config]="neditorConfig"></ngx-neditor>
   </div>
-
-  <div style="margin-top: 20px;">
-    <div>公司备注：</div>
-    <textarea
-      nz-input
-      [(ngModel)]="remark"
-      [nzAutosize]="{ minRows: 2, maxRows: 6 }"
-    ></textarea>
+  <div class="right">
+     <textarea
+       nz-input
+       [(ngModel)]="remark"
+       [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+     ></textarea>
   </div>
-
-
-  <div style="margin-top: 20px;">
-    <div>联系人：</div>
+  <div class="right">
     <input nz-input  [(ngModel)]="contact"/>
   </div>
-
-  <div style="margin-top: 20px;">
-    <div>微信号：</div>
+  <div class="right">
     <input nz-input  [(ngModel)]="wxNumber"/>
   </div>
-
-  <div style="margin-top: 20px;">
-    <div>负责人：</div>
+  <div class="right">
     <input nz-input  [(ngModel)]="leader"/>
   </div>
-
-
-  <div style="margin-top: 20px">
-    <button nz-button nzType="primary" (click)="addCompany()">添加</button>
-  </div>
+</div>
+<div style="clear: both;"></div>
+<div style="margin-top: 40px;float: right;margin-bottom: 50px;">
+  <button nz-button nzType="primary"  (click)="addCompany()" >添加</button>
 </div>

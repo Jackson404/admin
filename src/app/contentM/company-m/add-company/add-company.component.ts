@@ -25,10 +25,11 @@ export class AddCompanyComponent implements OnInit {
 
   // ueditor 配置
   neditorConfig = {
-    'initialContent': '请输入内容',
     'autoClearinitialContent': true,
-    'initialFrameWidth': 800,
-    'initialFrameHeight': 300,
+    'initialFrameWidth': '100%',
+    'initialFrameHeight': '300',
+    'autoHeightEnabled': false,
+    'zIndex': 0
 
   };
 
