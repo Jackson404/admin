@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NewsMService} from '../../service/newsM/news-m.service';
 import {NzMessageService} from 'ng-zorro-antd';
+import {ConfigService} from '../../config/config.service';
 
 @Component({
   selector: 'app-news-m',
@@ -14,13 +15,17 @@ export class NewsMComponent implements OnInit {
   pageSize: any = 10;
   pageTotal: any;
 
+  serveUrl:any;
+
   constructor(
     public NewMService: NewsMService,
-    private msg: NzMessageService
+    private msg: NzMessageService,
+    private config:ConfigService
   ) {
   }
 
   ngOnInit() {
+    this.serveUrl = this.config.baseUrl;
     this.getByPage();
   }
 

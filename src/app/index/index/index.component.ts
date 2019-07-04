@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
   isCollapsed = true;
-  constructor() { }
+  adminUserName: any;
 
-  ngOnInit() {
+  constructor(
+    private router:Router
+  ) {
   }
 
+  ngOnInit() {
+    this.adminUserName = window.localStorage.getItem('adminUserName');
+  }
+
+  loginOut(): void {
+    window.localStorage.setItem('adminUserName', null);
+    this.router.navigateByUrl('/login');
+  }
 }

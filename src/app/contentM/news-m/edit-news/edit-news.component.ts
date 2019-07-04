@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NzMessageService, UploadFile} from 'ng-zorro-antd';
 import {NewsMService} from '../../../service/newsM/news-m.service';
-import {UploadService} from '../../../service/upload.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ConfigService} from '../../../config/config.service';
 
 @Component({
   selector: 'app-edit-news',
@@ -12,7 +12,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class EditNewsComponent implements OnInit {
 
   newsId: any;
-  newsDetail: any;
+  categoryId: any;
+  isShowName: any;
+  isShowValue: any;
+  newsCateName: any;
+  uploadServeName: any;
+
+  // newsDetail: any;
 
   newsCateList: any;
   newsCateValue: any;
@@ -20,90 +26,72 @@ export class EditNewsComponent implements OnInit {
   keywords: any;
   newsDes: any;
   newsContent: any;
-  newsFrom: any;
   isShow: any;
+  imgUrl: any;
 
 
   // upload 缩略图
-  fileList: UploadFile[];
-  file = {};
-  imgUrl: any;
-  imgNzDisabled = false;
-
-  uploadFileName = '';
-
   showUploadList = {
     showPreviewIcon: true,
     showRemoveIcon: true,
     hidePreviewIconInNonImage: true
   };
+  fileList: any = [];
   previewImage: string | undefined = '';
   previewVisible = false;
-
-  // upload --
-
-  // ueditor 配置
-  neditorConfig = {
-    'initialContent': '请输入内容',
-    'autoClearinitialContent': true,
-    'initialFrameWidth': 800,
-    'initialFrameHeight': 300,
-
-  };
-
-  constructor(
-    public newsService: NewsMService,
-    public uploadService: UploadService,
-    public msg: NzMessageService,
-    public router: Router,
-    public activatedRoute: ActivatedRoute
-  ) {
-  }
-
-  ngOnInit() {
-    this.getNewsCateList();
-    this.activatedRoute.queryParams.subscribe(
-      params => {
-        this.newsId = params.newsId;
-      }
-    );
-    this.getNewsDetail();
-  }
-
-  // upload 缩略图上传
-
-  handleUpload = (item: any) => {
-
-    const formData = new FormData();
-    formData.append(item.name, item.file as any, this.uploadFileName);
-
-    this.uploadService.uploadFormData(formData).subscribe(
-      res => {
-        if (res.errorCode == 0) {
-          item.onSuccess(item.file);
-          this.msg.success('图片上传成功');
-          // console.log(res);
-          this.imgNzDisabled = true;
-          this.imgUrl = res.data.imgUrl;
-        }
-      },
-      err => {
-        this.msg.error(err, item.file);
-      }
-    );
-  };
-
-
-  beforeUpload = (file: UploadFile): boolean => {
-    this.uploadFileName = file.name;
-    return true;
-  };
-
 
   handlePreview = (file: UploadFile) => {
     this.previewImage = file.url || file.thumbUrl;
     this.previewVisible = true;
   };
+  // upload --
+
+
+  // ueditor 配置
+  neditorConfig = {
+    'autoClearinitialContent': true,
+    'initialFrameWidth': '100%',
+    'initialFrameHeight': '300',
+    'autoHeightEnabled': false,
+    'zIndex': 0
+
+  };
+
+  constructor(
+    public newsService: NewsMService,
+    public msg: NzMessageService,
+    public router: Router,
+    public activatedRoute: ActivatedRoute,
+    private config: ConfigService
+  ) {
+  }
+
+  ngOnInit() {
+    const accessToken = window.localStorage.getItem('accessToken');
+    this.uploadServeName = this.config.baseUrl + '/public/index.php/api/v1.File/upload?accessToken=' + accessToken;
+    this.getNewsCateList();
+    this.activatedRoute.queryParams.subscribe(
+      params => {
+        this.newsId = params.newsId;
+        this.getNewsDetail();
+      }
+    );
+  }
+
+
+  // upload 缩略图上传
+  uploadChange($event): void {
+    if ($event.type == 'success') {
+      this.fileList = $event.fileList;
+      const result = $event.file.response;
+      if (result.errorCode == '0') {
+        this.msg.success('上传成功');
+        this.imgUrl = result.data.imgUrl;
+      } else {
+        this.msg.warning(result.msg);
+      }
+    }
+  }
 
   // upload --
 
@@ -129,12 +117,20 @@ export class EditNewsComponent implements OnInit {
       res => {
         if (res.errorCode == 0) {
           const newsDetail = res.data.detail;
-          this.newsCateValue = newsDetail.categoryId;
+          this.newsCateName = newsDetail.categoryName;
+          this.categoryId = newsDetail.categoryId;
           this.newsTitle = newsDetail.title;
           this.keywords = newsDetail.keywords;
           this.newsDes = newsDetail.description;
           this.newsContent = newsDetail.content;
           this.imgUrl = newsDetail.imgUrl;
+          this.isShowValue = newsDetail.isShow;
+
+          if (newsDetail.isShow == 0) {
+            this.isShowName = '不展示';
+          } else {
+            this.isShowName = '展示';
+          }
         } else {
           this.msg.warning(res.msg);
         }
@@ -145,24 +141,30 @@ export class EditNewsComponent implements OnInit {
     );
   }
 
-  addNews(): void {
+  //编辑新闻
+  editNews(): void {
     const idToken = window.localStorage.getItem('idToken');
-    this.newsService.addNews(this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl,this.isShow, idToken).subscribe(
+    if (this.newsCateValue == undefined) {
+      this.newsCateValue = this.categoryId;
+    }
+
+    if (this.isShow == undefined) {
+      this.isShow = this.isShowValue;
+    }
+
+    this.newsService.editNews(this.newsId, this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl, this.isShow, idToken).subscribe(
       res => {
-        // console.log(res);
-        // @ts-ignore
         if (res.errorCode == 0) {
-          this.msg.success('添加新闻成功');
-          this.router.navigateByUrl('/home/newsM');
+          this.msg.success('编辑成功');
+          this.router.navigateByUrl('/home/newsM')
+
         } else {
-          // @ts-ignore
           this.msg.warning(res.msg);
         }
       }, err => {
         this.msg.error('服务异常');
       }
     );
-
   }
 
 }

@@ -69,6 +69,21 @@
             ></i>
         </span>
       </div>
+      <div style="position: absolute;right: 100px;top: 0;height: 64px;
+  padding: 0;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);">
+        <a nz-dropdown [nzDropdownMenu]="menu">
+          {{adminUserName}}
+          <i nz-icon nzType="down"></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item>个人中心</li>
+            <li nz-menu-item (click)="loginOut()">退出</li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
     </nz-header>
     <nz-content>
       <div class="inner-content">

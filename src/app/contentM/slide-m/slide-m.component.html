@@ -1,5 +1,5 @@
 
-<button style="margin-bottom: 25px" nz-button routerLink="/home/slideM/add-slide">添加轮播图</button>
+<button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/slideM/add-slide">添加轮播图</button>
 
 <nz-table #basicTable [nzData]="listOfData"
           nzShowPagination='false'
@@ -20,12 +20,11 @@
     <td>{{ data.remark }}</td>
     <td>{{ data.turnUrl }}</td>
     <td>
-      <a>编辑</a>
+      <button nz-button nzType="primary">编辑</button>
       <nz-divider nzType="vertical"></nz-divider>
-      <a (click)="delSlide(data.id)">删除</a>
+      <button nz-button nzType="danger" (click)="delSlide(data.id)">删除</button>
     </td>
   </tr>
   </tbody>
 
 </nz-table>
-<div style="margin-top: 25px"></div>

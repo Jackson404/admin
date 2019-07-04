@@ -44,5 +44,12 @@ export class NewsMService {
     return this.http.doPost(url, params);
   }
 
+  editNews(newsId, categoryId, title, keywords, description, content, imgUrl, isShow, idToken): Observable<any> {
+    const url = '/public/index.php/api/v1.News/edit';
+    const params = 'newsId=' + newsId + '&categoryId=' + categoryId + '&title=' + title + '&keywords=' + keywords + '&description=' + description
+      + '&content=' + content + '&imgUrl=' + imgUrl + '&isShow=' + isShow + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
+  }
+
 
 }

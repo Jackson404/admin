@@ -1,4 +1,4 @@
-<button style="margin-bottom: 25px" nz-button routerLink="/home/cateM/add-cate">添加分类</button>
+<button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/cateM/add-cate">添加分类</button>
 <nz-table #expandTable [nzData]="listOfMapData">
   <thead>
   <tr>
@@ -19,9 +19,9 @@
           {{ item.name }}
         </td>
         <td>
-          <a href="">编辑</a>
+          <button nz-button nzType="primary">编辑</button>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="delCate(item.id)">删除</a>
+          <button nz-button nzType="danger" (click)="delCate(item.id)">删除</button>
         </td>
       </tr>
     </ng-container>

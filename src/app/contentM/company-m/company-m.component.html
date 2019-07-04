@@ -1,4 +1,4 @@
-<button style="margin-bottom: 25px" nz-button routerLink="/home/companyM/add-company">添加公司</button>
+<button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/companyM/add-company">添加公司</button>
 
 <nz-table #basicTable [nzData]="listOfData"
           nzShowPagination='false'
@@ -25,16 +25,16 @@
     <td>{{ data.positionCount }}</td>
     <td>{{ data.createTime }}</td>
     <td>
-      <a routerLink="/home/companyM/position-page" [queryParams]="{companyId:data.id}">职位管理</a>
+      <button nz-button nzType="default"  routerLink="/home/companyM/position-page" [queryParams]="{companyId:data.id}">职位管理</button>
       <nz-divider nzType="vertical"></nz-divider>
-      <a>编辑</a>
+      <button nz-button nzType="primary">编辑</button>
       <nz-divider nzType="vertical"></nz-divider>
-      <a (click)="delCompany(data.id)">删除</a>
+      <button nz-button nzType="danger" (click)="delCompany(data.id)">删除</button>
     </td>
   </tr>
   </tbody>
 
 </nz-table>
-<div style="margin-top: 25px"></div>
-<nz-pagination style="float: right;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="pageTotal"
+
+<nz-pagination style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="pageTotal"
                (nzPageIndexChange)="getByPage()"></nz-pagination>
