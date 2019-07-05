@@ -26,7 +26,7 @@
     <td>{{ data.applyCount }}</td>
     <td>{{ data.createTime }}</td>
     <td>
-      <button nz-button nzType="default">简历管理</button>
+      <button nz-button nzType="default" (click)="showResumeModal(data.id)">简历管理</button>
       <nz-divider nzType="vertical"></nz-divider>
       <button nz-button nzType="primary" routerLink="/home/positionM/edit-position" [queryParams]="{positionId:data.id}">编辑</button>
       <nz-divider nzType="vertical"></nz-divider>
@@ -41,3 +41,58 @@
                (nzPageIndexChange)="getByPage()"></nz-pagination>
   <div style="clear: both;"></div>
 </div>
+
+
+<nz-modal [(nzVisible)]="isVisible"
+          nzTitle="职位申请记录"
+          nzWidth="80%"
+          (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+
+  <nz-table #resumeTable [nzData]="listOfDataA"
+            nzShowPagination='false'
+  >
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>姓名</th>
+      <th>手机</th>
+      <th>性别</th>
+      <th>年龄</th>
+      <th>工作年限</th>
+      <th>教育经历</th>
+      <th>期望薪资</th>
+      <th>技能描述</th>
+      <th>自我评价</th>
+      <th>入伍时间</th>
+      <th>服役时长</th>
+      <th>兵种</th>
+      <th>创建时间</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of resumeTable.data">
+      <td>{{ data.id }}</td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.phone }}</td>
+      <td>{{ data.gender }}</td>
+      <td>{{ data.age }}</td>
+      <td>{{ data.workYear }}</td>
+      <td>{{ data.education }}</td>
+      <td>{{ data.salary }}</td>
+      <td>{{ data.skills }}</td>
+      <td>{{ data.selfEvaluation }}</td>
+      <td>{{ data.militaryTime }}</td>
+      <td>{{ data.attendedTime }}</td>
+      <td>{{ data.corps }}</td>
+      <td>{{ data.createTime }}</td>
+    </tr>
+    </tbody>
+
+  </nz-table>
+
+  <div style="margin-top: 25px"></div>
+  <nz-pagination style="float: right;" [(nzPageIndex)]="pageIndexA" [(nzPageSize)]="pageSizeA" [nzTotal]="pageTotalA"
+                 (nzPageIndexChange)="getResumePageByPositionId()"></nz-pagination>
+  <div style="clear:both"></div>
+
+</nz-modal>

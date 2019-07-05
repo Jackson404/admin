@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from "../http.service";
-import {Observable} from "rxjs";
+import {HttpService} from '../http.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,20 @@ export class ResumeMService {
   getByPage(pageIndex, pageSize): Observable<any> {
     const url = '/public/index.php/api/v1.Resume/getByPage';
     const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize;
+    return this.http.doPost(url, params);
+  }
+
+  // 获取简历的投递记录
+  getResumeApplyList(resumeId): Observable<any> {
+    const url = '/public/index.php/api/v1.Resume/getResumeApplyList';
+    const params = 'resumeId=' + resumeId;
+    return this.http.doPost(url, params);
+  }
+
+  // 获取简历的投递记录
+  getResumeApplyPage(resumeId, pageIndex, pageSize): Observable<any> {
+    const url = '/public/index.php/api/v1.Resume/getResumeApplyPage';
+    const params = 'resumeId=' + resumeId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize;
     return this.http.doPost(url, params);
   }
 
