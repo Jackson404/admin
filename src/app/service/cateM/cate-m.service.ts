@@ -30,7 +30,17 @@ export class CateMService {
     return this.http.doPost(url, params);
   }
 
+  getCateDetail(categoryId): Observable<any> {
+    const url = '/public/index.php/api/v1.CategoryManagement/getDetail';
+    const params = 'categoryId=' + categoryId;
+    return this.http.doPost(url, params);
+  }
 
+  eidtCate(categoryId, name, pid, idToken): Observable<any> {
+    const url = '/public/index.php/api/v1.CategoryManagement/edit';
+    const params = 'categoryId=' + categoryId + '&name=' + name + '&pid=' + pid + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
+  }
 
 
 }

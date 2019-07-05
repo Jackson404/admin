@@ -1,15 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {CateMService} from '../../../service/cateM/cate-m.service';
 import {NzMessageService} from 'ng-zorro-antd';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-  selector: 'app-add-cate',
-  templateUrl: './add-cate.component.html',
-  styleUrls: ['./add-cate.component.css']
+  selector: 'app-edit-cate',
+  templateUrl: './edit-cate.component.html',
+  styleUrls: ['./edit-cate.component.css']
 })
-export class AddCateComponent implements OnInit {
+export class EditCateComponent implements OnInit {
 
+  cateId: any;
   pid: any = 0;
   name: any;
   // 职位类型
@@ -23,12 +24,35 @@ export class AddCateComponent implements OnInit {
   constructor(
     private cateService: CateMService,
     private msg: NzMessageService,
-    private router: Router
+    private router: Router,
+    private activateRoute: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
     this.getAllByTree();
+    this.activateRoute.queryParams.subscribe(
+      params => {
+        this.cateId = params.cateId;
+        this.getCateDetail();
+      }
+    );
+  }
+
+  getCateDetail(): void {
+    this.cateService.getCateDetail(this.cateId).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.pid = res.data.detail.pid;
+          this.name = res.data.detail.name;
+
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
   }
 
   //
@@ -46,12 +70,12 @@ export class AddCateComponent implements OnInit {
     );
   }
 
-  addCate(): void {
+  editCate():void{
     const idToken = window.localStorage.getItem('idToken');
-    this.cateService.addCate(this.name, this.pid, idToken).subscribe(
+    this.cateService.eidtCate(this.cateId,this.name, this.pid, idToken).subscribe(
       res => {
         if (res.errorCode == 0) {
-          this.msg.success('添加成功');
+          this.msg.success('编辑成功');
           this.router.navigateByUrl('/home/cateM');
         } else {
           this.msg.warning(res.msg);
@@ -61,4 +85,6 @@ export class AddCateComponent implements OnInit {
       }
     );
   }
+
+
 }

@@ -31,6 +31,7 @@ import { AddLabelComponent } from './contentM/label-m/add-label/add-label.compon
 import { EditSlideComponent } from './contentM/slide-m/edit-slide/edit-slide.component';
 import { EditPositionComponent } from './contentM/position-m/edit-position/edit-position.component';
 import { EditCompanyComponent } from './contentM/company-m/edit-company/edit-company.component';
+import { EditCateComponent } from './contentM/cate-m/edit-cate/edit-cate.component';
 
 registerLocaleData(zh);
 
@@ -56,7 +57,8 @@ registerLocaleData(zh);
     AddLabelComponent,
     EditSlideComponent,
     EditPositionComponent,
-    EditCompanyComponent
+    EditCompanyComponent,
+    EditCateComponent
   ],
   imports: [
     BrowserModule,

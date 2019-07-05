@@ -20,6 +20,7 @@ import {AddLabelComponent} from './contentM/label-m/add-label/add-label.componen
 import {EditSlideComponent} from './contentM/slide-m/edit-slide/edit-slide.component';
 import {EditPositionComponent} from './contentM/position-m/edit-position/edit-position.component';
 import {EditCompanyComponent} from './contentM/company-m/edit-company/edit-company.component';
+import {EditCateComponent} from './contentM/cate-m/edit-cate/edit-cate.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'},
@@ -52,6 +53,7 @@ const routes: Routes = [
 
       {path: 'cateM', component: CateMComponent},
       {path: 'cateM/add-cate', component: AddCateComponent},
+      {path: 'cateM/edit-cate', component: EditCateComponent},
 
     ]},
 ];
