@@ -35,4 +35,17 @@ export class LabelMService {
     return this.http.doPost(url, params);
   }
 
+  getLabelDetail(labelId): Observable<any> {
+    const url = '/public/index.php/api/v1.LabelManagement/getDetail';
+    const params = 'labelId=' + labelId;
+    return this.http.doPost(url, params);
+  }
+
+  editLabel(labelId, name, idToken): Observable<any> {
+    const url = '/public/index.php/api/v1.LabelManagement/edit';
+    const params = 'labelId=' + labelId + '&name=' + name + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
+
+  }
+
 }

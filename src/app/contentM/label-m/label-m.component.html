@@ -1,3 +1,4 @@
+<div class="inner-content">
 <button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/labelM/add-label">添加标签</button>
 
 <nz-table #basicTable [nzData]="listOfData"
@@ -17,7 +18,7 @@
     <td>{{ data.name }}</td>
     <td>{{ data.createTime }}</td>
     <td>
-      <button nz-button nzType="primary" >编辑</button>
+      <button nz-button nzType="primary" routerLink="/home/labelM/edit-label" [queryParams]="{labelId:data.id}">编辑</button>
       <nz-divider nzType="vertical"></nz-divider>
       <button nz-button nzType="danger" (click)="delLabel(data.id)">删除</button>
     </td>
@@ -27,3 +28,5 @@
 </nz-table>
 <nz-pagination style="float: right;margin-top: 10px" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="pageTotal"
                (nzPageIndexChange)="getByPage()"></nz-pagination>
+  <div style="clear: both;"></div>
+</div>

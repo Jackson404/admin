@@ -21,6 +21,7 @@ import {EditSlideComponent} from './contentM/slide-m/edit-slide/edit-slide.compo
 import {EditPositionComponent} from './contentM/position-m/edit-position/edit-position.component';
 import {EditCompanyComponent} from './contentM/company-m/edit-company/edit-company.component';
 import {EditCateComponent} from './contentM/cate-m/edit-cate/edit-cate.component';
+import {EditLabelComponent} from './contentM/label-m/edit-label/edit-label.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'},
@@ -45,6 +46,7 @@ const routes: Routes = [
 
       {path: 'labelM', component: LabelMComponent},
       {path: 'labelM/add-label', component: AddLabelComponent},
+      {path: 'labelM/edit-label', component: EditLabelComponent},
 
       {path: 'companyM', component: CompanyMComponent},
       {path: 'companyM/add-company', component: AddCompanyComponent},
