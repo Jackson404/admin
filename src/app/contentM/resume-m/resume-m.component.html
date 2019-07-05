@@ -1,5 +1,5 @@
 <!--<button style="margin-bottom: 25px" nz-button>添加简历</button>-->
-
+<div class="inner-content">
 <nz-table #basicTable [nzData]="listOfData"
           nzShowPagination='false'
 >
@@ -48,3 +48,5 @@
 <div style="margin-top: 25px"></div>
 <nz-pagination style="float: right;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="pageTotal"
                (nzPageIndexChange)="getByPage()"></nz-pagination>
+  <div style="clear:both"></div>
+</div>

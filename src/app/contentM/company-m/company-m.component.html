@@ -1,40 +1,46 @@
-<button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/companyM/add-company">添加公司</button>
+<div class="inner-content">
+  <button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/companyM/add-company">添加公司</button>
 
-<nz-table #basicTable [nzData]="listOfData"
-          nzShowPagination='false'
->
-  <thead>
-  <tr>
-    <th>公司id</th>
-    <th>公司名字</th>
-    <th>公司地址</th>
-    <th>公司电话</th>
-    <th>公司性质</th>
-    <th>职位数量</th>
-    <th>发布时间</th>
-    <th>操作</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let data of basicTable.data">
-    <td>{{ data.id }}</td>
-    <td>{{ data.name }}</td>
-    <td>{{ data.address }}</td>
-    <td>{{ data.phone }}</td>
-    <td>{{ data.nature }}</td>
-    <td>{{ data.positionCount }}</td>
-    <td>{{ data.createTime }}</td>
-    <td>
-      <button nz-button nzType="default"  routerLink="/home/companyM/position-page" [queryParams]="{companyId:data.id}">职位管理</button>
-      <nz-divider nzType="vertical"></nz-divider>
-      <button nz-button nzType="primary">编辑</button>
-      <nz-divider nzType="vertical"></nz-divider>
-      <button nz-button nzType="danger" (click)="delCompany(data.id)">删除</button>
-    </td>
-  </tr>
-  </tbody>
+  <nz-table #basicTable [nzData]="listOfData"
+            nzShowPagination='false'
+  >
+    <thead>
+    <tr>
+      <th>公司id</th>
+      <th>公司名字</th>
+      <th>公司地址</th>
+      <th>公司电话</th>
+      <th>公司性质</th>
+      <th>职位数量</th>
+      <th>发布时间</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.id }}</td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.address }}</td>
+      <td>{{ data.phone }}</td>
+      <td>{{ data.nature }}</td>
+      <td>{{ data.positionCount }}</td>
+      <td>{{ data.createTime }}</td>
+      <td>
+        <button nz-button nzType="default" routerLink="/home/companyM/position-page"
+                [queryParams]="{companyId:data.id}">职位管理
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button nz-button nzType="primary" routerLink="/home/companyM/edit-company" [queryParams]="{companyId:data.id}">编辑</button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button nz-button nzType="danger" (click)="delCompany(data.id)">删除</button>
+      </td>
+    </tr>
+    </tbody>
 
-</nz-table>
+  </nz-table>
 
-<nz-pagination style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="pageTotal"
-               (nzPageIndexChange)="getByPage()"></nz-pagination>
+  <nz-pagination style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
+                 [nzTotal]="pageTotal"
+                 (nzPageIndexChange)="getByPage()"></nz-pagination>
+  <div style="clear: both;"></div>
+</div>

@@ -1,52 +1,59 @@
-<div style="width: 10%;float: left;">
-  <div class="left">图片</div>
-  <div class="left" style="margin-top: 90px">备注</div>
-  <div class="left" style="margin-top: 40px">链接地址</div>
-</div>
-
-<div style="width: 90%;float: left;">
-  <div class="right">
-    <div class="clearfix">
-      <nz-upload
-        nzAction="{{uploadServeName}}"
-        nzName="img"
-        nzListType="picture-card"
-        (nzChange)="uploadChange($event)"
-        [(nzFileList)]="fileList"
-        [nzShowButton]="fileList.length < 1"
-        [nzShowUploadList]="showUploadList"
-        [nzPreview]="handlePreview"
-      >
-        <i nz-icon nzType="plus"></i>
-        <div class="ant-upload-text">上传</div>
-      </nz-upload>
-      <nz-modal
-        [nzVisible]="previewVisible"
-        [nzContent]="modalContent"
-        [nzFooter]="null"
-        (nzOnCancel)="previewVisible = false"
-      >
-        <ng-template #modalContent>
-          <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
-        </ng-template>
-      </nz-modal>
+<div class="inner-content">
+  <div class="con">
+    <div class="left">图片</div>
+    <div class="right">
+      <div class="clearfix">
+        <nz-upload
+          nzAction="{{uploadServeName}}"
+          nzName="img"
+          nzListType="picture-card"
+          (nzChange)="uploadChange($event)"
+          [(nzFileList)]="fileList"
+          [nzShowButton]="fileList.length < 1"
+          [nzShowUploadList]="showUploadList"
+          [nzPreview]="handlePreview"
+        >
+          <i nz-icon nzType="plus"></i>
+          <div class="ant-upload-text">上传</div>
+        </nz-upload>
+        <nz-modal
+          [nzVisible]="previewVisible"
+          [nzContent]="modalContent"
+          [nzFooter]="null"
+          (nzOnCancel)="previewVisible = false"
+        >
+          <ng-template #modalContent>
+            <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+          </ng-template>
+        </nz-modal>
+      </div>
     </div>
   </div>
-  <div class="right">
+  <div class="con">
+    <div class="left" >备注</div>
+    <div class="right">
     <textarea
       nz-input
       placeholder="备注..."
       [(ngModel)]="remark"
       [nzAutosize]="{ minRows: 2, maxRows: 6 }"
     ></textarea>
+    </div>
   </div>
-  <div class="right">
-    <input nz-input placeholder="请输入链接地址" [(ngModel)]="turnUrl" />
-  </div>
+  <div class="con">
+    <div class="left">链接地址</div>
+    <div class="right">
+      <input nz-input placeholder="请输入链接地址" [(ngModel)]="turnUrl" />
+    </div>
 
+  </div>
+  <div class="con">
+    <div style="margin-top: 40px;float: right;margin-bottom: 50px;">
+      <button nz-button nzType="primary"  (click)="addSlide()" >添加</button>
+    </div>
+  </div>
+  <div style="clear: both;"></div>
 </div>
 
-<div style="clear: both;"></div>
-<div style="margin-top: 40px;float: right;margin-bottom: 50px;">
-  <button nz-button nzType="primary"  (click)="addSlide()" >添加</button>
-</div>
+
+

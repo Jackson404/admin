@@ -1,3 +1,4 @@
+<div class="inner-content">
 <button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/positionM/add-position">添加职位</button>
 
 <nz-table #basicTable [nzData]="listOfData"
@@ -38,3 +39,5 @@
 
 <nz-pagination style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="pageTotal"
                (nzPageIndexChange)="getByPage()"></nz-pagination>
+  <div style="clear: both;"></div>
+</div>

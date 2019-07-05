@@ -1,3 +1,4 @@
+<div class="inner-content">
 <button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/newsM/add-news">添加新闻</button>
 
 <nz-table #basicTable [nzData]="listOfData.data"
@@ -37,3 +38,5 @@
 <nz-pagination style="float: right;margin-top: 15px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
                [nzTotal]="pageTotal"
                (nzPageIndexChange)="getByPage()"></nz-pagination>
+  <div style="clear: both;"></div>
+</div>

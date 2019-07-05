@@ -10,18 +10,18 @@ import {Router} from '@angular/router';
 })
 export class AddCompanyComponent implements OnInit {
 
-  name: any;
-  province: any;
-  city: any;
-  area: any;
-  address: any;
-  phone: any;
-  nature: any;
-  profile: any;
-  remark: any;
-  contact: any;
-  wxNumber: any;
-  leader: any;
+  name: any = '';
+  province: any = '';
+  city: any = '';
+  area: any = '';
+  address: any = '';
+  phone: any = '';
+  nature: any = '';
+  profile: any = '';
+  remark: any = '';
+  contact: any = '';
+  wxNumber: any = '';
+  leader: any = '';
 
   // ueditor 配置
   neditorConfig = {
