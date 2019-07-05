@@ -27,9 +27,9 @@
     <td>
       <button nz-button nzType="default">简历管理</button>
       <nz-divider nzType="vertical"></nz-divider>
-      <button nz-button nzType="primary">编辑</button>
+      <button nz-button nzType="primary" routerLink="/home/positionM/edit-position" [queryParams]="{positionId:data.id}">编辑</button>
       <nz-divider nzType="vertical"></nz-divider>
-      <button nz-button nzType="danger">删除</button>
+      <button nz-button nzType="danger" (click)="delPosition(data.id)">删除</button>
     </td>
   </tr>
   </tbody>

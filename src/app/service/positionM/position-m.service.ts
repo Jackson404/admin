@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from "../http.service";
-import {Observable} from "rxjs";
+import {HttpService} from '../http.service';
+import {Observable} from 'rxjs';
 import {max} from 'rxjs/operators';
 
 @Injectable({
@@ -18,6 +18,7 @@ export class PositionMService {
     const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize;
     return this.http.doPost(url, params);
   }
+
 //positionCateId	是	string	职位分类id
 // name	是	string	职位名字
 // companyId	是	string	公司id
@@ -34,12 +35,33 @@ export class PositionMService {
 // positionRequirement	否	string	岗位职责
 // isShow	否	string	是否展示 1是 0否 默认1
 // id_token
-  addPosition(positionCateId,name,companyId,minPay,maxPay,minWorkExp,maxWorkExp,education,age,num,labelIds,isSoldierPriority,address,positionRequirement,isShow,idToken):Observable<any>{
+  addPosition(positionCateId, name, companyId, minPay, maxPay, minWorkExp, maxWorkExp, education, age, num, labelIds, isSoldierPriority, address, positionRequirement, isShow, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.PositionManagement/add';
-    const params = 'positionCateId='+positionCateId+'&name='+name+'&companyId='+companyId+'&minPay='+minPay+'&maxPay='+maxPay+
-      '&minWorkExp='+minWorkExp+'&maxWorkExp='+maxWorkExp+'&education='+education+'&age='+age+'&num='+num+'&labelIds='+labelIds+
-      '&isSoldierPriority='+isSoldierPriority+'&address='+address+'&positionRequirement='+positionRequirement+'&isShow='+isShow+'&id_token='+idToken;
-    return this.http.doPost(url,params);
+    const params = 'positionCateId=' + positionCateId + '&name=' + name + '&companyId=' + companyId + '&minPay=' + minPay + '&maxPay=' + maxPay +
+      '&minWorkExp=' + minWorkExp + '&maxWorkExp=' + maxWorkExp + '&education=' + education + '&age=' + age + '&num=' + num + '&labelIds=' + labelIds +
+      '&isSoldierPriority=' + isSoldierPriority + '&address=' + address + '&positionRequirement=' + positionRequirement + '&isShow=' + isShow + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
 
+  }
+
+  delPosition(positionId, idToken): Observable<any> {
+    const url = '/public/index.php/api/v1.PositionManagement/del';
+    const params = 'positionId=' + positionId + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
+  }
+
+  getPositionDetail(positionId): Observable<any> {
+    const url = '/public/index.php/api/v1.PositionManagement/getDetail';
+    const params = 'positionId=' + positionId;
+    return this.http.doPost(url, params);
+  }
+
+  // 编辑职位
+  editPosition(positionId, positionCateId, name, companyId, minPay, maxPay, minWorkExp, maxWorkExp, education, age, num, labelIds, isSoldierPriority, address, positionRequirement, isShow, idToken): Observable<any> {
+    const url = '/public/index.php/api/v1.PositionManagement/edit';
+    const params = 'positionId=' + positionId + '&positionCateId=' + positionCateId + '&name=' + name + '&companyId=' + companyId + '&minPay=' + minPay + '&maxPay=' + maxPay +
+      '&minWorkExp=' + minWorkExp + '&maxWorkExp=' + maxWorkExp + '&education=' + education + '&age=' + age + '&num=' + num + '&labelIds=' + labelIds +
+      '&isSoldierPriority=' + isSoldierPriority + '&address=' + address + '&positionRequirement=' + positionRequirement + '&isShow=' + isShow + '&id_token=' + idToken;
+    return this.http.doPost(url, params);
   }
 }

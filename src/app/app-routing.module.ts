@@ -18,6 +18,7 @@ import {AddPositionComponent} from './contentM/position-m/add-position/add-posit
 import {AddCateComponent} from './contentM/cate-m/add-cate/add-cate.component';
 import {AddLabelComponent} from './contentM/label-m/add-label/add-label.component';
 import {EditSlideComponent} from './contentM/slide-m/edit-slide/edit-slide.component';
+import {EditPositionComponent} from './contentM/position-m/edit-position/edit-position.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'},
@@ -38,6 +39,7 @@ const routes: Routes = [
 
       {path: 'positionM', component: PositionMComponent},
       {path: 'positionM/add-position', component: AddPositionComponent},
+      {path: 'positionM/edit-position', component: EditPositionComponent},
 
       {path: 'labelM', component: LabelMComponent},
       {path: 'labelM/add-label', component: AddLabelComponent},

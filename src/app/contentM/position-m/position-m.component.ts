@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {PositionMService} from "../../service/positionM/position-m.service";
-import {NzMessageService} from "ng-zorro-antd";
+import {PositionMService} from '../../service/positionM/position-m.service';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-position-m',
@@ -30,11 +30,30 @@ export class PositionMComponent implements OnInit {
         if (res.errorCode == 0) {
           this.listOfData = res.data.page.data;
           this.pageTotal = res.data.page.total;
+        } else {
+          this.msg.warning(res.msg);
         }
       },
       err => {
         this.msg.error('服务器异常');
       }
-    )
+    );
+  }
+
+  // 删除职位
+  delPosition(positionId): void {
+    const idToken = window.localStorage.getItem('idToken');
+    this.positionMService.delPosition(positionId, idToken).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.msg.success('删除成功');
+          this.getByPage();
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
   }
 }

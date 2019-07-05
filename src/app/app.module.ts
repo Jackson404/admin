@@ -29,6 +29,7 @@ import { AddPositionComponent } from './contentM/position-m/add-position/add-pos
 import { AddCateComponent } from './contentM/cate-m/add-cate/add-cate.component';
 import { AddLabelComponent } from './contentM/label-m/add-label/add-label.component';
 import { EditSlideComponent } from './contentM/slide-m/edit-slide/edit-slide.component';
+import { EditPositionComponent } from './contentM/position-m/edit-position/edit-position.component';
 
 registerLocaleData(zh);
 
@@ -52,7 +53,8 @@ registerLocaleData(zh);
     AddPositionComponent,
     AddCateComponent,
     AddLabelComponent,
-    EditSlideComponent
+    EditSlideComponent,
+    EditPositionComponent
   ],
   imports: [
     BrowserModule,
