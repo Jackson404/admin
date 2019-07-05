@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         if (res.errorCode == 0) {
           window.localStorage.setItem('idToken', res.data.id_token);
           window.localStorage.setItem('adminUserName',res.data.username);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/home/welcome');
         } else {
           this.msg.warning(res.msg);
         }

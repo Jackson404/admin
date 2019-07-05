@@ -22,14 +22,17 @@ import {EditPositionComponent} from './contentM/position-m/edit-position/edit-po
 import {EditCompanyComponent} from './contentM/company-m/edit-company/edit-company.component';
 import {EditCateComponent} from './contentM/cate-m/edit-cate/edit-cate.component';
 import {EditLabelComponent} from './contentM/label-m/edit-label/edit-label.component';
+import {WelcomeComponent} from './index/welcome/welcome.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'},
   {
     path: 'login',component:LoginComponent
   },
+
   {path: 'home', component: IndexComponent,
     children: [
+      {path: 'welcome', component: WelcomeComponent},
       {path: 'newsM', component: NewsMComponent},
       {path: 'newsM/add-news', component: AddNewsComponent},
       {path: 'newsM/edit-news', component: EditNewsComponent},
