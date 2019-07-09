@@ -34,6 +34,8 @@ import { EditCompanyComponent } from './contentM/company-m/edit-company/edit-com
 import { EditCateComponent } from './contentM/cate-m/edit-cate/edit-cate.component';
 import { EditLabelComponent } from './contentM/label-m/edit-label/edit-label.component';
 import { WelcomeComponent } from './index/welcome/welcome.component';
+import { ResumeComponent } from './dataM/resume/resume.component';
+import { EditResumeComponent } from './dataM/resume/edit-resume/edit-resume.component';
 
 registerLocaleData(zh);
 
@@ -62,7 +64,9 @@ registerLocaleData(zh);
     EditCompanyComponent,
     EditCateComponent,
     EditLabelComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ResumeComponent,
+    EditResumeComponent
   ],
   imports: [
     BrowserModule,

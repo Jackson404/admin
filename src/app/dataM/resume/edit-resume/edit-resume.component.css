@@ -1,0 +1,35 @@
+nz-select {
+  margin-right: 8px;
+}
+
+i[nz-icon] {
+  font-size: 32px;
+  color: #999;
+}
+.ant-upload-text {
+  margin-top: 8px;
+  color: #666;
+}
+
+.left{
+  padding-right: 10px;
+  float: left;
+  /*border: 1px solid darkgrey;*/
+  width: 10%;
+  height: 34px;
+  text-align: right;
+  line-height: 34px;
+}
+
+.right{
+  float: left;
+  /*border: 1px solid green;*/
+  width: 90%;
+
+}
+.con{
+  margin-top: 22px;
+  float: left;
+  /*border: 1px solid orangered;*/
+  width: 100%;
+}

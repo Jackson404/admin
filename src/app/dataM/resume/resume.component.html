@@ -1,0 +1,66 @@
+<div class="inner-content">
+<!--  <button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/companyM/add-company">添加公司</button>-->
+  <button style="margin-bottom: 25px" nz-button nzType="primary" (click)="getCount()">获取总数</button>
+  <div style="margin-top: 15px;margin-bottom: 15px;line-height: inherit"><span style="color: blue;">总数为{{pageTotal}}条</span></div>
+  <nz-table #basicTable [nzData]="listOfData"
+            [nzSize]	 = "'small'"
+            nzShowPagination='false'
+  >
+    <thead>
+    <tr>
+      <th>简历id</th>
+      <th>名字</th>
+      <th>性别</th>
+      <th>出生日期</th>
+      <th>工作经历</th>
+      <th>工资</th>
+<!--      <th>行业</th>-->
+<!--      <th>岗位</th>-->
+      <th>学历</th>
+      <th>学校</th>
+      <th>专业</th>
+<!--      <th>奖金</th>-->
+<!--      <th>津贴</th>-->
+<!--      <th>工作描述</th>-->
+      <th>电话</th>
+<!--      <th>电邮</th>-->
+      <th>居住地</th>
+      <th>来源</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.resumeId }}</td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.sex }}</td>
+      <td>{{ data.birth }}</td>
+      <td>{{ data.work }}</td>
+      <td>{{ data.wage }}</td>
+<!--      <td>{{ data.profession }}</td>-->
+<!--      <td>{{ data.position }}</td>-->
+      <td>{{ data.qua }}</td>
+      <td>{{ data.gra }}</td>
+      <td>{{ data.spe }}</td>
+<!--      <td>{{ data.bonus }}</td>-->
+<!--      <td>{{ data.allow }}</td>-->
+<!--      <td>{{ data.resume }}</td>-->
+      <td>{{ data.phone }}</td>
+<!--      <td>{{ data.mail }}</td>-->
+      <td>{{ data.habitation }}</td>
+      <td>{{ data.from }}</td>
+      <td>
+        <button nz-button nzType="primary"  routerLink="/home/dataM/edit-resume" [queryParams]="{resumeId:data.resumeId}">编辑</button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button nz-button nzType="danger" (click)="delResume(data.resumeId)" >删除</button>
+      </td>
+    </tr>
+    </tbody>
+
+  </nz-table>
+
+  <nz-pagination style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
+                 [nzTotal]="pageTotal"
+                 (nzPageIndexChange)="getByPage()"></nz-pagination>
+  <div style="clear: both;"></div>
+</div>

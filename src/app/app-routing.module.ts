@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {NewsMComponent} from "./contentM/news-m/news-m.component";
-import {SlideMComponent} from "./contentM/slide-m/slide-m.component";
-import {ResumeMComponent} from "./contentM/resume-m/resume-m.component";
-import {PositionMComponent} from "./contentM/position-m/position-m.component";
-import {LabelMComponent} from "./contentM/label-m/label-m.component";
-import {CompanyMComponent} from "./contentM/company-m/company-m.component";
-import {CateMComponent} from "./contentM/cate-m/cate-m.component";
-import {AddNewsComponent} from "./contentM/news-m/add-news/add-news.component";
+import {NewsMComponent} from './contentM/news-m/news-m.component';
+import {SlideMComponent} from './contentM/slide-m/slide-m.component';
+import {ResumeMComponent} from './contentM/resume-m/resume-m.component';
+import {PositionMComponent} from './contentM/position-m/position-m.component';
+import {LabelMComponent} from './contentM/label-m/label-m.component';
+import {CompanyMComponent} from './contentM/company-m/company-m.component';
+import {CateMComponent} from './contentM/cate-m/cate-m.component';
+import {AddNewsComponent} from './contentM/news-m/add-news/add-news.component';
 import {LoginComponent} from './user/login/login.component';
 import {IndexComponent} from './index/index/index.component';
 import {AddSlideComponent} from './contentM/slide-m/add-slide/add-slide.component';
@@ -23,15 +23,21 @@ import {EditCompanyComponent} from './contentM/company-m/edit-company/edit-compa
 import {EditCateComponent} from './contentM/cate-m/edit-cate/edit-cate.component';
 import {EditLabelComponent} from './contentM/label-m/edit-label/edit-label.component';
 import {WelcomeComponent} from './index/welcome/welcome.component';
+import {ResumeComponent} from './dataM/resume/resume.component';
+import {EditResumeComponent} from './dataM/resume/edit-resume/edit-resume.component';
+import {AuthGuard} from './auth/auth.guard';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: '/login'},
+
   {
-    path: 'login',component:LoginComponent
+    path: 'login', component: LoginComponent
   },
 
-  {path: 'home', component: IndexComponent,
+  {
+    path: 'home', component: IndexComponent,
+    canActivate: [AuthGuard],
     children: [
+      {path: '', component: WelcomeComponent},
       {path: 'welcome', component: WelcomeComponent},
       {path: 'newsM', component: NewsMComponent},
       {path: 'newsM/add-news', component: AddNewsComponent},
@@ -60,7 +66,13 @@ const routes: Routes = [
       {path: 'cateM/add-cate', component: AddCateComponent},
       {path: 'cateM/edit-cate', component: EditCateComponent},
 
-    ]},
+      {path: 'dataM', component: ResumeComponent},
+      {path: 'dataM/edit-resume', component: EditResumeComponent},
+
+    ]
+  },
+  {path: '', pathMatch: 'full', redirectTo: '/login'},
+  {path: '**', component: IndexComponent}
 ];
 
 @NgModule({
