@@ -41,7 +41,6 @@ export class AddPositionComponent implements OnInit {
 
   };
 
-
   // 职位类型
   nodes: any = [];
 
@@ -77,7 +76,7 @@ export class AddPositionComponent implements OnInit {
     private labelService: LabelMService,
     private companyService: CompanyMService,
     private positionService: PositionMService,
-    private router:Router
+    private router: Router
   ) {
   }
 
@@ -143,7 +142,7 @@ export class AddPositionComponent implements OnInit {
       res => {
         if (res.errorCode == 0) {
           this.msg.success('添加成功');
-          this.router.navigateByUrl('/home/positionM')
+          this.router.navigateByUrl('/home/positionM');
         } else {
           this.msg.warning(res.msg);
         }

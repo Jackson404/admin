@@ -11,31 +11,46 @@ import {ConfigService} from '../../config/config.service';
 })
 export class SlideMComponent implements OnInit {
 
-  serverName:any;
+  serverName: any;
   listOfData: any;
 
   constructor(
     public slideMService: SlideMService,
     private msg: NzMessageService,
     private router: Router,
-    private config:ConfigService
+    private config: ConfigService
   ) {
   }
 
   ngOnInit() {
-    this.getAllSlide();
+    // this.getAllSlide();
+    this.getAllAdsAndSlide();
     this.serverName = this.config.baseUrl;
   }
 
-  getAllSlide(): void {
+  // getAllSlide(): void {
+  //
+  //   this.slideMService.getAll().subscribe(
+  //     res => {
+  //       if (res.errorCode == 0) {
+  //         this.listOfData = res.data.list;
+  //       }
+  //     },
+  //     err => {
+  //       this.msg.error('服务异常');
+  //     }
+  //   );
+  // }
 
-    this.slideMService.getAll().subscribe(
+  getAllAdsAndSlide(): void {
+    this.slideMService.getAllAdsAndSlide().subscribe(
       res => {
         if (res.errorCode == 0) {
           this.listOfData = res.data.list;
+        } else {
+          this.msg.warning(res.msg);
         }
-      },
-      err => {
+      }, err => {
         this.msg.error('服务异常');
       }
     );
@@ -49,7 +64,8 @@ export class SlideMComponent implements OnInit {
         if (res.errorCode == 0) {
           this.msg.success('删除成功');
           this.router.navigateByUrl('/home/slideM');
-          this.getAllSlide();
+          // this.getAllSlide();
+          this.getAllAdsAndSlide();
         } else {
           this.msg.warning(res.msg);
         }

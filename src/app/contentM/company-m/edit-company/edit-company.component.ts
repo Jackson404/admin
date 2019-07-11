@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NzMessageService} from 'ng-zorro-antd';
 import {CompanyMService} from '../../../service/companyM/company-m.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AreaService} from '../../../service/area/area.service';
 
 @Component({
   selector: 'app-edit-company',
@@ -34,22 +35,76 @@ export class EditCompanyComponent implements OnInit {
 
   };
 
+  // 省市区选择
+  provinceData: any;
+  cityData: any;
+  areaData: any;
+
   constructor(
     private msg: NzMessageService,
     private companyService: CompanyMService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private areaService: AreaService
   ) {
   }
 
   ngOnInit() {
+    this.getProvince();
     this.activatedRoute.queryParams.subscribe(
       params => {
         this.companyId = params.companyId;
         this.getCompanyDetail();
+
       }
     );
   }
+
+  provinceChange(value: string): void {
+
+    this.areaService.getCity(value).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+
+          this.cityData = res.data.city;
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
+  }
+
+  cityChange(value: string): void {
+
+    this.areaService.getArea(value).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.areaData = res.data.area;
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
+  }
+
+  getProvince(): void {
+    this.areaService.getProvince().subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.provinceData = res.data.province;
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
+  }
+
 
   getCompanyDetail(): void {
     this.companyService.getCompanyDetail(this.companyId).subscribe(
@@ -69,6 +124,8 @@ export class EditCompanyComponent implements OnInit {
           this.wxNumber = detail.wxNumber;
           this.leader = detail.leader;
 
+          this.provinceChange(this.province);
+          this.cityChange(this.city);
         } else {
           this.msg.warning(res.msg);
         }

@@ -12,17 +12,17 @@ export class CateMService {
   ) {
   }
 
-  getAllByTree(type = 0): Observable<any> {
-    const url = '/public/index.php/api/v1.CategoryManagement/getAllByTree';
-    const params = 'type=' + type;
-    return this.http.doPost(url, params);
-  }
-
   // getAllByTree(type = 0): Observable<any> {
-  //   const url = '/public/index.php/api/v1.PositionCate/getAllByTree';
+  //   const url = '/public/index.php/api/v1.CategoryManagement/getAllByTree';
   //   const params = 'type=' + type;
   //   return this.http.doPost(url, params);
   // }
+
+  getAllByTree(type = 0): Observable<any> {
+    const url = '/public/index.php/api/v1.PositionCate/getAllByTree';
+    const params = 'type=' + type;
+    return this.http.doPost(url, params);
+  }
 
   addCate(name, pid, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.CategoryManagement/add';

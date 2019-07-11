@@ -3,12 +3,14 @@
     <div class="left">职位分类</div>
     <div class="right">
       <nz-tree-select
-        style="width: 250px"
+        style="width: 200px;"
         [nzNodes]="nodes"
-        nzPlaceHolder="选择职位类别"
-        [nzShowLine] = true
+        [nzDropdownMatchSelectWidth]="true"
+        [nzDropdownStyle]="{ 'max-height': '400px','width':'400px' }"
         [(ngModel)]="positionCateId"
         (ngModelChange)="onChange($event)"
+        [nzAllowClear]="false"
+        nzPlaceHolder="选择职位类别"
       >
       </nz-tree-select>
     </div>
@@ -17,51 +19,44 @@
   <div class="con">
     <div class="left">职位名字</div>
     <div class="right" >
-      <input  nz-input style="width: 200px;"  [(ngModel)]="name" />
+      <input style="width: 200px;" nz-input  [(ngModel)]="name" />
     </div>
   </div>
 
   <div class="con">
     <div class="left">公司</div>
     <div class="right">
-      <nz-select style="width: 120px;"  [(ngModel)]="companyId" nzAllowClear nzPlaceHolder="请选择公司">
+      <nz-select  style="width: 200px;" [(ngModel)]="companyId" nzAllowClear nzPlaceHolder="请选择公司">
         <nz-option *ngFor="let company of companyList" nzValue="{{company.id}}" nzLabel="{{company.name}}"></nz-option>
       </nz-select>
     </div>
   </div>
 
   <div class="con">
-    <div class="left">最低薪资</div>
+    <div class="left">薪资</div>
     <div class="right">
-      <nz-input-number [(ngModel)]="minPay" [nzMin]="1"  [nzStep]="1"></nz-input-number>
+      <nz-input-number [(ngModel)]="minPay" [nzMin]="0" ></nz-input-number>
+      <i nz-icon nzType="minus" style="width: 20px;" nzTheme="outline"></i>
+      <nz-input-number [(ngModel)]="maxPay" [nzMin]="0" ></nz-input-number>
+      <span style="color:red;margin-left: 15px;">( 最低 - 最高 )</span>
     </div>
   </div>
 
   <div class="con">
-    <div class="left">最高薪资</div>
-    <div class="right">
-      <nz-input-number [(ngModel)]="maxPay" [nzMin]="1"  [nzStep]="1"></nz-input-number>
-    </div>
-  </div>
-
-  <div class="con">
-    <div class="left">最低工作年限</div>
+    <div class="left">工作年限</div>
     <div class="right" >
-      <input nz-input  style="width: 100px;" [(ngModel)]="minWorkExp" />
+      <input nz-input  style="width: 90px;" [(ngModel)]="minWorkExp"  />
+      <i nz-icon nzType="minus" style="width: 20px;" nzTheme="outline"></i>
+      <input nz-input  style="width: 90px;"  [(ngModel)]="maxWorkExp" />
+      <span style="color:red;margin-left: 15px;">( 最低 - 最高 )</span>
     </div>
   </div>
 
-  <div class="con">
-    <div class="left">最高工作年限</div>
-    <div class="right">
-      <input nz-input  style="width: 100px;"  [(ngModel)]="maxWorkExp" />
-    </div>
-  </div>
 
   <div class="con">
     <div class="left">学历</div>
     <div class="right">
-      <nz-select style="width: 120px;" [(ngModel)]="education"  nzPlaceHolder="请选择">
+      <nz-select  style="width: 200px;" [(ngModel)]="education"  nzPlaceHolder="请选择">
         <nz-option nzValue="不限" nzLabel="不限"></nz-option>
         <nz-option nzValue="初中及以下" nzLabel="初中及以下"></nz-option>
         <nz-option nzValue="高中" nzLabel="高中"></nz-option>
@@ -78,14 +73,14 @@
   <div class="con">
     <div class="left">年龄</div>
     <div class="right">
-      <input nz-input style="width: 100px;" [(ngModel)]="age" />
+      <input style="width: 200px;" nz-input [(ngModel)]="age" />
     </div>
   </div>
 
   <div class="con">
     <div class="left">招聘数量</div>
     <div class="right">
-      <input nz-input style="width: 100px;" [(ngModel)]="num" />
+      <input style="width: 200px;" nz-input  [(ngModel)]="num" />
     </div>
   </div>
 
@@ -95,7 +90,7 @@
       <nz-tag
         *ngFor="let label of labels"
         nzMode="checkable"
-        [nzChecked]="selectedTags.indexOf(label.name) > -1"
+        [nzChecked]="selectedTags.indexOf(label) > -1"
         (nzCheckedChange)="handleChange($event, label.name)"
       >
         {{ label.name }}
@@ -106,17 +101,10 @@
   <div class="con">
     <div class="left">军人优先</div>
     <div class="right" >
-      <nz-select style="width: 120px;" [(ngModel)]="isSoldierPriority"  nzPlaceHolder="请选择">
+      <nz-select style="width: 200px;"  [(ngModel)]="isSoldierPriority"  nzPlaceHolder="请选择">
         <nz-option nzValue="1" nzLabel="是"></nz-option>
         <nz-option nzValue="0" nzLabel="否"></nz-option>
       </nz-select>
-    </div>
-  </div>
-
-  <div class="con">
-    <div class="left">公司地址</div>
-    <div class="right">
-      <input nz-input  [(ngModel)]="address" />
     </div>
   </div>
 
@@ -130,7 +118,7 @@
   <div class="con">
     <div class="left">展示状态</div>
     <div class="right">
-      <nz-select style="width: 120px;" [(ngModel)]="isShow"  nzPlaceHolder="请选择">
+      <nz-select  style="width: 200px;" [(ngModel)]="isShow"  nzPlaceHolder="请选择">
         <nz-option nzValue="1" nzLabel="展示"></nz-option>
         <nz-option nzValue="0" nzLabel="不展示"></nz-option>
       </nz-select>

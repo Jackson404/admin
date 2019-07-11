@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NzMessageService} from 'ng-zorro-antd';
 import {CompanyMService} from '../../../service/companyM/company-m.service';
 import {Router} from '@angular/router';
+import {AreaService} from '../../../service/area/area.service';
 
 @Component({
   selector: 'app-add-company',
@@ -11,9 +12,9 @@ import {Router} from '@angular/router';
 export class AddCompanyComponent implements OnInit {
 
   name: any = '';
-  province: any = '';
-  city: any = '';
-  area: any = '';
+  province: any;
+  city: any;
+  area: any;
   address: any = '';
   phone: any = '';
   nature: any = '';
@@ -33,14 +34,68 @@ export class AddCompanyComponent implements OnInit {
 
   };
 
+  // 省市区选择
+  provinceData: any;
+  cityData: any;
+  areaData: any;
+
+
   constructor(
     private msg: NzMessageService,
     private companyService: CompanyMService,
-    private router: Router
+    private router: Router,
+    private areaService: AreaService
   ) {
   }
 
   ngOnInit() {
+    this.getProvince();
+  }
+
+  provinceChange(value: string): void {
+    this.city = undefined;
+    this.area = undefined;
+    this.areaService.getCity(value).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+
+          this.cityData = res.data.city;
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
+  }
+
+  cityChange(value: string): void {
+    this.area = undefined;
+    this.areaService.getArea(value).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.areaData = res.data.area;
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
+  }
+
+  getProvince(): void {
+    this.areaService.getProvince().subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.provinceData = res.data.province;
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
   }
 
   addCompany(): void {

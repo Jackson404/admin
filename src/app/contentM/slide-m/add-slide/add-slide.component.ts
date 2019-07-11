@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {NzMessageService, UploadFile} from 'ng-zorro-antd';
-import {UploadService} from '../../../service/upload.service';
 import {Router} from '@angular/router';
 import {SlideMService} from '../../../service/slideM/slide-m.service';
 import {ConfigService} from '../../../config/config.service';
@@ -15,6 +14,7 @@ export class AddSlideComponent implements OnInit {
   remark: any = '';
   turnUrl: any = '';
   imgUrl:any = '';
+  type:any;
 
   // upload 缩略图
   uploadServeName: any;
@@ -65,7 +65,7 @@ export class AddSlideComponent implements OnInit {
 
   addSlide(): void {
     const idToken = window.localStorage.getItem('idToken');
-    this.slideService.addSlide(this.imgUrl, this.remark, this.turnUrl, idToken).subscribe(
+    this.slideService.addSlide(this.imgUrl, this.remark, this.turnUrl,this.type, idToken).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('添加成功');

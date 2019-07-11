@@ -15,6 +15,7 @@ export class EditSlideComponent implements OnInit {
   remark: any = '';
   turnUrl: any = '';
   imgUrl: any = '';
+  type:any;
 
   // upload 缩略图
   uploadServeName: any;
@@ -77,23 +78,8 @@ export class EditSlideComponent implements OnInit {
           this.imgUrl = res.data.detail.imgUrl;
           this.remark = res.data.detail.remark;
           this.turnUrl = res.data.detail.turnUrl;
+          this.type = res.data.detail.type;
 
-        } else {
-          this.msg.warning(res.msg);
-        }
-      }, err => {
-        this.msg.error('服务异常');
-      }
-    );
-  }
-
-  addSlide(): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.slideService.addSlide(this.imgUrl, this.remark, this.turnUrl, idToken).subscribe(
-      res => {
-        if (res.errorCode == 0) {
-          this.msg.success('添加成功');
-          this.router.navigateByUrl('/home/slideM');
         } else {
           this.msg.warning(res.msg);
         }
@@ -106,7 +92,7 @@ export class EditSlideComponent implements OnInit {
   edit(): void {
 
     const idToken = window.localStorage.getItem('idToken');
-    this.slideService.editSlide(this.slideId, this.imgUrl, this.remark, this.turnUrl, idToken).subscribe(
+    this.slideService.editSlide(this.slideId, this.imgUrl, this.remark, this.turnUrl, this.type,idToken).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('编辑成功');

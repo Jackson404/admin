@@ -10,6 +10,7 @@
     <th>缩略图</th>
     <th>备注</th>
     <th>跳转连接</th>
+    <th>类型</th>
     <th>操作</th>
   </tr>
   </thead>
@@ -19,6 +20,8 @@
     <td><img style="width: 100px;height: 50px;" src="{{serverName}}{{data.imgUrl}}" alt=""></td>
     <td>{{ data.remark }}</td>
     <td>{{ data.turnUrl }}</td>
+    <td *ngIf="data.type == 1"><span style="color: red;">轮播图</span></td>
+    <td *ngIf="data.type == 2"><span style="color: blue;">广告图</span></td>
     <td>
       <button nz-button nzType="primary" routerLink="/home/slideM/edit-slide" [queryParams]="{slideId:data.id}">编辑</button>
       <nz-divider nzType="vertical"></nz-divider>

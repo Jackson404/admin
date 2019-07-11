@@ -18,9 +18,9 @@ export class SlideMService {
   }
 
   // 添加轮播图
-  addSlide(imgUrl, remark, turnUrl, idToken): Observable<any> {
+  addSlide(imgUrl, remark, turnUrl, type, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.SlideShow/add';
-    const params = 'imgUrl=' + imgUrl + '&remark=' + remark + '&turnUrl=' + turnUrl + '&id_token=' + idToken;
+    const params = 'imgUrl=' + imgUrl + '&remark=' + remark + '&turnUrl=' + turnUrl + '&type=' + type + '&id_token=' + idToken;
     return this.http.doPost(url, params);
   }
 
@@ -37,9 +37,14 @@ export class SlideMService {
     return this.http.doPost(url, params);
   }
 
-  editSlide(slideId, imgUrl, remark, turnUrl, idToken): Observable<any> {
+  editSlide(slideId, imgUrl, remark, turnUrl, type, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.SlideShow/edit';
-    const params = 'id=' + slideId + '&imgUrl=' + imgUrl + '&remark=' + remark + '&turnUrl=' + turnUrl + '&id_token=' + idToken;
+    const params = 'id=' + slideId + '&imgUrl=' + imgUrl + '&remark=' + remark + '&turnUrl=' + turnUrl + '&type=' + type + '&id_token=' + idToken;
     return this.http.doPost(url, params);
+  }
+
+  getAllAdsAndSlide(): Observable<any> {
+    const url = '/public/index.php/api/v1.SlideShow/getAllAdsAndSlide';
+    return this.http.doPost(url, '');
   }
 }

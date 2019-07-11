@@ -6,21 +6,19 @@
     </div>
   </div>
   <div class="con">
-    <div class="left">省：</div>
+    <div class="left">省市区：</div>
     <div class="right">
-      <input nz-input  [(ngModel)]="province"/>
-    </div>
-  </div>
-  <div class="con">
-    <div class="left">市：</div>
-    <div class="right">
-      <input nz-input  [(ngModel)]="city"/>
-    </div>
-  </div>
-  <div class="con">
-    <div class="left" >区：</div>
-    <div class="right">
-      <input nz-input  [(ngModel)]="area"/>
+      <div>
+        <nz-select style="width: 120px;" [(ngModel)]="province" nzPlaceHolder="选择省" (ngModelChange)="provinceChange($event)">
+          <nz-option *ngFor="let p of provinceData" [nzValue]="p" [nzLabel]="p"></nz-option>
+        </nz-select>
+        <nz-select style="width: 120px;" [(ngModel)]="city" nzPlaceHolder="选择市" (ngModelChange)="cityChange($event)">
+          <nz-option *ngFor="let c of cityData" [nzValue]="c" [nzLabel]="c"></nz-option>
+        </nz-select>
+        <nz-select style="width: 120px;" [(ngModel)]="area" nzPlaceHolder="选择区">
+          <nz-option *ngFor="let a of areaData" [nzValue]="a" [nzLabel]="a"></nz-option>
+        </nz-select>
+      </div>
     </div>
   </div>
   <div class="con">
