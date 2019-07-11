@@ -18,9 +18,9 @@ export class CompanyMService {
     return this.http.doPost(url, params);
   }
 
-  addCompany(name, province, city, area, address, phone, nature, profile, remark, contact, wxNumber, leader, idToken): Observable<any> {
+  addCompany(industryId, name, province, city, area, address, phone, nature, profile, remark, contact, wxNumber, leader, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.CompanyManagement/add';
-    const params = 'name=' + name + '&province=' + province + '&city=' + city + '&area=' + area + '&address=' + address +
+    const params = 'industryId=' + industryId + '&name=' + name + '&province=' + province + '&city=' + city + '&area=' + area + '&address=' + address +
       '&phone=' + phone + '&nature=' + nature + '&profile=' + profile + '&remark=' + remark + '&contact=' + contact +
       '&wxNumber=' + wxNumber + '&leader=' + leader + '&id_token=' + idToken;
     return this.http.doPost(url, params);
@@ -49,9 +49,9 @@ export class CompanyMService {
     return this.http.doPost(url, params);
   }
 
-  editCompany(companyId, name, province, city, area, address, phone, nature, profile, remark, contact, wxNumber, leader, idToken): Observable<any> {
+  editCompany(companyId,industryId, name, province, city, area, address, phone, nature, profile, remark, contact, wxNumber, leader, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.CompanyManagement/edit';
-    const params = 'companyId=' + companyId + '&name=' + name + '&province=' + province + '&city=' + city + '&area=' + area + '&address=' + address +
+    const params = 'companyId=' + companyId + '&industryId=' + industryId + '&name=' + name + '&province=' + province + '&city=' + city + '&area=' + area + '&address=' + address +
       '&phone=' + phone + '&nature=' + nature + '&profile=' + profile + '&remark=' + remark + '&contact=' + contact +
       '&wxNumber=' + wxNumber + '&leader=' + leader + '&id_token=' + idToken;
     return this.http.doPost(url, params);

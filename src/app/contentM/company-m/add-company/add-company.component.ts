@@ -3,6 +3,7 @@ import {NzMessageService} from 'ng-zorro-antd';
 import {CompanyMService} from '../../../service/companyM/company-m.service';
 import {Router} from '@angular/router';
 import {AreaService} from '../../../service/area/area.service';
+import {IndustryService} from '../../../service/industry/industry.service';
 
 @Component({
   selector: 'app-add-company',
@@ -23,6 +24,7 @@ export class AddCompanyComponent implements OnInit {
   contact: any = '';
   wxNumber: any = '';
   leader: any = '';
+  industryId:any;
 
   // ueditor 配置
   neditorConfig = {
@@ -39,17 +41,25 @@ export class AddCompanyComponent implements OnInit {
   cityData: any;
   areaData: any;
 
+  // 行业分类
+  nodes: any = [];
+
+  onChange($event): void {
+    this.industryId = $event;
+  }
 
   constructor(
     private msg: NzMessageService,
     private companyService: CompanyMService,
     private router: Router,
-    private areaService: AreaService
+    private areaService: AreaService,
+    private industryService:IndustryService
   ) {
   }
 
   ngOnInit() {
     this.getProvince();
+    this.getAllByTree();
   }
 
   provinceChange(value: string): void {
@@ -101,7 +111,17 @@ export class AddCompanyComponent implements OnInit {
   addCompany(): void {
 
     const idToken = window.localStorage.getItem('idToken');
-    this.companyService.addCompany(this.name, this.province, this.city, this.area, this.address, this.phone, this.nature, this.profile,
+    if (this.province == undefined){
+      this.province = '';
+    }
+    if (this.city == undefined){
+      this.city = '';
+    }
+    if (this.area == undefined){
+      this.area = '';
+    }
+
+    this.companyService.addCompany(this.industryId,this.name, this.province, this.city, this.area, this.address, this.phone, this.nature, this.profile,
       this.remark, this.contact, this.wxNumber, this.leader, idToken).subscribe(
       res => {
         if (res.errorCode == 0) {
@@ -116,5 +136,20 @@ export class AddCompanyComponent implements OnInit {
     );
 
   }
+
+  getAllByTree():void{
+    this.industryService.getAllByTree(1).subscribe(
+      res=>{
+        if (res.errorCode == 0){
+          this.nodes = res.data;
+        } else{
+          this.msg.warning(res.msg);
+        }
+      },err=>{
+        this.msg.error('服务异常');
+      }
+    )
+  }
+
 
 }

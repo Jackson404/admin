@@ -7,6 +7,7 @@
     <thead>
     <tr>
 <!--      <th>公司id</th>-->
+      <th>行业分类</th>
       <th>公司名字</th>
 <!--      <th>公司地址</th>-->
 <!--      <th>公司电话</th>-->
@@ -22,6 +23,7 @@
     <tbody>
     <tr *ngFor="let data of basicTable.data">
 <!--      <td>{{ data.id }}</td>-->
+      <td>{{data.industryName}}</td>
       <td>{{ data.name }}</td>
 <!--      <td>{{ data.address }}</td>-->
 <!--      <td>{{ data.phone }}</td>-->

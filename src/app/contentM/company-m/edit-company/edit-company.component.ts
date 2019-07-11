@@ -3,6 +3,7 @@ import {NzMessageService} from 'ng-zorro-antd';
 import {CompanyMService} from '../../../service/companyM/company-m.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AreaService} from '../../../service/area/area.service';
+import {IndustryService} from '../../../service/industry/industry.service';
 
 @Component({
   selector: 'app-edit-company',
@@ -25,6 +26,8 @@ export class EditCompanyComponent implements OnInit {
   wxNumber: any;
   leader: any;
 
+  industryId:any;
+
   // ueditor 配置
   neditorConfig = {
     'autoClearinitialContent': true,
@@ -40,16 +43,25 @@ export class EditCompanyComponent implements OnInit {
   cityData: any;
   areaData: any;
 
+  // 行业分类
+  nodes: any = [];
+
+  onChange($event): void {
+    this.industryId = $event;
+  }
+
   constructor(
     private msg: NzMessageService,
     private companyService: CompanyMService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private areaService: AreaService
+    private areaService: AreaService,
+    private industryService:IndustryService
   ) {
   }
 
   ngOnInit() {
+    this.getAllByTree();
     this.getProvince();
     this.activatedRoute.queryParams.subscribe(
       params => {
@@ -123,6 +135,7 @@ export class EditCompanyComponent implements OnInit {
           this.contact = detail.contact;
           this.wxNumber = detail.wxNumber;
           this.leader = detail.leader;
+          this.industryId = detail.industryId;
 
           this.provinceChange(this.province);
           this.cityChange(this.city);
@@ -138,7 +151,7 @@ export class EditCompanyComponent implements OnInit {
   // 编辑公司
   editCompany(): void {
     const idToken = window.localStorage.getItem('idToken');
-    this.companyService.editCompany(this.companyId, this.name, this.province, this.city, this.area, this.address, this.phone, this.nature, this.profile,
+    this.companyService.editCompany(this.companyId,this.industryId, this.name, this.province, this.city, this.area, this.address, this.phone, this.nature, this.profile,
       this.remark, this.contact, this.wxNumber, this.leader, idToken).subscribe(
       res => {
         if (res.errorCode == 0) {
@@ -151,6 +164,20 @@ export class EditCompanyComponent implements OnInit {
         this.msg.error('服务异常');
       }
     );
+  }
+
+  getAllByTree():void{
+    this.industryService.getAllByTree(1).subscribe(
+      res=>{
+        if (res.errorCode == 0){
+          this.nodes = res.data;
+        } else{
+          this.msg.warning(res.msg);
+        }
+      },err=>{
+        this.msg.error('服务异常');
+      }
+    )
   }
 
 }

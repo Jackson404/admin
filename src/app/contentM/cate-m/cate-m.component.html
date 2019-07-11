@@ -1,10 +1,10 @@
 <div class="inner-content">
-<button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/cateM/add-cate">添加分类</button>
+<!--<button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/cateM/add-cate">添加分类</button>-->
 <nz-table #expandTable [nzData]="listOfMapData">
   <thead>
   <tr>
     <th nzWidth="40%">名字</th>
-    <th>操作</th>
+<!--    <th>操作</th>-->
   </tr>
   </thead>
   <tbody>
@@ -19,11 +19,11 @@
         >
           {{ item.name }}
         </td>
-        <td>
-          <button nz-button nzType="primary" routerLink="/home/cateM/edit-cate" [queryParams]="{cateId:item.id}">编辑</button>
-          <nz-divider nzType="vertical"></nz-divider>
-          <button nz-button nzType="danger" (click)="delCate(item.id)">删除</button>
-        </td>
+<!--        <td>-->
+<!--          <button nz-button nzType="primary" routerLink="/home/cateM/edit-cate" [queryParams]="{cateId:item.id}">编辑</button>-->
+<!--          <nz-divider nzType="vertical"></nz-divider>-->
+<!--          <button nz-button nzType="danger" (click)="delCate(item.id)">删除</button>-->
+<!--        </td>-->
       </tr>
     </ng-container>
   </ng-container>
