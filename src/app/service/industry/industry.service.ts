@@ -15,6 +15,13 @@ export class IndustryService {
   getAllByTree(type = 0): Observable<any> {
     const url = '/public/index.php/api/v1.Industry/getAllByTree';
     const params = 'type=' + type;
-    return this.http.doPost(url,params);
+    return this.http.doPost(url, params);
   }
+
+  filterIndustryInfo(info): Observable<any> {
+    const url = '/public/index.php/api/v1.Industry/filterIndustryInfo';
+    const params = 'info=' + info;
+    return this.http.doPost(url, params);
+  }
+
 }

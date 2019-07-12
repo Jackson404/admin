@@ -1,5 +1,40 @@
 <div class="inner-content">
-  <button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/companyM/add-company">添加公司</button>
+  <button style="margin-bottom: 25px;float: left;" nz-button nzType="primary" routerLink="/home/companyM/add-company">添加公司</button>
+
+  <div  style="float: left;width: 200px;margin-left: 300px;">
+    <nz-input-group nzSize="default" [nzSuffix]="suffixIcon">
+      <input
+        placeholder="输入地区"
+        nz-input
+        [(ngModel)]="areaInfo"
+        (ngModelChange)="areaInfoChange($event)"
+        [nzAutocomplete]="autoArea"
+      />
+    </nz-input-group>
+    <ng-template #suffixIcon>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+    <nz-autocomplete #autoArea [nzDataSource]="areaInfoData"></nz-autocomplete>
+  </div>
+
+  <div  style="float: left;width: 200px;margin-left: 300px;">
+    <nz-input-group nzSize="default" [nzSuffix]="suffixIcon">
+      <input
+        placeholder="输入行业分类"
+        nz-input
+        [(ngModel)]="industryInfo"
+        (ngModelChange)="industryInfoChange($event)"
+        [nzAutocomplete]="autoIndustry"
+      />
+    </nz-input-group>
+    <ng-template #suffixIcon>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+    <nz-autocomplete #autoIndustry [nzDataSource]="industryInfoData"></nz-autocomplete>
+  </div>
+
+
+  <div style="clear: both;"></div>
 
   <nz-table #basicTable [nzData]="listOfData"
             nzShowPagination='false'
@@ -47,8 +82,11 @@
 
   </nz-table>
 
-  <nz-pagination style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
+  <nz-pagination *ngIf="show == 'normal'" style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
                  [nzTotal]="pageTotal"
                  (nzPageIndexChange)="getByPage()"></nz-pagination>
+  <nz-pagination *ngIf="show == 'filter'" style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndexA" [(nzPageSize)]="pageSizeA"
+                 [nzTotal]="pageTotalA"
+                 (nzPageIndexChange)="filterCompany()"></nz-pagination>
   <div style="clear: both;"></div>
 </div>

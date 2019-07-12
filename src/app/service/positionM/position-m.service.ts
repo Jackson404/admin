@@ -21,11 +21,24 @@ export class PositionMService {
 
   addPosition(positionCateId, name, companyId, minPay, maxPay, minWorkExp, maxWorkExp, education, age, num, labelIds, isSoldierPriority, address, positionRequirement, isShow, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.PositionManagement/add';
-    const params = 'positionCateId=' + positionCateId + '&name=' + name + '&companyId=' + companyId + '&minPay=' + minPay + '&maxPay=' + maxPay +
-      '&minWorkExp=' + minWorkExp + '&maxWorkExp=' + maxWorkExp + '&education=' + education + '&age=' + age + '&num=' + num + '&labelIds=' + labelIds +
-      '&isSoldierPriority=' + isSoldierPriority + '&address=' + address + '&positionRequirement=' + positionRequirement + '&isShow=' + isShow + '&id_token=' + idToken;
-    return this.http.doPost(url, params);
+    const formData = new FormData();
+    formData.append('positionCateId',positionCateId);
+    formData.append('name',name);
+    formData.append('companyId',companyId);
+    formData.append('minPay',minPay);
+    formData.append('maxPay',maxPay);
+    formData.append('minWorkExp',minWorkExp);
+    formData.append('maxWorkExp',maxWorkExp);
+    formData.append('education',education);
+    formData.append('age',age);
+    formData.append('num',num);
+    formData.append('labelIds',labelIds);
+    formData.append('isSoldierPriority',isSoldierPriority);
+    formData.append('positionRequirement',positionRequirement);
+    formData.append('isShow',isShow);
+    formData.append('id_token',idToken);
 
+    return this.http.doPostFormData(url, formData);
   }
 
   delPosition(positionId, idToken): Observable<any> {
@@ -43,10 +56,25 @@ export class PositionMService {
   // 编辑职位
   editPosition(positionId, positionCateId, name, companyId, minPay, maxPay, minWorkExp, maxWorkExp, education, age, num, labelIds, isSoldierPriority, address, positionRequirement, isShow, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.PositionManagement/edit';
-    const params = 'positionId=' + positionId + '&positionCateId=' + positionCateId + '&name=' + name + '&companyId=' + companyId + '&minPay=' + minPay + '&maxPay=' + maxPay +
-      '&minWorkExp=' + minWorkExp + '&maxWorkExp=' + maxWorkExp + '&education=' + education + '&age=' + age + '&num=' + num + '&labelIds=' + labelIds +
-      '&isSoldierPriority=' + isSoldierPriority + '&address=' + address + '&positionRequirement=' + positionRequirement + '&isShow=' + isShow + '&id_token=' + idToken;
-    return this.http.doPost(url, params);
+    const formData = new FormData();
+    formData.append('positionId',positionId);
+    formData.append('positionCateId',positionCateId);
+    formData.append('name',name);
+    formData.append('companyId',companyId);
+    formData.append('minPay',minPay);
+    formData.append('maxPay',maxPay);
+    formData.append('minWorkExp',minWorkExp);
+    formData.append('maxWorkExp',maxWorkExp);
+    formData.append('education',education);
+    formData.append('age',age);
+    formData.append('num',num);
+    formData.append('labelIds',labelIds);
+    formData.append('isSoldierPriority',isSoldierPriority);
+    formData.append('positionRequirement',positionRequirement);
+    formData.append('isShow',isShow);
+    formData.append('id_token',idToken);
+
+    return this.http.doPostFormData(url, formData);
   }
 
   getResumePageByPositionId(positionId, pageIndex, pageSize): Observable<any> {

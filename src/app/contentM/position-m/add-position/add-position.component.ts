@@ -5,6 +5,7 @@ import {LabelMService} from '../../../service/labelM/label-m.service';
 import {CompanyMService} from '../../../service/companyM/company-m.service';
 import {PositionMService} from '../../../service/positionM/position-m.service';
 import {Router} from '@angular/router';
+import {ages} from '../../../mockData/age';
 
 @Component({
   selector: 'app-add-position',
@@ -22,12 +23,13 @@ export class AddPositionComponent implements OnInit {
   minWorkExp: any = 0;
   maxWorkExp: any = 0;
   education: any = '不限';
-  num: any = 0;
-  age: any = 0;
+  num: any = '';
+  age: any = '';
   isSoldierPriority: any;
   address: any = '';
   positionRequirement: any = '';
   isShow: any = 0;
+  agesData:any = ages;
 
   companyList: any = [];
 

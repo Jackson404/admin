@@ -28,4 +28,10 @@ export class AreaService {
     const params = 'city=' + city;
     return this.http.doPost(url, params);
   }
+
+  filterAreaInfo(info): Observable<any> {
+    const url = '/public/index.php/api/v1.Area/filterAreaInfo';
+    const params = 'info=' + info;
+    return this.http.doPost(url, params);
+  }
 }

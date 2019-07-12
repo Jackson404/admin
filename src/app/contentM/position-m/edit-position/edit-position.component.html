@@ -73,7 +73,15 @@
   <div class="con">
     <div class="left">年龄</div>
     <div class="right">
-      <input style="width: 200px;" nz-input [(ngModel)]="age" />
+      <nz-input-group nzSize="default" style="width: 200px;">
+        <input
+          placeholder="输入年龄"
+          nz-input
+          [(ngModel)]="age"
+          [nzAutocomplete]="autoArea"
+        />
+      </nz-input-group>
+      <nz-autocomplete #autoArea [nzDataSource]="agesData"></nz-autocomplete>
     </div>
   </div>
 

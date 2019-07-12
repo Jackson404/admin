@@ -1,7 +1,22 @@
 <div class="inner-content">
-<button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/slideM/add-slide">添加轮播图</button>
+<button style="margin-bottom: 25px;float: left;" nz-button nzType="primary" routerLink="/home/slideM/add-slide">添加轮播图</button>
+  <div style="margin-left: 40px;float: left;line-height: 32px;height: 32px;">
+    <span style="color: #1890FF;">查看：</span>
+  </div>
+  <nz-select
+    style="width: 200px;margin-left: 10px;float: left;"
+    nzPlaceHolder="选择图片类型"
+    [(ngModel)]="selectedSlideId"
+    (ngModelChange) = "getAdsOrSlide($event)"
+  >
+    <nz-option  nzLabel="轮播图" [nzValue]="1"></nz-option>
+    <nz-option  nzLabel="广告图" [nzValue]="2"></nz-option>
+  </nz-select>
 
-<nz-table #basicTable [nzData]="listOfData"
+  <div style="clear: both;"></div>
+
+
+  <nz-table #basicTable [nzData]="listOfData"
           nzShowPagination='false'
 >
   <thead>

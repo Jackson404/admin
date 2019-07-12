@@ -5,6 +5,7 @@ import {LabelMService} from '../../../service/labelM/label-m.service';
 import {CompanyMService} from '../../../service/companyM/company-m.service';
 import {PositionMService} from '../../../service/positionM/position-m.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ages} from '../../../mockData/age';
 
 @Component({
   selector: 'app-edit-position',
@@ -13,6 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class EditPositionComponent implements OnInit {
 
+  agesData:any = ages;
   positionId:any;
   positionCateName:any;
   companyName:any;

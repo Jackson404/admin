@@ -1,42 +1,61 @@
 <div class="inner-content">
-<button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/newsM/add-news">添加新闻</button>
+  <button style="margin-bottom: 25px;float: left;" nz-button nzType="primary" routerLink="/home/newsM/add-news">添加新闻
+  </button>
 
-<nz-table #basicTable [nzData]="listOfData.data"
-          nzShowPagination='false'
->
-  <thead>
-  <tr>
-    <th>id</th>
-    <th>新闻名称</th>
-    <th>缩略图</th>
-    <th>新闻类型</th>
-    <th>创建时间</th>
-    <th>展示状态</th>
-    <th>操作</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let data of basicTable.data">
-    <td>{{ data.id }}</td>
-    <td>{{ data.title }}</td>
-    <td><img style="width: 100px;height: 50px;" src="{{serveUrl}}{{ data.imgUrl}}" alt=""></td>
-    <td>{{ data.categoryName }}</td>
-    <td>{{ data.createTime }}</td>
-    <td style="color: #00b7ee;" *ngIf="data.isShow == 1">是</td>
-    <td style="color: gray;" *ngIf="data.isShow == 0">否</td>
-    <!--    <td *ngIf="data.isShow == 1">{{ data.isShow }}</td>-->
-    <td>
-      <button nz-button nzType="primary" routerLink="/home/newsM/edit-news" [queryParams]="{newsId:data.id}">编辑</button>
-      <nz-divider nzType="vertical"></nz-divider>
-      <button nz-button nzType="danger" (click)="delNews(data.id)">删除</button>
-    </td>
-  </tr>
-  </tbody>
+  <div style="margin-left: 40px;float: left;line-height: 32px;height: 32px;">
+  <span style="color: #1890FF;">查看：</span>
+  </div>
+    <nz-select
+      style="width: 200px;margin-left: 10px;float: left;"
+      nzPlaceHolder="选择新闻类型"
+      [(ngModel)]="selectedNewsCateId"
+      (ngModelChange) = "getNewsByCateId($event)"
+    >
+      <nz-option *ngFor="let newsCate of newsCateList" nzLabel="{{newsCate.name}}" [nzValue]="newsCate.id"></nz-option>
+    </nz-select>
 
-</nz-table>
+  <div style="clear: both;"></div>
 
-<nz-pagination style="float: right;margin-top: 15px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
-               [nzTotal]="pageTotal"
-               (nzPageIndexChange)="getByPage()"></nz-pagination>
+
+  <nz-table #basicTable [nzData]="listOfData.data"
+            nzShowPagination='false'
+  >
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>新闻名称</th>
+      <th>缩略图</th>
+      <th>新闻类型</th>
+      <th>创建时间</th>
+      <th>展示状态</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.id }}</td>
+      <td>{{ data.title }}</td>
+      <td><img style="width: 100px;height: 50px;" src="{{serveUrl}}{{ data.imgUrl}}" alt=""></td>
+      <td>{{ data.categoryName }}</td>
+      <td>{{ data.createTime }}</td>
+      <td style="color: #1890FF;" *ngIf="data.isShow == 1">是</td>
+      <td style="color: #F52287;" *ngIf="data.isShow == 0">否</td>
+      <td>
+        <button nz-button nzType="primary" routerLink="/home/newsM/edit-news" [queryParams]="{newsId:data.id}">编辑
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button nz-button nzType="danger" (click)="delNews(data.id)">删除</button>
+      </td>
+    </tr>
+    </tbody>
+
+  </nz-table>
+
+  <nz-pagination *ngIf="showPagination == 'filter'" style="float: right;margin-top: 15px;" [(nzPageIndex)]="pageIndexS" [(nzPageSize)]="pageSizeS"
+                 [nzTotal]="pageTotalS"
+                 (nzPageIndexChange)="getPageByCateIdAdmin()"></nz-pagination>
+  <nz-pagination *ngIf="showPagination == 'normal'" style="float: right;margin-top: 15px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
+                 [nzTotal]="pageTotal"
+                 (nzPageIndexChange)="getByPage()"></nz-pagination>
   <div style="clear: both;"></div>
 </div>

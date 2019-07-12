@@ -14,19 +14,27 @@ export class NewsMComponent implements OnInit {
   pageIndex: any = 1;
   pageSize: any = 10;
   pageTotal: any;
+  showPagination:any = 'normal';
 
-  serveUrl:any;
+  serveUrl: any;
+
+  selectedNewsCateId: any ;
+  newsCateList: any;
+  pageIndexS: any = 1;
+  pageSizeS: any = 10;
+  pageTotalS: any;
 
   constructor(
     public NewMService: NewsMService,
     private msg: NzMessageService,
-    private config:ConfigService
+    private config: ConfigService
   ) {
   }
 
   ngOnInit() {
     this.serveUrl = this.config.baseUrl;
     this.getByPage();
+    this.getAllNewsCate();
   }
 
 
@@ -64,6 +72,42 @@ export class NewsMComponent implements OnInit {
         this.msg.error('服务异常');
       }
     );
+  }
+
+  // 获取所有新闻分类
+  getAllNewsCate(): void {
+    this.NewMService.getNewsCategoryList().subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.newsCateList = res.data.list;
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
+  }
+
+  getPageByCateIdAdmin():void{
+    this.NewMService.getPageByCateIdAdmin(this.selectedNewsCateId, this.pageIndexS, this.pageSizeS).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.listOfData = res.data.page;
+          this.pageTotalS = this.listOfData.total;
+          this.showPagination = 'filter';
+        } else {
+          this.msg.error(res.errorCode + res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
+  }
+
+  getNewsByCateId($event) {
+    this.selectedNewsCateId = $event;
+    this.getPageByCateIdAdmin();
   }
 
 

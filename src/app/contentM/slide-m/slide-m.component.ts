@@ -13,6 +13,8 @@ export class SlideMComponent implements OnInit {
 
   serverName: any;
   listOfData: any;
+  selectedSlideId: any;
+
 
   constructor(
     public slideMService: SlideMService,
@@ -23,27 +25,17 @@ export class SlideMComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getAllSlide();
     this.getAllAdsAndSlide();
     this.serverName = this.config.baseUrl;
   }
 
-  // getAllSlide(): void {
-  //
-  //   this.slideMService.getAll().subscribe(
-  //     res => {
-  //       if (res.errorCode == 0) {
-  //         this.listOfData = res.data.list;
-  //       }
-  //     },
-  //     err => {
-  //       this.msg.error('服务异常');
-  //     }
-  //   );
-  // }
+  getAdsOrSlide($event): void {
+    this.getAllAdsAndSlide($event);
+  }
 
-  getAllAdsAndSlide(): void {
-    this.slideMService.getAllAdsAndSlide().subscribe(
+
+  getAllAdsAndSlide(type = 0): void {
+    this.slideMService.getAll(type).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.listOfData = res.data.list;

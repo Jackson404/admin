@@ -12,11 +12,6 @@ export class SlideMService {
   ) {
   }
 
-  public getAll(): Observable<any> {
-    const url = '/public/index.php/api/v1.SlideShow/getAll';
-    return this.http.doPost(url, '');
-  }
-
   // 添加轮播图
   addSlide(imgUrl, remark, turnUrl, type, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.SlideShow/add';
@@ -43,8 +38,9 @@ export class SlideMService {
     return this.http.doPost(url, params);
   }
 
-  getAllAdsAndSlide(): Observable<any> {
-    const url = '/public/index.php/api/v1.SlideShow/getAllAdsAndSlide';
-    return this.http.doPost(url, '');
+  getAll(type): Observable<any> {
+    const url = '/public/index.php/api/v1.SlideShow/getAll';
+    const params = 'type=' + type;
+    return this.http.doPost(url, params);
   }
 }

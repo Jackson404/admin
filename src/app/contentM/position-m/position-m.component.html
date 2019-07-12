@@ -12,6 +12,8 @@
     <th>公司名称</th>
     <th>薪资</th>
     <th>投递数量</th>
+    <th>退役军人优先</th>
+    <th>展示</th>
     <th>发布时间</th>
     <th>操作</th>
   </tr>
@@ -24,6 +26,10 @@
     <td>{{ data.companyName }}</td>
     <td>{{ data.pay }}</td>
     <td>{{ data.applyCount }}</td>
+    <td *ngIf="data.isSoldierPriority ==1"><span style="color: #1890FF">是</span></td>
+    <td *ngIf="data.isSoldierPriority ==0"><span style="color:#F52287;">否</span></td>
+    <td *ngIf="data.isShow == 1"><span style="color: #1890FF">是</span></td>
+    <td *ngIf="data.isShow == 0"><span style="color: #F52287;">否</span></td>
     <td>{{ data.createTime }}</td>
     <td>
       <button nz-button nzType="default" (click)="showResumeModal(data.id)">简历管理</button>

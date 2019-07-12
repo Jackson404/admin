@@ -26,7 +26,13 @@
   <div class="con">
     <div class="left">公司</div>
     <div class="right">
-      <nz-select  style="width: 200px;" [(ngModel)]="companyId" nzAllowClear nzPlaceHolder="请选择公司">
+      <nz-select
+        style="width: 200px;"
+        nzShowSearch
+        nzAllowClear
+        nzPlaceHolder="请选择公司"
+        [(ngModel)]="companyId"
+      >
         <nz-option *ngFor="let company of companyList" nzValue="{{company.id}}" nzLabel="{{company.name}}"></nz-option>
       </nz-select>
     </div>
@@ -73,7 +79,15 @@
   <div class="con">
     <div class="left">年龄</div>
     <div class="right">
-      <input style="width: 200px;" nz-input [(ngModel)]="age" />
+      <nz-input-group nzSize="default" style="width: 200px;">
+        <input
+          placeholder="输入年龄"
+          nz-input
+          [(ngModel)]="age"
+          [nzAutocomplete]="autoArea"
+        />
+      </nz-input-group>
+      <nz-autocomplete #autoArea [nzDataSource]="agesData"></nz-autocomplete>
     </div>
   </div>
 

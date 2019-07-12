@@ -53,7 +53,8 @@ export class EditNewsComponent implements OnInit {
     'initialFrameWidth': '100%',
     'initialFrameHeight': '300',
     'autoHeightEnabled': false,
-    'zIndex': 0
+    'zIndex': 0,
+    'tabNode':'&nbsp;'
 
   };
 
@@ -152,6 +153,7 @@ export class EditNewsComponent implements OnInit {
       this.isShow = this.isShowValue;
     }
 
+    // console.log(this.newsContent);
     this.newsService.editNews(this.newsId, this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl, this.isShow, idToken).subscribe(
       res => {
         if (res.errorCode == 0) {

@@ -17,6 +17,13 @@ export class NewsMService {
     return this.http.doPost(url, params);
   }
 
+  getPageByCateIdAdmin(cateId, pageIndex, pageSize): Observable<any> {
+    const params = 'categoryId=' + cateId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize;
+    const url = '/public/index.php/api/v1.News/getNewsPageByCateIdWithAdmin';
+
+    return this.http.doPost(url, params);
+  }
+
   getNewsCategoryList(): Observable<any> {
     const url = '/public/index.php/api/v1.NewsCategory/getAll';
     const params = '';
@@ -26,10 +33,16 @@ export class NewsMService {
   addNews(categoryId, title, keywords, description, content, imgUrl, isShow, idToken) {
 
     const url = '/public/index.php/api/v1.News/add';
-    const params = 'categoryId=' + categoryId + '&title=' + title + '&keywords=' + keywords + '&description=' + description
-      + '&content=' + content + '&imgUrl=' + imgUrl + '&isShow=' + isShow + '&id_token=' + idToken;
-
-    return this.http.doPost(url, params);
+    const formData = new FormData();
+    formData.append('categoryId', categoryId);
+    formData.append('title', title);
+    formData.append('keywords', keywords);
+    formData.append('description', description);
+    formData.append('content', content);
+    formData.append('imgUrl', imgUrl);
+    formData.append('isShow', isShow);
+    formData.append('id_token', idToken);
+    return this.http.doPostFormData(url, formData);
   }
 
   delNews(newsId, idToken): Observable<any> {
@@ -46,9 +59,19 @@ export class NewsMService {
 
   editNews(newsId, categoryId, title, keywords, description, content, imgUrl, isShow, idToken): Observable<any> {
     const url = '/public/index.php/api/v1.News/edit';
-    const params = 'newsId=' + newsId + '&categoryId=' + categoryId + '&title=' + title + '&keywords=' + keywords + '&description=' + description
-      + '&content=' + content + '&imgUrl=' + imgUrl + '&isShow=' + isShow + '&id_token=' + idToken;
-    return this.http.doPost(url, params);
+
+    const formData = new FormData();
+    formData.append('newsId', newsId);
+    formData.append('categoryId', categoryId);
+    formData.append('title', title);
+    formData.append('keywords', keywords);
+    formData.append('description', description);
+    formData.append('content', content);
+    formData.append('imgUrl', imgUrl);
+    formData.append('isShow', isShow);
+    formData.append('id_token', idToken);
+
+    return this.http.doPostFormData(url, formData);
   }
 
 
