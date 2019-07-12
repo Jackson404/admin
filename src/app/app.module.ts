@@ -36,6 +36,7 @@ import { EditLabelComponent } from './contentM/label-m/edit-label/edit-label.com
 import { WelcomeComponent } from './index/welcome/welcome.component';
 import { ResumeComponent } from './dataM/resume/resume.component';
 import { EditResumeComponent } from './dataM/resume/edit-resume/edit-resume.component';
+import { HashLocationStrategy,LocationStrategy } from "@angular/common";
 
 registerLocaleData(zh);
 
@@ -79,7 +80,7 @@ registerLocaleData(zh);
     NgxNeditorModule,
     ReactiveFormsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN },{provide:LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
