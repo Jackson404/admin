@@ -18,6 +18,11 @@ export class IndustryService {
     return this.http.doPost(url, params);
   }
 
+  getAllTopIndustry(): Observable<any> {
+    const url = '/public/index.php/api/v1.Industry/getAllTopIndustry';
+    return this.http.doPost(url, '');
+  }
+
   filterIndustryInfo(info): Observable<any> {
     const url = '/public/index.php/api/v1.Industry/filterIndustryInfo';
     const params = 'info=' + info;

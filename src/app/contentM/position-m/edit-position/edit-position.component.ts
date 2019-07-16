@@ -14,16 +14,14 @@ import {ages} from '../../../mockData/age';
 })
 export class EditPositionComponent implements OnInit {
 
-  agesData:any = ages;
-  positionId:any;
-  positionCateName:any;
-  companyName:any;
-  soldierPriorityValue:any;
-  showValue:any;
+  agesData: any = ages;
+  positionId: any;
+  companyName: any;
+  editCompanyId:any;
 
+  companyId: any;
   positionCateId: any;
   name: any = '';
-  companyId: any;
   minPay: any = 0;
   maxPay: any = 0;
   minWorkExp: any = 0;
@@ -51,9 +49,7 @@ export class EditPositionComponent implements OnInit {
 
   // 职位类型
   nodes: any = [];
-  onChange($event: string): void {
-    this.positionCateId = $event;
-  }
+  values: any | null = null;
   // 职位类型结束
 
 
@@ -71,13 +67,13 @@ export class EditPositionComponent implements OnInit {
     private companyService: CompanyMService,
     private positionService: PositionMService,
     private router: Router,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(
-      params=>{
+      params => {
         this.positionId = params.positionId;
         this.getPositionDetail();
       }
@@ -86,6 +82,14 @@ export class EditPositionComponent implements OnInit {
     this.getAllLabels();
     this.getAllCompany();
   }
+
+  // 类型
+  onChange($event: string): void {
+    this.values = $event;
+    const len = $event.length;
+    this.positionCateId = $event[len - 1];
+  }
+
 
   handleChange(checked: boolean, tag: string): void {
     if (checked) {
@@ -115,7 +119,6 @@ export class EditPositionComponent implements OnInit {
   }
 
   //get all labels
-
   getAllLabels(): void {
     this.labelService.getAllLabels().subscribe(
       res => {
@@ -145,56 +148,57 @@ export class EditPositionComponent implements OnInit {
     );
   }
 
-  getPositionDetail():void{
-      this.positionService.getPositionDetail(this.positionId).subscribe(
-        res=>{
-          if (res.errorCode == 0){
-            const detail = res.data.detail;
-            this.positionCateId = detail.positionCateId;
-            this.positionCateName = detail.positionCateName;
-            this.companyId = detail.companyId;
-            this.companyName = detail.companyName;
-            this.name = detail.name;
-            this.minPay = detail.minPay;
-            this.maxPay = detail.maxPay;
-            this.minWorkExp = detail.minWorkExp;
-            this.maxWorkExp = detail.maxWorkExp;
-            this.education = detail.education;
-            this.num = detail.num;
-            this.age = detail.age;
-            this.isSoldierPriority = detail.isSoldierPriority;
-            this.address = detail.address;
-            this.positionRequirement = detail.positionRequirement;
-            this.isShow = detail.isShow;
-            this.selectedTags = detail.labelIds;
-            this.selectedLabels = detail.labelIds.join(',');
+  // 获取职位详情
+  getPositionDetail(): void {
+    this.positionService.getPositionDetail(this.positionId).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          const detail = res.data.detail;
+          this.positionCateId = detail.positionCateId;
+          this.values = detail.positionCateName;
+          this.companyId = detail.companyId;
+          this.companyName = detail.companyName;
+          this.name = detail.name;
+          this.minPay = detail.minPay;
+          this.maxPay = detail.maxPay;
+          this.minWorkExp = detail.minWorkExp;
+          this.maxWorkExp = detail.maxWorkExp;
+          this.education = detail.education;
+          this.num = detail.num;
+          this.age = detail.age;
+          this.isSoldierPriority = detail.isSoldierPriority;
+          this.address = detail.address;
+          this.positionRequirement = detail.positionRequirement;
+          this.isShow = detail.isShow;
+          this.selectedTags = detail.labelIds;
+          this.selectedLabels = detail.labelIds.join(',');
 
-          } else{
-            this.msg.warning(res.msg);
-          }
-        },err=>{
-          this.msg.error('服务异常');
+        } else {
+          this.msg.warning(res.msg);
         }
-      )
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
   }
 
   // 编辑职位
-  editPosition():void{
+  editPosition(): void {
     const idToken = window.localStorage.getItem('idToken');
-    this.positionService.editPosition(this.positionId,this.positionCateId, this.name, this.companyId, this.minPay, this.maxPay, this.minWorkExp, this.maxWorkExp,
+    this.positionService.editPosition(this.positionId, this.positionCateId, this.name, this.companyId, this.minPay, this.maxPay, this.minWorkExp, this.maxWorkExp,
       this.education, this.age, this.num, this.selectedLabels, this.isSoldierPriority, this.address, this.positionRequirement,
       this.isShow, idToken).subscribe(
-        res=>{
-          if (res.errorCode == 0){
-            this.msg.success('编辑成功');
-            this.router.navigateByUrl('/home/positionM');
-          } else{
-            this.msg.warning(res.msg);
-          }
-        },err=>{
-          this.msg.error('服务异常');
+      res => {
+        if (res.errorCode == 0) {
+          this.msg.success('编辑成功');
+          this.router.navigateByUrl('/home/positionM');
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
       }
-    )
+    );
   }
 
 

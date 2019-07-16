@@ -4,6 +4,7 @@ import {CompanyMService} from '../../../service/companyM/company-m.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AreaService} from '../../../service/area/area.service';
 import {IndustryService} from '../../../service/industry/industry.service';
+import {positionCate} from '../../../mockData/positionCate';
 
 @Component({
   selector: 'app-edit-company',
@@ -26,7 +27,7 @@ export class EditCompanyComponent implements OnInit {
   wxNumber: any;
   leader: any;
 
-  industryId:any;
+  industryId: any;
 
   // ueditor 配置
   neditorConfig = {
@@ -44,11 +45,8 @@ export class EditCompanyComponent implements OnInit {
   areaData: any;
 
   // 行业分类
-  nodes: any = [];
-
-  onChange($event): void {
-    this.industryId = $event;
-  }
+  positionCateData: any = positionCate;
+  values: any[] | null = null;
 
   constructor(
     private msg: NzMessageService,
@@ -56,12 +54,11 @@ export class EditCompanyComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private areaService: AreaService,
-    private industryService:IndustryService
+    private industryService: IndustryService
   ) {
   }
 
   ngOnInit() {
-    this.getAllByTree();
     this.getProvince();
     this.activatedRoute.queryParams.subscribe(
       params => {
@@ -70,6 +67,11 @@ export class EditCompanyComponent implements OnInit {
 
       }
     );
+  }
+
+  onChanges(values: any): void {
+    const len = values.length;
+    this.industryId = values[len - 1];
   }
 
   provinceChange(value: string): void {
@@ -152,7 +154,7 @@ export class EditCompanyComponent implements OnInit {
   editCompany(): void {
     const idToken = window.localStorage.getItem('idToken');
     console.log(this.industryId);
-    this.companyService.editCompany(this.companyId,this.industryId, this.name, this.province, this.city, this.area, this.address, this.phone, this.nature, this.profile,
+    this.companyService.editCompany(this.companyId, this.industryId, this.name, this.province, this.city, this.area, this.address, this.phone, this.nature, this.profile,
       this.remark, this.contact, this.wxNumber, this.leader, idToken).subscribe(
       res => {
         if (res.errorCode == 0) {
@@ -167,18 +169,5 @@ export class EditCompanyComponent implements OnInit {
     );
   }
 
-  getAllByTree():void{
-    this.industryService.getAllByTree(1).subscribe(
-      res=>{
-        if (res.errorCode == 0){
-          this.nodes = res.data;
-        } else{
-          this.msg.warning(res.msg);
-        }
-      },err=>{
-        this.msg.error('服务异常');
-      }
-    )
-  }
 
 }

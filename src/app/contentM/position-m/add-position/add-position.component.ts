@@ -45,11 +45,13 @@ export class AddPositionComponent implements OnInit {
 
   // 职位类型
   nodes: any = [];
+  values: any | null = null;
 
   onChange($event: string): void {
-    this.positionCateId = $event;
+    this.values = $event;
+    const len = $event.length;
+    this.positionCateId = $event[len-1];
   }
-
   // 职位类型结束
 
   //标签
@@ -68,7 +70,6 @@ export class AddPositionComponent implements OnInit {
     this.selectedLabels = this.selectedTags.join(',');
 
   }
-
   //标签结束
 
 

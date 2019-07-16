@@ -2,17 +2,17 @@
   <div class="con">
     <div class="left">职位分类</div>
     <div class="right">
-      <nz-tree-select
-        style="width: 200px;"
-        [nzNodes]="nodes"
-        [nzDropdownMatchSelectWidth]="true"
-        [nzDropdownStyle]="{ 'max-height': '400px','width':'400px' }"
-        [(ngModel)]="positionCateId"
+      <nz-cascader
+        [nzExpandTrigger] = "'hover'"
+        [nzOptions]="nodes"
+        [nzLabelProperty]="'name'"
+        [nzValueProperty]="'id'"
+        [nzShowSearch]="true"
+        [(ngModel)]="values"
         (ngModelChange)="onChange($event)"
-        [nzAllowClear]="false"
         nzPlaceHolder="选择职位类别"
       >
-      </nz-tree-select>
+      </nz-cascader>
     </div>
   </div>
 

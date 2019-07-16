@@ -2,17 +2,17 @@
   <div class="con">
     <div class="left">行业分类</div>
     <div class="right">
-      <nz-tree-select
-        style="width: 200px;"
-        [nzNodes]="nodes"
-        [nzDropdownMatchSelectWidth]="true"
-        [nzDropdownStyle]="{ 'max-height': '400px','width':'400px' }"
-        [(ngModel)]="industryId"
-        (ngModelChange)="onChange($event)"
-        [nzAllowClear]="false"
-        nzPlaceHolder="选择行业"
+      <nz-cascader
+        [nzExpandTrigger] = "'hover'"
+        [nzOptions]="positionCateData"
+        [nzLabelProperty]="'name'"
+        [nzValueProperty]="'code'"
+        [nzShowSearch]="true"
+        [(ngModel)]="values"
+        (ngModelChange)="onChanges($event)"
+        nzPlaceHolder="选择行业分类"
       >
-      </nz-tree-select>
+      </nz-cascader>
     </div>
   </div>
   <div class="con">

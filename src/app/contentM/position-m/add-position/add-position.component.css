@@ -1,7 +1,6 @@
 .left{
   padding-right: 10px;
   float: left;
-  /*border: 1px solid darkgrey;*/
   width: 10%;
   height: 34px;
   text-align: right;
@@ -10,14 +9,12 @@
 
 .right{
   float: left;
-  /*border: 1px solid green;*/
   width: 90%;
 
 }
 .con{
   margin-top: 22px;
   float: left;
-  /*border: 1px solid orangered;*/
   width: 100%;
 }
 nz-select {
