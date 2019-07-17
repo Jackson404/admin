@@ -50,8 +50,7 @@ export class SlideMComponent implements OnInit {
 
   //删除轮播图
   delSlide(slideId): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.slideMService.delSlide(slideId, idToken).subscribe(
+    this.slideMService.delSlide(slideId).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('删除成功');

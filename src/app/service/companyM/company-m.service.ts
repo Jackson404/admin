@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class CompanyMService {
+  idToken: any = window.localStorage.getItem('idToken');
 
   constructor(
     public http: HttpService
@@ -13,13 +14,13 @@ export class CompanyMService {
   }
 
   public getByPage(pageIndex, pageSize): Observable<any> {
-    const url = '/public/index.php/api/v1.CompanyManagement/getByPage';
-    const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize;
+    const url = '/public/index.php/api/v1.admin.CompanyManagement/getByPage';
+    const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
-  addCompany(industryId, name, province, city, area, address, phone, nature, profile, remark, contact, wxNumber, leader, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.CompanyManagement/add';
+  addCompany(industryId, name, province, city, area, address, phone, nature, profile, remark, contact, wxNumber, leader): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.CompanyManagement/add';
     const formData = new FormData();
     formData.append('industryId', industryId);
     formData.append('name', name);
@@ -34,36 +35,37 @@ export class CompanyMService {
     formData.append('contact', contact);
     formData.append('wxNumber', wxNumber);
     formData.append('leader', leader);
-    formData.append('id_token', idToken);
+    formData.append('id_token', this.idToken);
 
     return this.http.doPostFormData(url, formData);
   }
 
-  delCompany(companyId, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.CompanyManagement/del';
-    const params = 'companyId=' + companyId + '&id_token=' + idToken;
+  delCompany(companyId): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.CompanyManagement/del';
+    const params = 'companyId=' + companyId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
-  getPositionPageByCompanyId(companyId, pageIndex, pageSize, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.PositionManagement/getPositionPageByCompanyId';
-    const params = 'companyId=' + companyId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + idToken;
+  getPositionPageByCompanyId(companyId, pageIndex, pageSize): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.PositionManagement/getPositionPageByCompanyId';
+    const params = 'companyId=' + companyId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getAllCompany(): Observable<any> {
-    const url = '/public/index.php/api/v1.CompanyManagement/getAll';
-    return this.http.doPost(url, '');
-  }
-
-  getCompanyDetail(companyId): Observable<any> {
-    const url = '/public/index.php/api/v1.CompanyManagement/getDetail';
-    const params = 'companyId=' + companyId;
+    const url = '/public/index.php/api/v1.admin.CompanyManagement/getAll';
+    const params = 'id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
-  editCompany(companyId, industryId, name, province, city, area, address, phone, nature, profile, remark, contact, wxNumber, leader, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.CompanyManagement/edit';
+  getCompanyDetail(companyId): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.CompanyManagement/getDetail';
+    const params = 'companyId=' + companyId + '&id_token=' + this.idToken;
+    return this.http.doPost(url, params);
+  }
+
+  editCompany(companyId, industryId, name, province, city, area, address, phone, nature, profile, remark, contact, wxNumber, leader): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.CompanyManagement/edit';
     const formData = new FormData();
     formData.append('companyId', companyId);
     formData.append('industryId', industryId);
@@ -79,14 +81,14 @@ export class CompanyMService {
     formData.append('contact', contact);
     formData.append('wxNumber', wxNumber);
     formData.append('leader', leader);
-    formData.append('id_token', idToken);
+    formData.append('id_token', this.idToken);
 
     return this.http.doPostFormData(url, formData);
   }
 
-  public filterCompanyInfo(areaInfo, industryInfo,pageIndex, pageSize): Observable<any> {
-    const url = '/public/index.php/api/v1.CompanyManagement/filterCompanyPage';
-    const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&areaInfo=' + areaInfo + '&industryInfo='+industryInfo;
+  public filterCompanyInfo(areaInfo, industryInfo, pageIndex, pageSize): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.CompanyManagement/filterCompanyPage';
+    const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&areaInfo=' + areaInfo + '&industryInfo=' + industryInfo + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 

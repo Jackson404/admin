@@ -58,9 +58,7 @@ export class NewsMComponent implements OnInit {
 
   // 删除新闻
   delNews(newsId): void {
-
-    const idToken = window.localStorage.getItem('idToken');
-    this.NewMService.delNews(newsId, idToken).subscribe(
+    this.NewMService.delNews(newsId).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('删除成功');

@@ -7,46 +7,40 @@ import {Observable} from 'rxjs';
 })
 export class CateMService {
 
+  idToken: any = window.localStorage.getItem('idToken');
   constructor(
     public http: HttpService
   ) {
   }
 
-  // getAllByTree(type = 0): Observable<any> {
-  //   const url = '/public/index.php/api/v1.CategoryManagement/getAllByTree';
-  //   const params = 'type=' + type;
-  //   return this.http.doPost(url, params);
-  // }
-
   getAllByTree(type = 0): Observable<any> {
-    const url = '/public/index.php/api/v1.PositionCate/getAllByTree';
-    const params = 'type=' + type;
+    const url = '/public/index.php/api/v1.admin.PositionCate/getAllByTree';
+    const params = 'type=' + type + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
-  addCate(name, pid, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.CategoryManagement/add';
-    const params = 'name=' + name + '&pid=' + pid + '&id_token=' + idToken;
+  addCate(name, pid): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.PositionCate/add';
+    const params = 'name=' + name + '&pid=' + pid + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
-  delCate(categoryId, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.CategoryManagement/del';
-    const params = 'categoryId=' + categoryId + '&id_token=' + idToken;
+  delCate(categoryId): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.PositionCate/del';
+    const params = 'categoryId=' + categoryId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getCateDetail(categoryId): Observable<any> {
-    const url = '/public/index.php/api/v1.CategoryManagement/getDetail';
-    const params = 'categoryId=' + categoryId;
+    const url = '/public/index.php/api/v1.admin.PositionCate/getDetail';
+    const params = 'categoryId=' + categoryId+ '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
-  eidtCate(categoryId, name, pid, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.CategoryManagement/edit';
-    const params = 'categoryId=' + categoryId + '&name=' + name + '&pid=' + pid + '&id_token=' + idToken;
+  editCate(categoryId, name, pid): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.PositionCate/edit';
+    const params = 'categoryId=' + categoryId + '&name=' + name + '&pid=' + pid + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
-
 
 }

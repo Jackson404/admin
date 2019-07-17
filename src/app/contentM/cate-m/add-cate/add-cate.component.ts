@@ -47,8 +47,7 @@ export class AddCateComponent implements OnInit {
   }
 
   addCate(): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.cateService.addCate(this.name, this.pid, idToken).subscribe(
+    this.cateService.addCate(this.name, this.pid).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('添加成功');

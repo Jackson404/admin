@@ -88,8 +88,7 @@ export class PositionMComponent implements OnInit {
 
   // 删除职位
   delPosition(positionId): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.positionMService.delPosition(positionId, idToken).subscribe(
+    this.positionMService.delPosition(positionId).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('删除成功');

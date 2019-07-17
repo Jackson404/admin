@@ -71,8 +71,7 @@ export class EditCateComponent implements OnInit {
   }
 
   editCate():void{
-    const idToken = window.localStorage.getItem('idToken');
-    this.cateService.eidtCate(this.cateId,this.name, this.pid, idToken).subscribe(
+    this.cateService.editCate(this.cateId,this.name, this.pid).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('编辑成功');

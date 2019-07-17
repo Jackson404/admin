@@ -28,7 +28,7 @@ export class AddPositionComponent implements OnInit {
   isSoldierPriority: any;
   address: any = '';
   positionRequirement: any = '';
-  isShow: any = 0;
+  isShow: any = 1;
   agesData:any = ages;
 
   companyList: any = [];
@@ -138,10 +138,9 @@ export class AddPositionComponent implements OnInit {
 
   // 添加职位
   addPosition(): void {
-    const idToken = window.localStorage.getItem('idToken');
     this.positionService.addPosition(this.positionCateId, this.name, this.companyId, this.minPay, this.maxPay, this.minWorkExp, this.maxWorkExp,
       this.education, this.age, this.num, this.selectedLabels, this.isSoldierPriority, this.address, this.positionRequirement,
-      this.isShow, idToken).subscribe(
+      this.isShow).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('添加成功');

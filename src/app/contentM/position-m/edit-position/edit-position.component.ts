@@ -32,7 +32,7 @@ export class EditPositionComponent implements OnInit {
   isSoldierPriority: any;
   address: any = '';
   positionRequirement: any = '';
-  isShow: any = 0;
+  isShow: any = 1;
 
   companyList: any = [];
 
@@ -184,10 +184,9 @@ export class EditPositionComponent implements OnInit {
 
   // 编辑职位
   editPosition(): void {
-    const idToken = window.localStorage.getItem('idToken');
     this.positionService.editPosition(this.positionId, this.positionCateId, this.name, this.companyId, this.minPay, this.maxPay, this.minWorkExp, this.maxWorkExp,
       this.education, this.age, this.num, this.selectedLabels, this.isSoldierPriority, this.address, this.positionRequirement,
-      this.isShow, idToken).subscribe(
+      this.isShow).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('编辑成功');

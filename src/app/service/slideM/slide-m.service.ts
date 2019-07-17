@@ -6,41 +6,41 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class SlideMService {
-
+  idToken: any = window.localStorage.getItem('idToken');
   constructor(
     public http: HttpService
   ) {
   }
 
   // 添加轮播图
-  addSlide(imgUrl, remark, turnUrl, type, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.SlideShow/add';
-    const params = 'imgUrl=' + imgUrl + '&remark=' + remark + '&turnUrl=' + turnUrl + '&type=' + type + '&id_token=' + idToken;
+  addSlide(imgUrl, remark, turnUrl, type): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.SlideShow/add';
+    const params = 'imgUrl=' + imgUrl + '&remark=' + remark + '&turnUrl=' + turnUrl + '&type=' + type + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   //删除轮播图
-  delSlide(slideId, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.SlideShow/delById';
-    const params = 'id=' + slideId + '&id_token=' + idToken;
+  delSlide(slideId): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.SlideShow/delById';
+    const params = 'id=' + slideId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getDetail(slideId): Observable<any> {
-    const url = '/public/index.php/api/v1.SlideShow/getDetail';
-    const params = 'id=' + slideId;
+    const url = '/public/index.php/api/v1.admin.SlideShow/getDetail';
+    const params = 'id=' + slideId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
-  editSlide(slideId, imgUrl, remark, turnUrl, type, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.SlideShow/edit';
-    const params = 'id=' + slideId + '&imgUrl=' + imgUrl + '&remark=' + remark + '&turnUrl=' + turnUrl + '&type=' + type + '&id_token=' + idToken;
+  editSlide(slideId, imgUrl, remark, turnUrl, type): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.SlideShow/edit';
+    const params = 'id=' + slideId + '&imgUrl=' + imgUrl + '&remark=' + remark + '&turnUrl=' + turnUrl + '&type=' + type + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getAll(type): Observable<any> {
-    const url = '/public/index.php/api/v1.SlideShow/getAll';
-    const params = 'type=' + type;
+    const url = '/public/index.php/api/v1.admin.SlideShow/getAll';
+    const params = 'type=' + type + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 }

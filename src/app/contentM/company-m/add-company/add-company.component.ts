@@ -110,7 +110,6 @@ export class AddCompanyComponent implements OnInit {
 
   addCompany(): void {
 
-    const idToken = window.localStorage.getItem('idToken');
     if (this.province == undefined) {
       this.province = '';
     }
@@ -122,7 +121,7 @@ export class AddCompanyComponent implements OnInit {
     }
 
     this.companyService.addCompany(this.industryId, this.name, this.province, this.city, this.area, this.address, this.phone, this.nature, this.profile,
-      this.remark, this.contact, this.wxNumber, this.leader, idToken).subscribe(
+      this.remark, this.contact, this.wxNumber, this.leader).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('添加成功');

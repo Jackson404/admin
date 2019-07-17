@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class LabelMService {
+  idToken: any = window.localStorage.getItem('idToken');
 
   constructor(
     public http: HttpService
@@ -13,37 +14,38 @@ export class LabelMService {
   }
 
   getByPage(pageIndex, pageSize): Observable<any> {
-    const url = '/public/index.php/api/v1.LabelManagement/getByPage';
-    const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize;
+    const url = '/public/index.php/api/v1.admin.LabelManagement/getByPage';
+    const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getAllLabels(): Observable<any> {
-    const url = '/public/index.php/api/v1.LabelManagement/getAllLabels';
-    return this.http.doPost(url, '');
-  }
-
-  addLabel(name, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.LabelManagement/add';
-    const params = 'name=' + name + '&id_token=' + idToken;
+    const url = '/public/index.php/api/v1.admin.LabelManagement/getAllLabels';
+    const params = 'id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
-  delLabel(labelId, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.LabelManagement/del';
-    const params = 'labelId=' + labelId + '&id_token=' + idToken;
+  addLabel(name): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.LabelManagement/add';
+    const params = 'name=' + name + '&id_token=' + this.idToken;
+    return this.http.doPost(url, params);
+  }
+
+  delLabel(labelId): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.LabelManagement/del';
+    const params = 'labelId=' + labelId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getLabelDetail(labelId): Observable<any> {
-    const url = '/public/index.php/api/v1.LabelManagement/getDetail';
-    const params = 'labelId=' + labelId;
+    const url = '/public/index.php/api/v1.admin.LabelManagement/getDetail';
+    const params = 'labelId=' + labelId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
-  editLabel(labelId, name, idToken): Observable<any> {
-    const url = '/public/index.php/api/v1.LabelManagement/edit';
-    const params = 'labelId=' + labelId + '&name=' + name + '&id_token=' + idToken;
+  editLabel(labelId, name): Observable<any> {
+    const url = '/public/index.php/api/v1.admin.LabelManagement/edit';
+    const params = 'labelId=' + labelId + '&name=' + name + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
 
   }

@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class IndustryService {
+  idToken: any = window.localStorage.getItem('idToken');
 
   constructor(
     private http: HttpService
@@ -13,19 +14,20 @@ export class IndustryService {
   }
 
   getAllByTree(type = 0): Observable<any> {
-    const url = '/public/index.php/api/v1.Industry/getAllByTree';
-    const params = 'type=' + type;
+    const url = '/public/index.php/api/v1.admin.Industry/getAllByTree';
+    const params = 'type=' + type + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getAllTopIndustry(): Observable<any> {
-    const url = '/public/index.php/api/v1.Industry/getAllTopIndustry';
-    return this.http.doPost(url, '');
+    const url = '/public/index.php/api/v1.admin.Industry/getAllTopIndustry';
+    const params = 'id_token=' + this.idToken;
+    return this.http.doPost(url, params);
   }
 
   filterIndustryInfo(info): Observable<any> {
-    const url = '/public/index.php/api/v1.Industry/filterIndustryInfo';
-    const params = 'info=' + info;
+    const url = '/public/index.php/api/v1.admin.Industry/filterIndustryInfo';
+    const params = 'info=' + info + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 

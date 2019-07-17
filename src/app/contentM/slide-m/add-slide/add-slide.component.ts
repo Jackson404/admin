@@ -64,8 +64,7 @@ export class AddSlideComponent implements OnInit {
 
 
   addSlide(): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.slideService.addSlide(this.imgUrl, this.remark, this.turnUrl,this.type, idToken).subscribe(
+    this.slideService.addSlide(this.imgUrl, this.remark, this.turnUrl,this.type).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('添加成功');

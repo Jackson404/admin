@@ -46,8 +46,7 @@ export class EditLabelComponent implements OnInit {
   }
 
   editLabel(): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.labelService.editLabel(this.labelId,this.name, idToken).subscribe(
+    this.labelService.editLabel(this.labelId,this.name).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('编辑成功');

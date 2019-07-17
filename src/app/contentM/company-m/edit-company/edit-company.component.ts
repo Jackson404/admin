@@ -152,10 +152,9 @@ export class EditCompanyComponent implements OnInit {
 
   // 编辑公司
   editCompany(): void {
-    const idToken = window.localStorage.getItem('idToken');
     console.log(this.industryId);
     this.companyService.editCompany(this.companyId, this.industryId, this.name, this.province, this.city, this.area, this.address, this.phone, this.nature, this.profile,
-      this.remark, this.contact, this.wxNumber, this.leader, idToken).subscribe(
+      this.remark, this.contact, this.wxNumber, this.leader).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('编辑成功');

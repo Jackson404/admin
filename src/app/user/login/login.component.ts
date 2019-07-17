@@ -55,8 +55,6 @@ export class LoginComponent implements OnInit {
         this.msg.error('服务异常');
       }
     );
-
-
   }
 
 

@@ -99,8 +99,7 @@ export class CateMComponent implements OnInit {
 
   //删除分类
   delCate(cateId): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.cateMService.delCate(cateId, idToken).subscribe(
+    this.cateMService.delCate(cateId).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('删除成功');

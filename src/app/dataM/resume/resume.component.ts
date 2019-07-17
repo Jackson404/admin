@@ -13,27 +13,6 @@ export class ResumeComponent implements OnInit {
   pageSize: any = 10;
   pageTotal: any;
 
-  // widthConfig = [
-  //   50,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  //   100,
-  // ];
-
   constructor(
     private resumeService: ResumeService,
     private msg: NzMessageService
@@ -77,8 +56,7 @@ export class ResumeComponent implements OnInit {
   }
 
   delResume(resumeId): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.resumeService.delResume(resumeId,idToken).subscribe(
+    this.resumeService.delResume(resumeId).subscribe(
       res => {
         if (res.errorCode == 0){
           this.msg.success('删除成功');

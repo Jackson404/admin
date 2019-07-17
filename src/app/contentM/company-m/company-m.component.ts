@@ -70,8 +70,7 @@ export class CompanyMComponent implements OnInit {
   }
 
   delCompany(companyId): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.companyMService.delCompany(companyId, idToken).subscribe(
+    this.companyMService.delCompany(companyId).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('删除成功');

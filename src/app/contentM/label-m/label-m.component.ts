@@ -38,8 +38,7 @@ export class LabelMComponent implements OnInit {
   }
 
   delLabel(labelId): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.labelMService.delLabel(labelId, idToken).subscribe(
+    this.labelMService.delLabel(labelId).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('删除成功');

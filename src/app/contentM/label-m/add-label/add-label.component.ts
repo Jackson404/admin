@@ -23,8 +23,7 @@ export class AddLabelComponent implements OnInit {
   }
 
   addLabel(): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.labelService.addLabel(this.name, idToken).subscribe(
+    this.labelService.addLabel(this.name).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('添加成功');

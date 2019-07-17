@@ -19,8 +19,7 @@ export class AddNewsComponent implements OnInit {
   keywords: any;
   newsDes: any;
   newsContent: any;
-  newsFrom: any;
-  isShow: any;
+  isShow: any = 1;
   imgUrl: any;
 
   // upload 缩略图
@@ -97,10 +96,8 @@ export class AddNewsComponent implements OnInit {
   }
 
   addNews(): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.newsService.addNews(this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl, this.isShow, idToken).subscribe(
+    this.newsService.addNews(this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl, this.isShow).subscribe(
       res => {
-        // console.log(res);
         // @ts-ignore
         if (res.errorCode == 0) {
           this.msg.success('添加新闻成功');

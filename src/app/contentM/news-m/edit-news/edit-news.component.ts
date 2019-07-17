@@ -26,7 +26,7 @@ export class EditNewsComponent implements OnInit {
   keywords: any;
   newsDes: any;
   newsContent: any;
-  isShow: any;
+  isShow: any = 1;
   imgUrl: any;
 
 
@@ -144,7 +144,6 @@ export class EditNewsComponent implements OnInit {
 
   //编辑新闻
   editNews(): void {
-    const idToken = window.localStorage.getItem('idToken');
     if (this.newsCateValue == undefined) {
       this.newsCateValue = this.categoryId;
     }
@@ -153,8 +152,7 @@ export class EditNewsComponent implements OnInit {
       this.isShow = this.isShowValue;
     }
 
-    // console.log(this.newsContent);
-    this.newsService.editNews(this.newsId, this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl, this.isShow, idToken).subscribe(
+    this.newsService.editNews(this.newsId, this.newsCateValue, this.newsTitle, this.keywords, this.newsDes, this.newsContent, this.imgUrl, this.isShow).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('编辑成功');

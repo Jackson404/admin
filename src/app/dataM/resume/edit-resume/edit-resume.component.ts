@@ -56,8 +56,7 @@ export class EditResumeComponent implements OnInit {
   }
 
   getDetail(): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.resumeService.getDetail(this.resumeId, idToken).subscribe(
+    this.resumeService.getDetail(this.resumeId).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.name = res.data.detail.name;
@@ -85,8 +84,7 @@ export class EditResumeComponent implements OnInit {
   }
 
   editResume(): void {
-    const idToken = window.localStorage.getItem('idToken');
-    this.resumeService.editResume(this.resumeId,this.name, this.sex, this.birth, this.work, this.wage, this.profession, this.position, this.qua, this.gra, this.spe, this.bonus, this.allow, this.resume, this.phone, this.mail, this.habitation, idToken).subscribe(
+    this.resumeService.editResume(this.resumeId,this.name, this.sex, this.birth, this.work, this.wage, this.profession, this.position, this.qua, this.gra, this.spe, this.bonus, this.allow, this.resume, this.phone, this.mail, this.habitation).subscribe(
       res => {
         console.log(res);
         if (res.errorCode == 0) {
