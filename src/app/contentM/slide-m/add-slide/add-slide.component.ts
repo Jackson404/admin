@@ -43,7 +43,9 @@ export class AddSlideComponent implements OnInit {
 
   ngOnInit() {
     const accessToken = window.localStorage.getItem('accessToken');
-    this.uploadServeName = this.config.baseUrl + '/public/index.php/api/v1.File/upload?accessToken=' + accessToken;
+    const idToken = window.localStorage.getItem('idToken');
+    this.uploadServeName = this.config.baseUrl + '/public/index.php/api/v1.admin.File/upload?accessToken=' + accessToken+
+      '&id_token='+idToken;
   }
 
   // upload 缩略图上传

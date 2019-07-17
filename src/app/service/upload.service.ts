@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class UploadService {
+  idToken = window.localStorage.getItem('idToken');
 
   constructor(
     public http: HttpService
@@ -13,13 +14,13 @@ export class UploadService {
   }
 
   public upload(img): Observable<any> {
-    const url = '/public/index.php/api/v1.File/upload';
-    const params = 'img=' + img;
+    const url = '/public/index.php/api/v1.admin.File/upload';
+    const params = 'img=' + img + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   public uploadFormData(params): Observable<any> {
-    const url = '/public/index.php/api/v1.File/upload';
+    const url = '/public/index.php/api/v1.admin.File/upload';
 
     return this.http.doPostFormData(url, params);
   }
