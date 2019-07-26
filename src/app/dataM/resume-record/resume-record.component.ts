@@ -293,7 +293,7 @@ export class ResumeRecordComponent implements OnInit {
     this.resumeService.addStar(idCard, phone, 0).subscribe(
       res => {
         if (res.errorCode == 0) {
-          this.msg.success('加星成功');
+          this.msg.success('去星成功');
           this.filterResumePage();
         } else {
           this.msg.warning(res.msg);

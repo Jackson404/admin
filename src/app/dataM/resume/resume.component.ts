@@ -53,7 +53,6 @@ export class ResumeComponent implements OnInit {
   phoneE: any;
   nameE: any;
   sexE: any;
-  sexNameE: any;
   birthYearE: any;
   birthE: any;
   schoolE: any;
@@ -69,7 +68,6 @@ export class ResumeComponent implements OnInit {
   workUnitE: any;
 
   resumeDetail: any;
-  recordType:any;
 
   constructor(
     private resumeService: ResumeService,
@@ -185,7 +183,6 @@ export class ResumeComponent implements OnInit {
       res => {
         if (res.errorCode == 0) {
           this.listOfData = res.data.page;
-          // this.pageTotal = window.localStorage.getItem('pageTotal');
           this.pageTotal = res.data.total;
         } else {
           this.msg.warning(res.msg);
@@ -241,7 +238,7 @@ export class ResumeComponent implements OnInit {
     this.resumeService.addStar(idCard, phone, 0).subscribe(
       res => {
         if (res.errorCode == 0) {
-          this.msg.success('加星成功');
+          this.msg.success('去星成功');
           this.filterResumePage();
         } else {
           this.msg.warning(res.msg);

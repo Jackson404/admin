@@ -155,6 +155,7 @@
             <th>学历</th>
             <th>居住地</th>
             <th>工作年限</th>
+            <th>期望薪资</th>
             <th>期望职位</th>
             <th>操作</th>
           </tr>
@@ -173,29 +174,30 @@
             <td>{{data.educationName}}</td>
             <td>{{data.habitation}}</td>
             <td>{{data.workYear}}</td>
+            <td>{{data.exSalary}}</td>
             <td>{{data.exPosition}}</td>
             <td>
-              <div style="float: left;width: 25px;height: 25px;cursor: pointer;"
+              <div style="float: left;width: 18px;height: 18px;cursor: pointer;"
                    *ngIf="data.type != 1"
                    (click)="addStar(data.idCard,data.phone)">
-                <img style="width: 25px;height: 25px;" src="../../../assets/icons/star.png" alt="">
+                <img style="width: 18px;height: 18px;" src="../../../assets/icons/star.png" alt="">
               </div>
-              <div style="float: left;width: 25px;height: 25px;cursor: pointer;"
+              <div style="float: left;width: 18px;height: 18px;cursor: pointer;"
                    *ngIf="data.type == 1"
                    (click)="removeStar(data.idCard,data.phone)">
-                <img style="width: 25px;height: 25px;" src="../../../assets/icons/star-ok.png" alt="">
+                <img style="width: 18px;height: 18px;" src="../../../assets/icons/star-ok.png" alt="">
               </div>
               <nz-divider style="float: left;" nzType="vertical"></nz-divider>
-              <div style="float: left;width: 25px;height: 25px;cursor: pointer;"
+              <div style="float: left;width: 18px;height: 18px;cursor: pointer;"
                    (click)="editResume(data.idCard,data.phone)"
               >
-                <img style="width: 25px;height: 25px;" src="../../../assets/icons/edit.png" alt="">
+                <img style="width: 18px;height: 18px;" src="../../../assets/icons/edit.png" alt="">
               </div>
               <nz-divider style="float: left;" nzType="vertical"></nz-divider>
-              <div style="float: left;width: 25px;height: 25px;cursor: pointer;"
+              <div style="float: left;width: 18px;height: 18px;cursor: pointer;"
                    (click)="delResume(data.idCard,data.phone)"
               >
-                <img style="width: 25px;height: 25px;" src="../../../assets/icons/del.png" alt="">
+                <img style="width: 18px;height: 18px;" src="../../../assets/icons/del.png" alt="">
               </div>
             </td>
           </tr>
