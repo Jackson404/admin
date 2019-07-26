@@ -2,18 +2,22 @@ import {Component, OnInit} from '@angular/core';
 import {ResumeService} from '../../service/dataM/resume.service';
 import {NzMessageService} from 'ng-zorro-antd';
 import {AreaService} from '../../service/area/area.service';
+import {Router} from '@angular/router';
 import {workExp} from '../../mockData/workExp';
 import {educationTag} from '../../mockData/educationTag';
 import {ageTags} from '../../mockData/ageTags';
 import {sexTags} from '../../mockData/sexTags';
-import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-resume',
-  templateUrl: './resume.component.html',
-  styleUrls: ['./resume.component.css']
+  selector: 'app-resume-record',
+  templateUrl: './resume-record.component.html',
+  styleUrls: ['./resume-record.component.css']
 })
-export class ResumeComponent implements OnInit {
+export class ResumeRecordComponent implements OnInit {
+
+  dateRecord: any = new Date();
+  recordList: any = [];
+
   listOfData: any;
   pageIndex: any = 1;
   pageSize: any = 10;
@@ -21,11 +25,11 @@ export class ResumeComponent implements OnInit {
 
   isVisibleResumeDetail = false;
   detail: any;
-  areaInfo: any = '';
+  isVisibleEdit = false;
+
   areaInfoData: any = [];
 
   isVisibleRecord = false;
-  isVisibleEdit = false;
 
   workExpTag: any = workExp;
   educationTag: any = educationTag;
@@ -33,7 +37,9 @@ export class ResumeComponent implements OnInit {
   sexTag: any = sexTags;
 
   // selectedTags: string[] = [];
-  ageChecked: any = true;
+  ageChecked: any;
+  recordShow: any = false;
+
 
   // 筛选条件
   minAge: any = '';
@@ -47,6 +53,9 @@ export class ResumeComponent implements OnInit {
   //
   recordName: any = '';
   remark: any = '';
+
+  nzTabPosition = 'left';
+  selectedIndex = 0;
 
   // 编辑
   idCardE: any;
@@ -71,6 +80,8 @@ export class ResumeComponent implements OnInit {
   resumeDetail: any;
   recordType:any;
 
+  recordId:any;
+
   constructor(
     private resumeService: ResumeService,
     private msg: NzMessageService,
@@ -80,20 +91,58 @@ export class ResumeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getByPage();
-    this.filterResumePage();
+    const a = new Date();
+    const y = a.getFullYear();
+    const m = a.getMonth() + 1;
+    const d = a.getDate();
+    this.dateRecord = y + '-' + m + '-' + d;
+
+    // this.filterResumePage();
+    this.getRecordByDate();
     this.filterAreaInfo();
   }
 
+  onChange(result): void {
+    const y = result.getFullYear();
+    const m = result.getMonth() + 1;
+    const d = result.getDate();
+
+    this.dateRecord = y + '-' + m + '-' + d;
+    this.getRecordByDate();
+  }
+
+
+  recordSelect(record): void {
+
+  }
+
+  recordClick(record): void {
+    this.recordId = record.id;
+    this.posKey = record.posKey;
+    this.recordName = record.recordName;
+    this.remark = record.remark;
+    this.sex = record.sex;
+    this.workExp = record.workExp;
+    this.minAge = record.minAge;
+    this.maxAge = record.maxAge;
+    this.exWorkLocation = record.exWorkLocation;
+    this.educationName = record.educationName;
+    this.recordShow = true;
+    this.filterResumePage();
+  }
+
+  recordDeselect(record): void {
+  }
+
   minAgeChange(): void {
-    if (this.minAge == '') {
+    if (this.minAge == ''){
       this.minAge = 0;
     }
     this.filterResumePage();
   }
 
   maxAgeChange(): void {
-    if (this.maxAge == '') {
+    if (this.maxAge == ''){
       this.maxAge = 0;
     }
     this.filterResumePage();
@@ -134,7 +183,6 @@ export class ResumeComponent implements OnInit {
   }
 
   areaInfoChange($event): void {
-    this.areaInfo = $event;
     this.exWorkLocation = $event;
     this.filterResumePage();
   }
@@ -144,7 +192,7 @@ export class ResumeComponent implements OnInit {
   }
 
   filterAreaInfo(): void {
-    this.areaService.filterAreaInfo(this.areaInfo).subscribe(
+    this.areaService.filterAreaInfo(this.exWorkLocation).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.areaInfoData = res.data;
@@ -196,19 +244,12 @@ export class ResumeComponent implements OnInit {
     );
   }
 
-  keepResumeRecord(): void {
-    this.isVisibleRecord = true;
-  }
-
-
-  handleOkRecord(): void {
-    this.isVisibleRecord = false;
-
-    this.resumeService.addRecord(this.recordName, this.remark, this.posKey, this.exWorkLocation, this.workExp, this.educationName, this.minAge, this.maxAge, this.sex).subscribe(
+  updateRecord():void{
+    this.resumeService.updateRecord(this.recordId,this.recordName, this.remark, this.posKey, this.exWorkLocation, this.workExp, this.educationName, this.minAge, this.maxAge, this.sex).subscribe(
       res => {
         if (res.errorCode == 0) {
           this.msg.success('保存成功');
-          this.router.navigateByUrl('/home/dataRecordM');
+          this.ngOnInit();
         } else {
           this.msg.warning(res.msg);
         }
@@ -218,8 +259,19 @@ export class ResumeComponent implements OnInit {
     );
   }
 
-  handleCancelRecord(): void {
-    this.isVisibleRecord = false;
+
+  getRecordByDate(): void {
+    this.resumeService.getRecordByDate(this.dateRecord).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          this.recordList = res.data.list;
+        } else {
+          this.msg.warning(res.msg);
+        }
+      }, err => {
+        this.msg.error('服务异常');
+      }
+    );
   }
 
   addStar(idCard, phone): void {
@@ -266,7 +318,6 @@ export class ResumeComponent implements OnInit {
       }
     );
   }
-
 
   handleCancelEdit():void{
     this.isVisibleEdit = false;
@@ -322,8 +373,6 @@ export class ResumeComponent implements OnInit {
       }
     );
   }
-
-
 
 
 }

@@ -12,19 +12,19 @@
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-<!--      <li nz-submenu nzOpen nzTitle="常用功能" nzIcon="dashboard">-->
-<!--        <ul>-->
-<!--          <li nz-menu-item nzMatchRouter>-->
-<!--            <a routerLink="/welcome">用户管理</a>-->
-<!--          </li>-->
-<!--          <li nz-menu-item nzMatchRouter>-->
-<!--            <a>权限管理</a>-->
-<!--          </li>-->
-<!--          <li nz-menu-item nzMatchRouter>-->
-<!--            <a>日志管理</a>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </li>-->
+      <!--      <li nz-submenu nzOpen nzTitle="常用功能" nzIcon="dashboard">-->
+      <!--        <ul>-->
+      <!--          <li nz-menu-item nzMatchRouter>-->
+      <!--            <a routerLink="/welcome">用户管理</a>-->
+      <!--          </li>-->
+      <!--          <li nz-menu-item nzMatchRouter>-->
+      <!--            <a>权限管理</a>-->
+      <!--          </li>-->
+      <!--          <li nz-menu-item nzMatchRouter>-->
+      <!--            <a>日志管理</a>-->
+      <!--          </li>-->
+      <!--        </ul>-->
+      <!--      </li>-->
 
       <li nz-submenu nzOpen nzTitle="内容管理" nzIcon="menu">
         <ul>
@@ -51,13 +51,16 @@
           </li>
         </ul>
       </li>
-<!--      <li nz-submenu nzOpen nzTitle="数据管理" nzIcon="form">-->
-<!--        <ul>-->
-<!--          <li nz-menu-item nzMatchRouter>-->
-<!--            <a routerLink="/home/dataM">数据搜索</a>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </li>-->
+      <li nz-submenu nzOpen nzTitle="数据管理" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/home/dataM">职位搜索</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/home/dataRecordM">搜索记录</a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </nz-sider>
   <nz-layout>
@@ -76,16 +79,16 @@
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu nzSelectable>
             <li nz-menu-item>{{adminUserName}}</li>
-<!--            <li nz-menu-item>个人中心</li>-->
+            <!--            <li nz-menu-item>个人中心</li>-->
             <li nz-menu-item (click)="loginOut()">退出</li>
           </ul>
         </nz-dropdown-menu>
       </div>
     </nz-header>
     <nz-content>
-<!--      <div class="inner-content">-->
-        <router-outlet></router-outlet>
-<!--      </div>-->
+      <!--      <div class="inner-content">-->
+      <router-outlet></router-outlet>
+      <!--      </div>-->
     </nz-content>
   </nz-layout>
 </nz-layout>

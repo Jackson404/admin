@@ -24,8 +24,9 @@ import {EditCateComponent} from './contentM/cate-m/edit-cate/edit-cate.component
 import {EditLabelComponent} from './contentM/label-m/edit-label/edit-label.component';
 import {WelcomeComponent} from './index/welcome/welcome.component';
 import {ResumeComponent} from './dataM/resume/resume.component';
-import {EditResumeComponent} from './dataM/resume/edit-resume/edit-resume.component';
+// import {EditResumeComponent} from './dataM/resume/edit-resume/edit-resume.component';
 import {AuthGuard} from './auth/auth.guard';
+import {ResumeRecordComponent} from './dataM/resume-record/resume-record.component';
 
 const routes: Routes = [
 
@@ -67,7 +68,9 @@ const routes: Routes = [
       {path: 'cateM/edit-cate', component: EditCateComponent},
 
       {path: 'dataM', component: ResumeComponent},
-      {path: 'dataM/edit-resume', component: EditResumeComponent},
+      // {path: 'dataM/edit-resume', component: EditResumeComponent},
+
+      {path:'dataRecordM',component:ResumeRecordComponent}
 
     ]
   },

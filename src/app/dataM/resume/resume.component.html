@@ -1,66 +1,378 @@
 <div class="inner-content">
-<!--  <button style="margin-bottom: 25px" nz-button nzType="primary" routerLink="/home/companyM/add-company">添加公司</button>-->
-  <button style="margin-bottom: 25px" nz-button nzType="primary" (click)="getCount()">获取总数</button>
-  <div style="margin-top: 15px;margin-bottom: 15px;line-height: inherit"><span style="color: blue;">总数为{{pageTotal}}条</span></div>
+
+  <div style="width: 100%;margin-bottom: 20px;float: left;">
+    <div style="float: left;width: 5%;text-align: right;">
+      <strong>职位关键词: </strong>
+    </div>
+    <div style="float: left;margin-left: 10px;">
+      <nz-input-group nzSearch nzSize="default" [nzAddOnAfter]="suffixButton">
+        <input [(ngModel)]="posKey" type="text" nz-input placeholder="输入关键词"/>
+      </nz-input-group>
+      <ng-template #suffixButton>
+        <button nz-button nzType="primary" nzSize="default" (click)="posKeySearch()" nzSearch>搜索</button>
+      </ng-template>
+    </div>
+    <div style="float: right;">
+      <button nz-button nzType="primary" (click)="keepResumeRecord()">保存</button>
+    </div>
+  </div>
+
+  <div style="width: 100%;margin-bottom: 20px;float: left;">
+    <div style="float: left;width: 5%;text-align: right">
+      <strong>期望地点: </strong>
+    </div>
+    <div style="float: left;margin-left: 10px;">
+      <nz-input-group nzSize="default">
+        <input
+          placeholder="输入地区"
+          nz-input
+          [(ngModel)]="areaInfo"
+          (ngModelChange)="areaInfoChange($event)"
+          [nzAutocomplete]="autoArea"
+        />
+      </nz-input-group>
+      <nz-autocomplete #autoArea [nzDataSource]="areaInfoData"></nz-autocomplete>
+    </div>
+  </div>
+
+  <div style="width: 100%;margin-bottom: 20px;float: left;">
+    <div style="float: left;width: 5%;text-align: right">
+      <strong>工作经验: </strong>
+    </div>
+    <div style="float: left;margin-left: 10px;">
+      <nz-tag
+        *ngFor="let workExpTag of workExpTag;"
+        nzMode="checkable"
+        [nzChecked]="this.workExp == workExpTag "
+        (nzCheckedChange)="handleWorkExpChange($event, workExpTag)"
+      >
+        {{ workExpTag }}
+      </nz-tag>
+    </div>
+  </div>
+
+  <div style="width: 100%;margin-bottom: 20px;float: left;">
+    <div style="float: left;width: 5%;text-align: right">
+      <strong>学历: </strong>
+    </div>
+    <div style="float: left;margin-left: 10px;">
+      <nz-tag
+        *ngFor="let education of educationTag;"
+        nzMode="checkable"
+        [nzChecked]="this.educationName == education "
+        (nzCheckedChange)="handleEducationChange($event, education)"
+      >
+        {{ education }}
+      </nz-tag>
+    </div>
+  </div>
+
+  <div style="width: 100%;margin-bottom: 20px;float: left;">
+    <div style="float: left;width: 5%;text-align: right">
+      <strong>年龄: </strong>
+    </div>
+    <div style="float: left;margin-left: 10px;">
+      <nz-tag
+        *ngFor="let age of ageTag;"
+        nzMode="checkable"
+        [nzChecked]="ageChecked == true"
+        (nzCheckedChange)="handleAgeChange($event, age)"
+      >
+        {{ age }}
+      </nz-tag>
+      <nz-input-number [(ngModel)]="minAge" (ngModelChange)="minAgeChange()" [nzMin]="0"></nz-input-number>
+      <i nz-icon nzType="minus" style="width: 20px;" nzTheme="outline"></i>
+      <nz-input-number [(ngModel)]="maxAge" (ngModelChange)="maxAgeChange()" [nzMin]="0"></nz-input-number>
+      <span style="color:red;margin-left: 15px;">( 最低 - 最高 )</span>
+    </div>
+  </div>
+
+  <div style="width: 100%;margin-bottom: 20px;float: left;">
+    <div style="float: left;width: 5%;text-align: right">
+      <strong>性别: </strong>
+    </div>
+    <div style="float: left;margin-left: 10px;">
+      <nz-tag
+        *ngFor="let sexT of sexTag;"
+        nzMode="checkable"
+        [nzChecked]="this.sex == sexT "
+        (nzCheckedChange)="handleSexChange($event, sexT)"
+      >
+        {{ sexT }}
+      </nz-tag>
+    </div>
+  </div>
+
+  <div style="clear: both;"></div>
+
   <nz-table #basicTable [nzData]="listOfData"
-            [nzSize]	 = "'small'"
+            [nzSize]="'small'"
             nzShowPagination='false'
   >
     <thead>
     <tr>
-      <th>简历id</th>
+      <th>状态</th>
       <th>名字</th>
       <th>性别</th>
-      <th>出生日期</th>
-      <th>工作经历</th>
-      <th>工资</th>
-<!--      <th>行业</th>-->
-<!--      <th>岗位</th>-->
+      <th>手机号</th>
+      <th>出生年</th>
       <th>学历</th>
-      <th>学校</th>
-      <th>专业</th>
-<!--      <th>奖金</th>-->
-<!--      <th>津贴</th>-->
-<!--      <th>工作描述</th>-->
-      <th>电话</th>
-<!--      <th>电邮</th>-->
       <th>居住地</th>
-      <th>来源</th>
+      <th>工作年限</th>
+      <th>期望职位</th>
       <th>操作</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let data of basicTable.data">
-      <td>{{ data.resumeId }}</td>
-      <td>{{ data.name }}</td>
-      <td>{{ data.sex }}</td>
-      <td>{{ data.birth }}</td>
-      <td>{{ data.work }}</td>
-      <td>{{ data.wage }}</td>
-<!--      <td>{{ data.profession }}</td>-->
-<!--      <td>{{ data.position }}</td>-->
-      <td>{{ data.qua }}</td>
-      <td>{{ data.gra }}</td>
-      <td>{{ data.spe }}</td>
-<!--      <td>{{ data.bonus }}</td>-->
-<!--      <td>{{ data.allow }}</td>-->
-<!--      <td>{{ data.resume }}</td>-->
-      <td>{{ data.phone }}</td>
-<!--      <td>{{ data.mail }}</td>-->
-      <td>{{ data.habitation }}</td>
-      <td>{{ data.from }}</td>
+      <td *ngIf="data.type == 0">无</td>
+      <td *ngIf="data.type == 1"><span style="color:red;">★</span></td>
+      <td *ngIf="data.type == 2"><span style="color:red;">已更新</span></td>
+      <td style="cursor: pointer;" (click)="showResumeDetail(data.idCard,data.phone)">{{data.name}}</td>
+      <td *ngIf="data.sex == 1">男</td>
+      <td *ngIf="data.sex == 0">女</td>
+      <td *ngIf="data.sex == -1">未知</td>
+      <td>{{data.phone}}</td>
+      <td>{{data.birthYear}}</td>
+      <td>{{data.educationName}}</td>
+      <td>{{data.habitation}}</td>
+      <td>{{data.workYear}}</td>
+      <td>{{data.exPosition}}</td>
       <td>
-        <button nz-button nzType="primary"  routerLink="/home/dataM/edit-resume" [queryParams]="{resumeId:data.resumeId}">编辑</button>
-        <nz-divider nzType="vertical"></nz-divider>
-        <button nz-button nzType="danger" (click)="delResume(data.resumeId)" >删除</button>
+        <div style="float: left;width: 25px;height: 25px;cursor: pointer;"
+             *ngIf="data.type != 1"
+             (click)="addStar(data.idCard,data.phone)">
+          <img style="width: 25px;height: 25px;" src="../../../assets/icons/star.png" alt="">
+        </div>
+        <div style="float: left;width: 25px;height: 25px;cursor: pointer;"
+             *ngIf="data.type == 1"
+             (click)="removeStar(data.idCard,data.phone)">
+          <img style="width: 25px;height: 25px;" src="../../../assets/icons/star-ok.png" alt="">
+        </div>
+        <nz-divider style="float: left;" nzType="vertical"></nz-divider>
+        <div style="float: left;width: 25px;height: 25px;cursor: pointer;"
+             (click)="editResume(data.idCard,data.phone)"
+        >
+          <img style="width: 25px;height: 25px;" src="../../../assets/icons/edit.png" alt="">
+        </div>
+        <nz-divider style="float: left;" nzType="vertical"></nz-divider>
+        <div style="float: left;width: 25px;height: 25px;cursor: pointer;"
+             (click)="delResume(data.idCard,data.phone)"
+        >
+          <img style="width: 25px;height: 25px;" src="../../../assets/icons/del.png" alt="">
+        </div>
+
+        <div style="clear: both;"></div>
       </td>
     </tr>
     </tbody>
-
   </nz-table>
 
   <nz-pagination style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
                  [nzTotal]="pageTotal"
-                 (nzPageIndexChange)="getByPage()"></nz-pagination>
+                 (nzPageIndexChange)="filterResumePage()"
+                 [nzShowTotal]="totalTemplate"
+  ></nz-pagination>
+  <ng-template #totalTemplate let-total> 总共 {{ pageTotal }} 条数据</ng-template>
   <div style="clear: both;"></div>
 </div>
+
+<nz-modal *ngIf="detail != undefined" nzWidth="50%" [(nzVisible)]="isVisibleResumeDetail" nzTitle="简历详情"
+          (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()">
+  <div *ngIf="detail.type == 1"
+       class="resume_detail"><span>状态:</span><span style="color: red;">★★★</span>
+  </div>
+  <div *ngIf="detail.type == 2"
+       class="resume_detail"><span>状态:</span><span style="color: red;">更新</span>
+  </div>
+  <div class="resume_detail">
+    <span>手机号:</span>{{detail.phone}}</div>
+  <div class="resume_detail">
+    <span>名字:</span>{{detail.name}}</div>
+  <div *ngIf="detail.sex == 0"
+       class="resume_detail"><span>性别:</span>女
+  </div>
+  <div *ngIf="detail.sex == 1"
+       class="resume_detail"><span>性别:</span>男
+  </div>
+  <div *ngIf="detail.sex == -1"
+       class="resume_detail"><span>性别:</span>未知
+  </div>
+  <div class="resume_detail">
+    <span>出生年:</span>{{detail.birthYear}}</div>
+  <div class="resume_detail">
+    <span>出生日期:</span>{{detail.birth}}</div>
+  <div class="resume_detail">
+    <span>学校:</span>{{detail.school}}</div>
+  <div class="resume_detail">
+    <span>学历:</span>{{detail.educationName}}</div>
+  <div class="resume_detail">
+    <span>邮箱:</span>{{detail.mail}}</div>
+  <div class="resume_detail">
+    <span>专业:</span>{{detail.profession}}</div>
+  <div class="resume_detail">
+    <span>工作年限:</span>{{detail.workYear}}</div>
+  <div class="resume_detail">
+    <span>期望职位:</span>{{detail.exPosition}}</div>
+  <div class="resume_detail">
+    <span>期望薪资:</span>{{detail.exSalary}}</div>
+  <div class="resume_detail">
+    <span>期望城市:</span>{{detail.exCity}}</div>
+  <div class="resume_detail">
+    <span>居住地:</span>{{detail.habitation}}</div>
+  <div class="resume_detail">
+    <span>户籍:</span>{{detail.houseLocation}}</div>
+  <div class="resume_detail">
+    <span>工作单位:</span>{{detail.workUnit}}</div>
+  <div class="resume_detail">
+    <span>投递时间:</span>{{detail.deliveryTime}}</div>
+  <div style="clear: both;"></div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisibleRecord" nzTitle="保存搜索记录" (nzOnCancel)="handleCancelRecord()"
+          (nzOnOk)="handleOkRecord()">
+  <div style="width: 100%;">
+    <span style="float:left;">(必填)搜索记录:</span>
+    <input style="float: left;" type="text" nz-input [(ngModel)]="recordName">
+  </div>
+  <div style="width: 100%;">
+    <span style="float: left;">(必填)备注信息:</span>
+    <input style="float: left;" type="text" nz-input [(ngModel)]="remark">
+  </div>
+  <div style="clear: both;"></div>
+</nz-modal>
+
+
+<!--编辑简历-->
+<nz-modal [(nzVisible)]="isVisibleEdit" nzWidth="50%" nzTitle="编辑简历" (nzOnCancel)="handleCancelEdit()"
+          (nzOnOk)="handleOkEdit()">
+
+<!--    <div class="con">-->
+<!--      <div class="left">证件号码</div>-->
+<!--      <div class="right">-->
+<!--        <input nz-input [(ngModel)]="idCardE"/>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div class="con">
+      <div class="left"><strong>名字</strong></div>
+      <div class="right" style="line-height: 34px">
+        <div>
+          <strong>{{nameE}}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">手机号</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="phoneE"/>
+      </div>
+    </div>
+
+    <div class="con">
+      <div class="left">性别</div>
+      <div class="right">
+        <nz-select
+          style="width: 200px;"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="性别"
+          [(ngModel)]="sexE"
+        >
+          <nz-option nzLabel="男" nzValue="1"></nz-option>
+          <nz-option nzLabel="女" nzValue="0"></nz-option>
+          <nz-option nzLabel="未知" nzValue="-1"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div class="con">
+      <div class="left">出生年</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="birthYearE"/>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">出生日期</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="birthE"/>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">学校</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="schoolE"/>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">学历</div>
+      <div class="right">
+        <nz-select
+          style="width: 200px;"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="学历"
+          [(ngModel)]="educationNameE"
+        >
+          <nz-option nzLabel="高中及以下" nzValue="高中及以下"></nz-option>
+          <nz-option nzLabel="大专" nzValue="大专"></nz-option>
+          <nz-option nzLabel="本科及以上" nzValue="本科及以上"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">邮箱</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="mailE"/>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">专业</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="professionE"/>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">工作年限</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="workYearE"/>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">期望职位</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="exPositionE"/>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">期望薪资</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="exSalaryE"/>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">期望城市</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="exCityE"/>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">居住地</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="habitationE"/>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">户籍地</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="houseLocationE"/>
+      </div>
+    </div>
+    <div class="con">
+      <div class="left">工作单位</div>
+      <div class="right">
+        <input nz-input [(ngModel)]="workUnitE"/>
+      </div>
+    </div>
+    <div style="clear: both;"></div>
+</nz-modal>

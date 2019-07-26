@@ -35,8 +35,9 @@ import { EditCateComponent } from './contentM/cate-m/edit-cate/edit-cate.compone
 import { EditLabelComponent } from './contentM/label-m/edit-label/edit-label.component';
 import { WelcomeComponent } from './index/welcome/welcome.component';
 import { ResumeComponent } from './dataM/resume/resume.component';
-import { EditResumeComponent } from './dataM/resume/edit-resume/edit-resume.component';
+// import { EditResumeComponent } from './dataM/resume/edit-resume/edit-resume.component';
 import { HashLocationStrategy,LocationStrategy } from "@angular/common";
+import { ResumeRecordComponent } from './dataM/resume-record/resume-record.component';
 
 registerLocaleData(zh);
 
@@ -67,7 +68,8 @@ registerLocaleData(zh);
     EditLabelComponent,
     WelcomeComponent,
     ResumeComponent,
-    EditResumeComponent
+    // EditResumeComponent,
+    ResumeRecordComponent
   ],
   imports: [
     BrowserModule,
