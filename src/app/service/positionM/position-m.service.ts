@@ -13,14 +13,14 @@ export class PositionMService {
   }
 
   getByPage(pageIndex, pageSize): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.PositionManagement/getByPage';
+    const url = '/api/v1.admin.PositionManagement/getByPage';
     const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   addPosition(positionCateId, name, companyId, minPay, maxPay, minWorkExp, maxWorkExp, education, age,
               num, labelIds, isSoldierPriority, address, positionRequirement, isShow): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.PositionManagement/add';
+    const url = '/api/v1.admin.PositionManagement/add';
     const formData = new FormData();
     formData.append('positionCateId',positionCateId);
     formData.append('name',name);
@@ -42,13 +42,13 @@ export class PositionMService {
   }
 
   delPosition(positionId): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.PositionManagement/del';
+    const url = '/api/v1.admin.PositionManagement/del';
     const params = 'positionId=' + positionId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getPositionDetail(positionId): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.PositionManagement/getDetail';
+    const url = '/api/v1.admin.PositionManagement/getDetail';
     const params = 'positionId=' + positionId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
@@ -56,7 +56,7 @@ export class PositionMService {
   // 编辑职位
   editPosition(positionId, positionCateId, name, companyId, minPay, maxPay, minWorkExp, maxWorkExp,
                education, age, num, labelIds, isSoldierPriority, address, positionRequirement, isShow): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.PositionManagement/edit';
+    const url = '/api/v1.admin.PositionManagement/edit';
     const formData = new FormData();
     formData.append('positionId',positionId);
     formData.append('positionCateId',positionCateId);
@@ -79,7 +79,7 @@ export class PositionMService {
   }
 
   getResumePageByPositionId(positionId, pageIndex, pageSize): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.Resume/getResumePageByPositionId';
+    const url = '/api/v1.admin.Resume/getResumePageByPositionId';
     const params = 'positionId=' + positionId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }

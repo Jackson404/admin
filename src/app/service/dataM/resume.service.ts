@@ -15,19 +15,19 @@ export class ResumeService {
   }
 
   getByPage(pageIndex, pageSize): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.ResumeData/getByPage';
+    const url = '/api/v1.admin.ResumeData/getByPage';
     const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getDetail(idCard, phone): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.ResumeData/getDetail';
+    const url = '/api/v1.admin.ResumeData/getDetail';
     const params = 'idCard=' + idCard + '&phone=' + phone + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   filterResumeData(posKey, exWorkLocation, workExp, educationName, minAge, maxAge, sex, pageIndex, pageSize): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.ResumeData/filterResumeData';
+    const url = '/api/v1.admin.ResumeData/filterResumeData';
     const formData = new FormData();
     formData.append('posKey', posKey);
     formData.append('exWorkLocation', exWorkLocation);
@@ -43,7 +43,7 @@ export class ResumeService {
   }
 
   addRecord(recordName, remark, posKey, exWorkLocation, workExp, educationName, minAge, maxAge, sex): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.ResumeData/addRecord';
+    const url = '/api/v1.admin.ResumeData/addRecord';
     const formData = new FormData();
     formData.append('recordName', recordName);
     formData.append('remark', remark);
@@ -60,7 +60,7 @@ export class ResumeService {
   }
 
   updateRecord(recordId,recordName, remark, posKey, exWorkLocation, workExp, educationName, minAge, maxAge, sex): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.ResumeData/updateRecord';
+    const url = '/api/v1.admin.ResumeData/updateRecord';
     const formData = new FormData();
     formData.append('recordId',recordId);
     formData.append('recordName', recordName);
@@ -78,26 +78,26 @@ export class ResumeService {
   }
 
   getRecordByDate(date): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.ResumeData/getRecordByDate';
+    const url = '/api/v1.admin.ResumeData/getRecordByDate';
     const params = 'date=' + date + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   addStar(idCard, phone, type): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.ResumeData/addStar';
+    const url = '/api/v1.admin.ResumeData/addStar';
     const params = 'idCard=' + idCard + '&phone=' + phone + '&type=' + type + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   delResume(idCard, phone): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.ResumeData/delResume';
+    const url = '/api/v1.admin.ResumeData/delResume';
     const params = 'idCard=' + idCard + '&phone=' + phone + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   editResume(idCard, phone, name, sex, birthYear, birth, school, education, educationName, mail, profession, professionId,
              workYear, exPosition, exSalary, exCity, habitation, houseLocation, workUnit): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.ResumeData/edit';
+    const url = '/api/v1.admin.ResumeData/edit';
     const formData = new FormData();
     formData.append('idCard', idCard);
     formData.append('phone', phone);

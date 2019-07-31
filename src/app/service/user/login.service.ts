@@ -13,7 +13,7 @@ export class LoginService {
   }
 
   login(username, password): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.AdminUser/login';
+    const url = '/api/v1.admin.AdminUser/login';
     const params = 'username=' + username + '&password=' + password;
     return this.http.doPost(url, params);
   }

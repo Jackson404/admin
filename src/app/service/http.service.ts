@@ -19,7 +19,7 @@ export class HttpService {
     const grantType = Md5.hashStr('zhengbu_client_credential');
     const webId = Md5.hashStr('zhengbuwangluokejiwebid');
     const webSecret = Md5.hashStr('zhengbuwangluokejisecret');
-    const url = '/public/index.php/api/Auth/getToken';
+    const url = '/api/Auth/getToken';
     const params = 'grantType=' + grantType + '&webId=' + webId + '&webSecret=' + webSecret;
     this.http.post(this.config.baseUrl + url, params, this.config.httpPostOptions).subscribe(
       res => {

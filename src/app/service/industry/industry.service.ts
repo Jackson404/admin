@@ -14,19 +14,19 @@ export class IndustryService {
   }
 
   getAllByTree(type = 0): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.Industry/getAllByTree';
+    const url = '/api/v1.admin.Industry/getAllByTree';
     const params = 'type=' + type + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getAllTopIndustry(): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.Industry/getAllTopIndustry';
+    const url = '/api/v1.admin.Industry/getAllTopIndustry';
     const params = 'id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   filterIndustryInfo(info): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.Industry/filterIndustryInfo';
+    const url = '/api/v1.admin.Industry/filterIndustryInfo';
     const params = 'info=' + info + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }

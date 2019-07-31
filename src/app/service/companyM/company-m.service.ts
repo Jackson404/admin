@@ -14,13 +14,13 @@ export class CompanyMService {
   }
 
   public getByPage(pageIndex, pageSize): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.CompanyManagement/getByPage';
+    const url = '/api/v1.admin.CompanyManagement/getByPage';
     const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   addCompany(industryId, name, province, city, area, address, phone, nature, profile, remark, contact, wxNumber, leader): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.CompanyManagement/add';
+    const url = '/api/v1.admin.CompanyManagement/add';
     const formData = new FormData();
     formData.append('industryId', industryId);
     formData.append('name', name);
@@ -41,31 +41,31 @@ export class CompanyMService {
   }
 
   delCompany(companyId): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.CompanyManagement/del';
+    const url = '/api/v1.admin.CompanyManagement/del';
     const params = 'companyId=' + companyId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getPositionPageByCompanyId(companyId, pageIndex, pageSize): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.PositionManagement/getPositionPageByCompanyId';
+    const url = '/api/v1.admin.PositionManagement/getPositionPageByCompanyId';
     const params = 'companyId=' + companyId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getAllCompany(): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.CompanyManagement/getAll';
+    const url = '/api/v1.admin.CompanyManagement/getAll';
     const params = 'id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getCompanyDetail(companyId): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.CompanyManagement/getDetail';
+    const url = '/api/v1.admin.CompanyManagement/getDetail';
     const params = 'companyId=' + companyId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   editCompany(companyId, industryId, name, province, city, area, address, phone, nature, profile, remark, contact, wxNumber, leader): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.CompanyManagement/edit';
+    const url = '/api/v1.admin.CompanyManagement/edit';
     const formData = new FormData();
     formData.append('companyId', companyId);
     formData.append('industryId', industryId);
@@ -87,7 +87,7 @@ export class CompanyMService {
   }
 
   public filterCompanyInfo(areaInfo, industryInfo, pageIndex, pageSize): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.CompanyManagement/filterCompanyPage';
+    const url = '/api/v1.admin.CompanyManagement/filterCompanyPage';
     const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&areaInfo=' + areaInfo + '&industryInfo=' + industryInfo + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }

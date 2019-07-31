@@ -13,27 +13,27 @@ export class NewsMService {
 
   getByPage(pageIndex, pageSize): Observable<any> {
     const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
-    const url = '/public/index.php/api/v1.admin.News/getByPageWithAdmin';
+    const url = '/api/v1.admin.News/getByPageWithAdmin';
 
     return this.http.doPost(url, params);
   }
 
   getPageByCateIdAdmin(cateId, pageIndex, pageSize): Observable<any> {
     const params = 'categoryId=' + cateId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
-    const url = '/public/index.php/api/v1.admin.News/getNewsPageByCateIdWithAdmin';
+    const url = '/api/v1.admin.News/getNewsPageByCateIdWithAdmin';
 
     return this.http.doPost(url, params);
   }
 
   getNewsCategoryList(): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.NewsCategory/getAll';
+    const url = '/api/v1.admin.NewsCategory/getAll';
     const params = 'id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   addNews(categoryId, title, keywords, description, content, imgUrl, isShow) {
 
-    const url = '/public/index.php/api/v1.admin.News/add';
+    const url = '/api/v1.admin.News/add';
     const formData = new FormData();
     formData.append('categoryId', categoryId);
     formData.append('title', title);
@@ -47,19 +47,19 @@ export class NewsMService {
   }
 
   delNews(newsId): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.News/del';
+    const url = '/api/v1.admin.News/del';
     const params = 'newsId=' + newsId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getNewsDetail(newsId): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.News/getDetail';
+    const url = '/api/v1.admin.News/getDetail';
     const params = 'newsId=' + newsId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   editNews(newsId, categoryId, title, keywords, description, content, imgUrl, isShow): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.News/edit';
+    const url = '/api/v1.admin.News/edit';
 
     const formData = new FormData();
     formData.append('newsId', newsId);

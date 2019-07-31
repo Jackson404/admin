@@ -14,31 +14,31 @@ export class CateMService {
   }
 
   getAllByTree(type = 0): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.PositionCate/getAllByTree';
+    const url = '/api/v1.admin.PositionCate/getAllByTree';
     const params = 'type=' + type + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   addCate(name, pid): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.PositionCate/add';
+    const url = '/api/v1.admin.PositionCate/add';
     const params = 'name=' + name + '&pid=' + pid + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   delCate(categoryId): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.PositionCate/del';
+    const url = '/api/v1.admin.PositionCate/del';
     const params = 'categoryId=' + categoryId + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   getCateDetail(categoryId): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.PositionCate/getDetail';
+    const url = '/api/v1.admin.PositionCate/getDetail';
     const params = 'categoryId=' + categoryId+ '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
 
   editCate(categoryId, name, pid): Observable<any> {
-    const url = '/public/index.php/api/v1.admin.PositionCate/edit';
+    const url = '/api/v1.admin.PositionCate/edit';
     const params = 'categoryId=' + categoryId + '&name=' + name + '&pid=' + pid + '&id_token=' + this.idToken;
     return this.http.doPost(url, params);
   }
