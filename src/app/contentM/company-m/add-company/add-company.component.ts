@@ -4,6 +4,7 @@ import {CompanyMService} from '../../../service/companyM/company-m.service';
 import {Router} from '@angular/router';
 import {AreaService} from '../../../service/area/area.service';
 import {positionCate} from '../../../mockData/positionCate';
+import {variable} from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-add-company',
@@ -56,11 +57,16 @@ export class AddCompanyComponent implements OnInit {
 
   ngOnInit() {
     this.getProvince();
+
   }
 
   onChanges(values: any): void {
+    console.log(this.values);
+    console.log(values);
     const len = values.length;
     this.industryId = values[len - 1];
+    console.log(values[len - 1]);
+    console.log(this.industryId);
   }
 
   provinceChange(value: string): void {
@@ -120,6 +126,7 @@ export class AddCompanyComponent implements OnInit {
       this.area = '';
     }
 
+    console.log(this.industryId);
     this.companyService.addCompany(this.industryId, this.name, this.province, this.city, this.area, this.address, this.phone, this.nature, this.profile,
       this.remark, this.contact, this.wxNumber, this.leader).subscribe(
       res => {
