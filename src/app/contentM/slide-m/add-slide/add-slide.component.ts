@@ -44,12 +44,12 @@ export class AddSlideComponent implements OnInit {
   ngOnInit() {
     const accessToken = window.localStorage.getItem('accessToken');
     const idToken = window.localStorage.getItem('idToken');
-    this.uploadServeName = this.config.baseUrl + '/api/v1.admin.File/upload?accessToken=' + accessToken+
-      '&id_token='+idToken;
+    this.uploadServeName = this.config.baseUrl + '/api/v1.File/oss?accessToken=' + accessToken;
   }
 
   // upload 缩略图上传
   uploadChange($event): void {
+    console.log($event);
     if ($event.type == 'success') {
       this.fileList = $event.fileList;
       const result = $event.file.response;

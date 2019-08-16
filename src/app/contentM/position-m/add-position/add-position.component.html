@@ -3,7 +3,7 @@
     <div class="left">职位分类</div>
     <div class="right">
       <nz-cascader
-        [nzExpandTrigger] = "'hover'"
+        [nzExpandTrigger]="'hover'"
         [nzOptions]="nodes"
         [nzLabelProperty]="'name'"
         [nzValueProperty]="'id'"
@@ -18,8 +18,8 @@
 
   <div class="con">
     <div class="left">职位名字</div>
-    <div class="right" >
-      <input style="width: 200px;" nz-input  [(ngModel)]="name" />
+    <div class="right">
+      <input style="width: 200px;" nz-input [(ngModel)]="name"/>
     </div>
   </div>
 
@@ -41,19 +41,19 @@
   <div class="con">
     <div class="left">薪资</div>
     <div class="right">
-      <nz-input-number [(ngModel)]="minPay" [nzMin]="0" ></nz-input-number>
+      <nz-input-number [(ngModel)]="minPay" [nzMin]="0"></nz-input-number>
       <i nz-icon nzType="minus" style="width: 20px;" nzTheme="outline"></i>
-      <nz-input-number [(ngModel)]="maxPay" [nzMin]="0" ></nz-input-number>
+      <nz-input-number [(ngModel)]="maxPay" [nzMin]="0"></nz-input-number>
       <span style="color:red;margin-left: 15px;">( 最低 - 最高 )</span>
     </div>
   </div>
 
   <div class="con">
     <div class="left">工作年限</div>
-    <div class="right" >
-      <input nz-input  style="width: 90px;" [(ngModel)]="minWorkExp"  />
+    <div class="right">
+      <input nz-input style="width: 90px;" [(ngModel)]="minWorkExp"/>
       <i nz-icon nzType="minus" style="width: 20px;" nzTheme="outline"></i>
-      <input nz-input  style="width: 90px;"  [(ngModel)]="maxWorkExp" />
+      <input nz-input style="width: 90px;" [(ngModel)]="maxWorkExp"/>
       <span style="color:red;margin-left: 15px;">( 最低 - 最高 )</span>
     </div>
   </div>
@@ -62,7 +62,7 @@
   <div class="con">
     <div class="left">学历</div>
     <div class="right">
-      <nz-select  style="width: 200px;" [(ngModel)]="education"  nzPlaceHolder="请选择">
+      <nz-select style="width: 200px;" [(ngModel)]="education" nzPlaceHolder="请选择">
         <nz-option nzValue="不限" nzLabel="不限"></nz-option>
         <nz-option nzValue="初中及以下" nzLabel="初中及以下"></nz-option>
         <nz-option nzValue="高中" nzLabel="高中"></nz-option>
@@ -94,7 +94,7 @@
   <div class="con">
     <div class="left">招聘数量</div>
     <div class="right">
-      <input style="width: 200px;" nz-input  [(ngModel)]="num" />
+      <input style="width: 200px;" nz-input [(ngModel)]="num"/>
     </div>
   </div>
 
@@ -114,8 +114,8 @@
 
   <div class="con">
     <div class="left">军人优先</div>
-    <div class="right" >
-      <nz-select style="width: 200px;"  [(ngModel)]="isSoldierPriority"  nzPlaceHolder="请选择">
+    <div class="right">
+      <nz-select style="width: 200px;" [(ngModel)]="isSoldierPriority" nzPlaceHolder="请选择">
         <nz-option nzValue="1" nzLabel="是"></nz-option>
         <nz-option nzValue="0" nzLabel="否"></nz-option>
       </nz-select>
@@ -125,21 +125,43 @@
   <div class="con" style="height: 400px;">
     <div class="left">岗位职责</div>
     <div class="right">
-      <ngx-neditor style="width: 100%;height: 300px;" [(ngModel)]="positionRequirement" #neditor [config]="neditorConfig"></ngx-neditor>
+      <ngx-neditor style="width: 100%;height: 300px;" [(ngModel)]="positionRequirement" #neditor
+                   [config]="neditorConfig"></ngx-neditor>
     </div>
   </div>
 
+  <!--  <div class="con">-->
+  <!--    <div class="left">展示状态</div>-->
+  <!--    <div class="right">-->
+  <!--      <nz-select  style="width: 200px;" [(ngModel)]="isShow"  nzPlaceHolder="请选择">-->
+  <!--        <nz-option nzValue="1" nzLabel="展示"></nz-option>-->
+  <!--        <nz-option nzValue="0" nzLabel="不展示"></nz-option>-->
+  <!--      </nz-select>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+<!--  <div style="clear: both;"></div>-->
 <!--  <div class="con">-->
-<!--    <div class="left">展示状态</div>-->
+<!--    <div class="left">面试时间</div>-->
 <!--    <div class="right">-->
-<!--      <nz-select  style="width: 200px;" [(ngModel)]="isShow"  nzPlaceHolder="请选择">-->
-<!--        <nz-option nzValue="1" nzLabel="展示"></nz-option>-->
-<!--        <nz-option nzValue="0" nzLabel="不展示"></nz-option>-->
-<!--      </nz-select>-->
+<!--      <nz-date-picker [(ngModel)]="interviewTime" (ngModelChange)="onChange($event)"-->
+<!--                      [nzFormat]="'yyyy-MM-dd'"></nz-date-picker>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="con">-->
+<!--    <div class="left">面试地点</div>-->
+<!--    <div class="right">-->
+<!--      <input type="text" nz-input [(ngModel)]="interviewAddress">-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="con">-->
+<!--    <div class="left">接单价格</div>-->
+<!--    <div class="right">-->
+<!--      <input type="text" nz-input [(ngModel)]="unitPrice">-->
 <!--    </div>-->
 <!--  </div>-->
   <div style="margin-top: 40px;float: right;margin-bottom: 50px;">
-    <button nz-button nzType="primary"  (click)="addPosition()" >添加</button>
+    <button nz-button nzType="primary" (click)="addPosition()">添加</button>
   </div>
   <div style="clear: both;"></div>
 

@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
 
   validateForm: FormGroup;
 
-
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
@@ -52,6 +51,7 @@ export class LoginComponent implements OnInit {
           this.msg.warning(res.msg);
         }
       }, err => {
+        console.log(err);
         this.msg.error('服务异常');
       }
     );
