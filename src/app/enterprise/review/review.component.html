@@ -1,1 +1,56 @@
-<p>review works!</p>
+<div class="inner-content">
+  <nz-table #basicTable [nzData]="listOfData"
+            [nzSize]="'small'"
+            nzShowPagination='false'
+  >
+    <thead>
+    <tr>
+      <th>记录id</th>
+      <th>真实姓名</th>
+      <th>手机号</th>
+      <th>身份证id</th>
+      <th>身份证前图</th>
+      <th>身份证背面</th>
+      <th>公司名字</th>
+      <th>公司地址</th>
+      <th>营业执照</th>
+      <th>资质证明</th>
+      <th>认证状态</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.id}}</td>
+      <td>{{data.realname}}</td>
+      <td>{{data.realphone}}</td>
+      <td>{{data.idCard}}</td>
+      <td><img style="width: 100px;height: 50px;" src="{{data.idCardFrontPic}}" alt=""></td>
+      <td><img style="width: 100px;height: 50px;" src="{{data.idCardBackPic}}" alt=""></td>
+      <td>{{data.companyName}}</td>
+      <td>{{data.companyAddr}}</td>
+      <td><img style="width: 100px;height: 50px;" src="{{data.businessLic}}" alt=""></td>
+      <td><img style="width: 100px;height: 50px;" src="{{data.otherQuaLic}}" alt=""></td>
+      <td *ngIf="data.pass == 0"><span style="color:greenyellow;">待审核</span></td>
+      <td *ngIf="data.pass == 1"><span style="color:blue;">通过</span></td>
+      <td *ngIf="data.pass == -1"><span style="color:red;">拒绝</span></td>
+      <td>
+        <button nz-button nzType="primary" (click)="review(data.id,1)">通过</button>
+        <nz-divider style="float: left;" nzType="vertical"></nz-divider>
+        <button nz-button nzType="danger" (click)="review(data.id,-1)">拒绝</button>
+        <nz-divider style="float: left;" nzType="vertical"></nz-divider>
+
+        <div style="clear: both;"></div>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+
+  <nz-pagination style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
+                 [nzTotal]="pageTotal"
+                 (nzPageIndexChange)="getListPage()"
+                 [nzShowTotal]="totalTemplate"
+  ></nz-pagination>
+  <ng-template #totalTemplate let-total> 总共 {{ pageTotal }} 条数据</ng-template>
+  <div style="clear: both;"></div>
+</div>

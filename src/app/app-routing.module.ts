@@ -27,6 +27,8 @@ import {ResumeComponent} from './dataM/resume/resume.component';
 // import {EditResumeComponent} from './dataM/resume/edit-resume/edit-resume.component';
 import {AuthGuard} from './auth/auth.guard';
 import {ResumeRecordComponent} from './dataM/resume-record/resume-record.component';
+import {ReviewComponent} from './enterprise/review/review.component';
+import {MsgComponent} from './enterprise/msg/msg.component';
 
 const routes: Routes = [
 
@@ -70,7 +72,10 @@ const routes: Routes = [
       {path: 'dataM', component: ResumeComponent},
       // {path: 'dataM/edit-resume', component: EditResumeComponent},
 
-      {path:'dataRecordM',component:ResumeRecordComponent}
+      {path: 'dataRecordM', component: ResumeRecordComponent},
+
+      {path: 'epReview', component: ReviewComponent},
+      {path: 'epMsg', component: MsgComponent},
 
     ]
   },

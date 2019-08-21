@@ -1,43 +1,44 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { IconsProviderModule } from './icons-provider.module';
-import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {IconsProviderModule} from './icons-provider.module';
+import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { registerLocaleData } from '@angular/common';
-import zh from '@angular/common/locales/zh';
-import { NewsMComponent } from './contentM/news-m/news-m.component';
-import { SlideMComponent } from './contentM/slide-m/slide-m.component';
-import { ResumeMComponent } from './contentM/resume-m/resume-m.component';
-import { PositionMComponent } from './contentM/position-m/position-m.component';
-import { CompanyMComponent } from './contentM/company-m/company-m.component';
-import { CateMComponent } from './contentM/cate-m/cate-m.component';
-import { LabelMComponent } from './contentM/label-m/label-m.component';
-import { AddNewsComponent } from './contentM/news-m/add-news/add-news.component';
-import { NgxNeditorModule } from '@notadd/ngx-neditor';
-import { LoginComponent } from './user/login/login.component';
-import { IndexComponent } from './index/index/index.component';
-import { EditNewsComponent } from './contentM/news-m/edit-news/edit-news.component';
-import { AddSlideComponent } from './contentM/slide-m/add-slide/add-slide.component';
-import { AddCompanyComponent } from './contentM/company-m/add-company/add-company.component';
-import { PositionPageComponent } from './contentM/company-m/position-page/position-page.component';
-import { AddPositionComponent } from './contentM/position-m/add-position/add-position.component';
-import { AddCateComponent } from './contentM/cate-m/add-cate/add-cate.component';
-import { AddLabelComponent } from './contentM/label-m/add-label/add-label.component';
-import { EditSlideComponent } from './contentM/slide-m/edit-slide/edit-slide.component';
-import { EditPositionComponent } from './contentM/position-m/edit-position/edit-position.component';
-import { EditCompanyComponent } from './contentM/company-m/edit-company/edit-company.component';
-import { EditCateComponent } from './contentM/cate-m/edit-cate/edit-cate.component';
-import { EditLabelComponent } from './contentM/label-m/edit-label/edit-label.component';
-import { WelcomeComponent } from './index/welcome/welcome.component';
-import { ResumeComponent } from './dataM/resume/resume.component';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // import { EditResumeComponent } from './dataM/resume/edit-resume/edit-resume.component';
-import { HashLocationStrategy,LocationStrategy } from "@angular/common";
-import { ResumeRecordComponent } from './dataM/resume-record/resume-record.component';
+import {HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angular/common';
+import zh from '@angular/common/locales/zh';
+import {NewsMComponent} from './contentM/news-m/news-m.component';
+import {SlideMComponent} from './contentM/slide-m/slide-m.component';
+import {ResumeMComponent} from './contentM/resume-m/resume-m.component';
+import {PositionMComponent} from './contentM/position-m/position-m.component';
+import {CompanyMComponent} from './contentM/company-m/company-m.component';
+import {CateMComponent} from './contentM/cate-m/cate-m.component';
+import {LabelMComponent} from './contentM/label-m/label-m.component';
+import {AddNewsComponent} from './contentM/news-m/add-news/add-news.component';
+import {NgxNeditorModule} from '@notadd/ngx-neditor';
+import {LoginComponent} from './user/login/login.component';
+import {IndexComponent} from './index/index/index.component';
+import {EditNewsComponent} from './contentM/news-m/edit-news/edit-news.component';
+import {AddSlideComponent} from './contentM/slide-m/add-slide/add-slide.component';
+import {AddCompanyComponent} from './contentM/company-m/add-company/add-company.component';
+import {PositionPageComponent} from './contentM/company-m/position-page/position-page.component';
+import {AddPositionComponent} from './contentM/position-m/add-position/add-position.component';
+import {AddCateComponent} from './contentM/cate-m/add-cate/add-cate.component';
+import {AddLabelComponent} from './contentM/label-m/add-label/add-label.component';
+import {EditSlideComponent} from './contentM/slide-m/edit-slide/edit-slide.component';
+import {EditPositionComponent} from './contentM/position-m/edit-position/edit-position.component';
+import {EditCompanyComponent} from './contentM/company-m/edit-company/edit-company.component';
+import {EditCateComponent} from './contentM/cate-m/edit-cate/edit-cate.component';
+import {EditLabelComponent} from './contentM/label-m/edit-label/edit-label.component';
+import {WelcomeComponent} from './index/welcome/welcome.component';
+import {ResumeComponent} from './dataM/resume/resume.component';
+import {ResumeRecordComponent} from './dataM/resume-record/resume-record.component';
+import { ReviewComponent } from './enterprise/review/review.component';
+import { MsgComponent } from './enterprise/msg/msg.component';
 
 registerLocaleData(zh);
 
@@ -69,7 +70,9 @@ registerLocaleData(zh);
     WelcomeComponent,
     ResumeComponent,
     // EditResumeComponent,
-    ResumeRecordComponent
+    ResumeRecordComponent,
+    ReviewComponent,
+    MsgComponent
   ],
   imports: [
     BrowserModule,

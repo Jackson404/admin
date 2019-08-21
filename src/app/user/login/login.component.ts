@@ -44,8 +44,12 @@ export class LoginComponent implements OnInit {
     this.loginService.login(username, password).subscribe(
       res => {
         if (res.errorCode == 0) {
-          window.localStorage.setItem('idToken', res.data.id_token);
+          const idToken = res.data.id_token;
+          window.localStorage.setItem('idToken', idToken);
           window.localStorage.setItem('adminUserName',res.data.username);
+          window.localStorage.setItem('userType',res.data.type);
+          // const strPos = idToken.indexOf('|');
+          // const userId = idToken.substring(0,strPos);
           this.router.navigateByUrl('/home/welcome');
         } else {
           this.msg.warning(res.msg);

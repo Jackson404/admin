@@ -17,7 +17,7 @@ export class EditPositionComponent implements OnInit {
   agesData: any = ages;
   positionId: any;
   companyName: any;
-  editCompanyId:any;
+  editCompanyId: any;
 
   companyId: any;
   positionCateId: any;
@@ -30,9 +30,16 @@ export class EditPositionComponent implements OnInit {
   num: any = 0;
   age: any = 0;
   isSoldierPriority: any;
-  address: any = '';
+  // address: any = '';
   positionRequirement: any = '';
   isShow: any = 1;
+  interviewTime: any;
+  interviewTimeStamp: any;
+  interviewAddress: any;
+  unitPrice: any;
+  endTime: any;
+  endTimeStamp: any;
+  positionType: any;
 
   companyList: any = [];
 
@@ -57,6 +64,7 @@ export class EditPositionComponent implements OnInit {
   labels: any = [];
   selectedTags: any = [];
   selectedLabels: any = '';
+
   //标签结束
 
 
@@ -81,6 +89,25 @@ export class EditPositionComponent implements OnInit {
     this.getAllByTree();
     this.getAllLabels();
     this.getAllCompany();
+  }
+
+  // 面试时间
+  onInterviewTimeChange(result: Date): void {
+
+    this.interviewTimeStamp = Math.round(result.getTime() / 1000).toString();
+  }
+
+  onInterviewTimeOk(result: Date): void {
+    this.interviewTimeStamp = Math.round(result.getTime() / 1000).toString();
+  }
+
+  // 截止时间
+  onEndTimeChange(result: Date): void {
+    this.endTimeStamp = Math.round(result.getTime() / 1000).toString();
+  }
+
+  onEndTimeOk(result: Date): void {
+    this.endTimeStamp = Math.round(result.getTime() / 1000).toString();
   }
 
   // 类型
@@ -167,8 +194,13 @@ export class EditPositionComponent implements OnInit {
           this.num = detail.num;
           this.age = detail.age;
           this.isSoldierPriority = detail.isSoldierPriority;
-          this.address = detail.address;
+          // this.address = detail.address;
           this.positionRequirement = detail.positionRequirement;
+          this.interviewAddress = detail.interviewAddress;
+          this.interviewTimeStamp = detail.interviewTime;
+          this.endTimeStamp = detail.endTime;
+          this.positionType = detail.positionType;
+          this.unitPrice = detail.unitPrice;
           this.isShow = detail.isShow;
           this.selectedTags = detail.labelIds;
           this.selectedLabels = detail.labelIds.join(',');
@@ -185,7 +217,8 @@ export class EditPositionComponent implements OnInit {
   // 编辑职位
   editPosition(): void {
     this.positionService.editPosition(this.positionId, this.positionCateId, this.name, this.companyId, this.minPay, this.maxPay, this.minWorkExp, this.maxWorkExp,
-      this.education, this.age, this.num, this.selectedLabels, this.isSoldierPriority, this.address, this.positionRequirement,
+      this.education, this.age, this.num, this.selectedLabels, this.isSoldierPriority, this.positionRequirement,
+      this.interviewTimeStamp, this.endTimeStamp, this.interviewAddress, this.unitPrice, this.positionType,
       this.isShow).subscribe(
       res => {
         if (res.errorCode == 0) {

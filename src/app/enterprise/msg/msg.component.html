@@ -1,1 +1,31 @@
-<p>msg works!</p>
+<div class="inner-content">
+
+  <div class="con">
+    <div class="left">标题：</div>
+    <div class="right">
+      <input nz-input [(ngModel)]="title"/>
+    </div>
+  </div>
+
+  <div class="con">
+    <div class="left">内容：</div>
+    <div class="right">
+      <textarea rows="4" nz-input [(ngModel)]="content"></textarea>
+    </div>
+  </div>
+  <div class="con">
+    <div class="left">接收人：</div>
+    <div class="right">
+      <nz-select style="width: 120px;" [(ngModel)]="recUserId" nzAllowClear nzPlaceHolder="接收人">
+        <nz-option *ngFor="let user of userList;" [nzValue]="user.id" nzLabel="{{user.realname}}"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div class="con">
+    <div style="margin-top: 40px;float: right;margin-bottom: 50px;">
+      <button nz-button nzType="primary" (click)="addMsg()">发送</button>
+    </div>
+  </div>
+  <div style="clear: both;"></div>
+
+</div>

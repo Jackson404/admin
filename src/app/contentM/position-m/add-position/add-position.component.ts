@@ -26,10 +26,18 @@ export class AddPositionComponent implements OnInit {
   num: any = '';
   age: any = '';
   isSoldierPriority: any;
-  address: any = '';
+  // address: any = '';
   positionRequirement: any = '';
   isShow: any = 1;
-  agesData:any = ages;
+  interviewTime: any;
+  interviewTimeStamp:any;
+  interviewAddress: any;
+  unitPrice: any;
+  endTime: any ;
+  endTimeStamp:any;
+  positionType: any;
+
+  agesData: any = ages;
 
   companyList: any = [];
 
@@ -50,8 +58,9 @@ export class AddPositionComponent implements OnInit {
   onChange($event: string): void {
     this.values = $event;
     const len = $event.length;
-    this.positionCateId = $event[len-1];
+    this.positionCateId = $event[len - 1];
   }
+
   // 职位类型结束
 
   //标签
@@ -70,6 +79,7 @@ export class AddPositionComponent implements OnInit {
     this.selectedLabels = this.selectedTags.join(',');
 
   }
+
   //标签结束
 
 
@@ -87,6 +97,25 @@ export class AddPositionComponent implements OnInit {
     this.getAllByTree();
     this.getAllLabels();
     this.getAllCompany();
+  }
+
+  // 面试时间
+  onInterviewTimeChange(result: Date): void {
+
+    this.interviewTimeStamp = Math.round(result.getTime()/1000).toString();
+  }
+
+  onInterviewTimeOk(result: Date): void {
+    this.interviewTimeStamp =  Math.round(result.getTime()/1000).toString();
+  }
+
+  // 截止时间
+  onEndTimeChange(result: Date): void {
+    this.endTimeStamp =  Math.round(result.getTime()/1000).toString();
+  }
+
+  onEndTimeOk(result: Date): void {
+    this.endTimeStamp =  Math.round(result.getTime()/1000).toString();
   }
 
 
@@ -138,8 +167,10 @@ export class AddPositionComponent implements OnInit {
 
   // 添加职位
   addPosition(): void {
+    console.log(this.interviewTimeStamp);
     this.positionService.addPosition(this.positionCateId, this.name, this.companyId, this.minPay, this.maxPay, this.minWorkExp, this.maxWorkExp,
-      this.education, this.age, this.num, this.selectedLabels, this.isSoldierPriority, this.address, this.positionRequirement,
+      this.education, this.age, this.num, this.selectedLabels, this.isSoldierPriority, this.positionRequirement,
+      this.interviewTimeStamp, this.endTimeStamp, this.interviewAddress, this.unitPrice, this.positionType,
       this.isShow).subscribe(
       res => {
         if (res.errorCode == 0) {
