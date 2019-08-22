@@ -39,6 +39,7 @@ import {ResumeComponent} from './dataM/resume/resume.component';
 import {ResumeRecordComponent} from './dataM/resume-record/resume-record.component';
 import { ReviewComponent } from './enterprise/review/review.component';
 import { MsgComponent } from './enterprise/msg/msg.component';
+import { UserComponent } from './enterprise/user/user.component';
 
 registerLocaleData(zh);
 
@@ -72,7 +73,8 @@ registerLocaleData(zh);
     // EditResumeComponent,
     ResumeRecordComponent,
     ReviewComponent,
-    MsgComponent
+    MsgComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

@@ -35,4 +35,29 @@ export class ReviewService {
     return this.http.doPost(url, params);
   }
 
+  getEpUserPage(pageIndex, pageSize): Observable<any> {
+    const url = '/api/v1.admin.EpUser/getEpUserPage';
+    const params = 'pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
+    return this.http.doPost(url, params);
+  }
+
+  getEmUserPageByEpId(epId, pageIndex, pageSize): Observable<any> {
+    const url = '/api/v1.admin.EpUser/getEmUserPageByEpId';
+    const params = 'epId=' + epId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&id_token=' + this.idToken;
+    return this.http.doPost(url, params);
+  }
+
+  addEmUser(companyName, realname, realphone): Observable<any> {
+    const url = '/api/v1.admin.EpUser/addEmUser';
+    const params = 'companyName=' + companyName + '&realname=' + realname + '&realphone=' + realphone + '&id_token=' + this.idToken;
+    return this.http.doPost(url, params);
+  }
+
+  addEpUser(realname, realphone, companyName, companyAddr): Observable<any> {
+    const url = '/api/v1.admin.EpUser/addEpUser';
+    const params = 'companyAddr=' + companyAddr + '&companyName=' + companyName + '&realname=' + realname + '&realphone=' + realphone + '&id_token=' + this.idToken;
+    return this.http.doPost(url, params);
+  }
+
+
 }

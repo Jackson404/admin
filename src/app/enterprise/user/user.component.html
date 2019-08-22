@@ -1,0 +1,96 @@
+<div class="inner-content">
+  <button nz-button style="margin-bottom: 20px;" nzType="primary" (click)="addEpUser()">添加企业用户</button>
+  <nz-table #basicTable [nzData]="listOfData"
+            [nzSize]="'small'"
+            nzShowPagination='false'
+  >
+    <thead>
+    <tr>
+      <th>记录id</th>
+      <th>真实姓名</th>
+      <th>手机号</th>
+      <th>公司名字</th>
+      <th>认证状态</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.id}}</td>
+      <td>{{data.name}}</td>
+      <td>{{data.phone}}</td>
+      <td>{{data.realname}}</td>
+      <td *ngIf="data.isReview == 1"><span style="color:greenyellow;">审核中</span></td>
+      <td *ngIf="data.isReview == 2"><span style="color:blue;">通过</span></td>
+      <td *ngIf="data.isReview == 0"><span style="color:red;">待审核</span></td>
+      <td>
+        <button nz-button nzType="primary" (click)="showAddEmUser(data.realname)" style="margin-right: 10px;">添加员工</button>
+        <nz-divider style="float: left;" nzType="vertical"></nz-divider>
+        <button nz-button nzType="dashed"  (click)="showEmUser(data.epId)">员工列表</button>
+        <div style="clear: both;"></div>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+
+  <nz-pagination style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
+                 [nzTotal]="pageTotal"
+                 (nzPageIndexChange)="getEpUserPage()"
+                 [nzShowTotal]="totalTemplate"
+  ></nz-pagination>
+  <ng-template #totalTemplate let-total> 总共 {{ pageTotal }} 条数据</ng-template>
+  <div style="clear: both;"></div>
+</div>
+
+<!--弹出员工列表-->
+<nz-modal [(nzVisible)]="isVisibleEm" nzTitle="员工列表" (nzOnCancel)="handleCancelEm()" (nzOnOk)="handleOkEm()">
+  <nz-table #emTable [nzData]="emListOfData"
+            [nzSize]="'small'"
+            nzShowPagination='false'
+  >
+    <thead>
+    <tr>
+      <th>记录id</th>
+      <th>真实姓名</th>
+      <th>手机号</th>
+      <th>公司名字</th>
+      <th>认证状态</th>
+<!--      <th>操作</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of emTable.data">
+      <td>{{data.id}}</td>
+      <td>{{data.name}}</td>
+      <td>{{data.phone}}</td>
+      <td>{{data.realname}}</td>
+      <td *ngIf="data.isReview == 1"><span style="color:greenyellow;">审核中</span></td>
+      <td *ngIf="data.isReview == 2"><span style="color:blue;">通过</span></td>
+      <td *ngIf="data.isReview == 0"><span style="color:red;">待审核</span></td>
+    </tr>
+    </tbody>
+  </nz-table>
+
+  <nz-pagination style="float: right;margin-top: 10px;" [(nzPageIndex)]="pageIndexEm" [(nzPageSize)]="pageSizeEm"
+                 [nzTotal]="pageTotalEm"
+                 (nzPageIndexChange)="getEpUserPage()"
+                 [nzShowTotal]="totalTemplate"
+  ></nz-pagination>
+  <ng-template #totalTemplate let-total> 总共 {{ pageTotalEm }} 条数据</ng-template>
+  <div style="clear: both;"></div>
+</nz-modal>
+
+<!--添加企业用户弹出框-->
+<nz-modal [(nzVisible)]="isVisibleAddEp" nzTitle="添加企业用户" (nzOnCancel)="handleCancelAddEp()" (nzOnOk)="handleOkAddEp()">
+  真实姓名：<input type="text" nz-input [(ngModel)]="realname">
+  手机号：<input type="text" nz-input [(ngModel)]="realphone">
+  公司名字：<input type="text" nz-input [(ngModel)]="companyName">
+  公司地址：<input type="text" nz-input [(ngModel)]="companyAddr">
+
+</nz-modal>
+
+<!--添加企业员工弹出框-->
+<nz-modal [(nzVisible)]="isVisibleAddEm" nzTitle="添加企业用户" (nzOnCancel)="handleCancelAddEm()" (nzOnOk)="handleOkAddEm()">
+  真实姓名：<input type="text" nz-input [(ngModel)]="realname">
+  手机号：<input type="text" nz-input [(ngModel)]="realphone">
+</nz-modal>

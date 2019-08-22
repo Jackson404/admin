@@ -121,6 +121,7 @@
       <th>工作年限</th>
       <th>期望薪资</th>
       <th>期望职位</th>
+      <th>导入时间</th>
       <th>操作</th>
     </tr>
     </thead>
@@ -140,6 +141,7 @@
       <td>{{data.workYear}}</td>
       <td>{{data.exSalary}}</td>
       <td>{{data.exPosition}}</td>
+      <td>{{data.createTime}}</td>
       <td>
         <div style="float: left;width: 18px;height: 18px;cursor: pointer;"
              *ngIf="data.type != 1"

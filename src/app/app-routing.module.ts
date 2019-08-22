@@ -29,6 +29,7 @@ import {AuthGuard} from './auth/auth.guard';
 import {ResumeRecordComponent} from './dataM/resume-record/resume-record.component';
 import {ReviewComponent} from './enterprise/review/review.component';
 import {MsgComponent} from './enterprise/msg/msg.component';
+import {UserComponent} from './enterprise/user/user.component';
 
 const routes: Routes = [
 
@@ -76,6 +77,7 @@ const routes: Routes = [
 
       {path: 'epReview', component: ReviewComponent},
       {path: 'epMsg', component: MsgComponent},
+      {path:'epUser',component:UserComponent}
 
     ]
   },
