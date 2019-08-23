@@ -115,6 +115,7 @@
       <th>名字</th>
       <th>性别</th>
       <th>手机号</th>
+      <th>备注</th>
       <th>出生年</th>
       <th>学历</th>
       <th>居住地</th>
@@ -135,6 +136,7 @@
       <td *ngIf="data.sex == 0">女</td>
       <td *ngIf="data.sex == -1">未知</td>
       <td>{{data.phone}}</td>
+      <td style="color: dodgerblue;">{{data.remark}}</td>
       <td>{{data.birthYear}}</td>
       <td>{{data.educationName}}</td>
       <td>{{data.habitation}}</td>
@@ -143,6 +145,10 @@
       <td>{{data.exPosition}}</td>
       <td>{{data.createTime}}</td>
       <td>
+        <div style="float: left;width: 18px;height: 18px;cursor: pointer;">
+          <i nz-icon nzType="plus" style="font-size: 16px; color: #08c;" nzTheme="outline"  (click)="showAddResumeRemarkModal(data.idCard,data.phone)"></i>
+        </div>
+        <nz-divider style="float: left;" nzType="vertical"></nz-divider>
         <div style="float: left;width: 18px;height: 18px;cursor: pointer;"
              *ngIf="data.type != 1"
              (click)="addStar(data.idCard,data.phone)">
@@ -161,7 +167,7 @@
         </div>
         <nz-divider style="float: left;" nzType="vertical"></nz-divider>
         <div style="float: left;width: 18px;height: 18px;cursor: pointer;"
-             (click)="delResume(data.idCard,data.phone)"
+             (click)="showDelResume(data.idCard,data.phone)"
         >
           <img style="width: 18px;height: 18px;" src="../../../assets/icons/del.png" alt="">
         </div>
@@ -379,4 +385,16 @@
       </div>
     </div>
     <div style="clear: both;"></div>
+</nz-modal>
+
+<!--编辑简历备注-->
+<nz-modal [(nzVisible)]="isVisibleAddResumeRemark" nzWidth="50%" nzTitle="编辑简历备注" (nzOnCancel)="handleCancelAddResumeRemark()"
+          (nzOnOk)="handleOkAddResumeRemark()">
+  <div class="con">
+    <div class="left">备注</div>
+    <div class="right">
+      <input nz-input [(ngModel)]="resumeRemark"/>
+    </div>
+  </div>
+  <div style="clear: both;"></div>
 </nz-modal>

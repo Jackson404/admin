@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ResumeService} from '../../service/dataM/resume.service';
-import {NzMessageService} from 'ng-zorro-antd';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {AreaService} from '../../service/area/area.service';
 import {workExp} from '../../mockData/workExp';
 import {educationTag} from '../../mockData/educationTag';
@@ -66,14 +66,19 @@ export class ResumeComponent implements OnInit {
   habitationE: any;
   houseLocationE: any;
   workUnitE: any;
+  resumeRemark: any = '';
 
   resumeDetail: any;
+
+  isVisibleAddResumeRemark: any = false;
+
 
   constructor(
     private resumeService: ResumeService,
     private msg: NzMessageService,
     private areaService: AreaService,
-    private router: Router
+    private router: Router,
+    private modalService: NzModalService
   ) {
   }
 
@@ -182,6 +187,7 @@ export class ResumeComponent implements OnInit {
     this.resumeService.filterResumeData(this.posKey, this.exWorkLocation, this.workExp, this.educationName, this.minAge, this.maxAge, this.sex, this.pageIndex, this.pageSize).subscribe(
       res => {
         if (res.errorCode == 0) {
+
           this.listOfData = res.data.page;
           this.pageTotal = res.data.total;
         } else {
@@ -249,6 +255,18 @@ export class ResumeComponent implements OnInit {
     );
   }
 
+  showDelResume(idCard, phone): void {
+    this.modalService.confirm({
+      nzTitle: '删除简历',
+      nzContent: '<b style="color: red;">确定要删除这个简历吗？</b>',
+      nzOkText: '是',
+      nzOkType: 'danger',
+      nzOnOk: () => this.delResume(idCard, phone),
+      nzCancelText: '否',
+      // nzOnCancel: () => console.log('Cancel')
+    });
+  }
+
   delResume(idCard, phone): void {
     this.resumeService.delResume(idCard, phone).subscribe(
       res => {
@@ -264,12 +282,42 @@ export class ResumeComponent implements OnInit {
     );
   }
 
+  handleCancelAddResumeRemark(): void {
+    this.isVisibleAddResumeRemark = false;
+  }
 
-  handleCancelEdit():void{
+  handleOkAddResumeRemark(): void {
+    this.isVisibleAddResumeRemark = false;
+    this.addResumeRemark();
+  }
+  showAddResumeRemarkModal(idCard,phone):void{
+    this.isVisibleAddResumeRemark = true;
+    this.idCardE = idCard;
+    this.phoneE = phone;
+  }
+  // 添加备注
+  addResumeRemark(): void {
+    this.resumeService.editResumeRemark(this.idCardE, this.phoneE, this.resumeRemark).subscribe(
+      res => {
+        if (res.errorCode == 0) {
+          console.log(res);
+          this.msg.success('添加成功');
+          this.filterResumePage();
+        } else {
+          this.msg.warning(res.msg);
+        }
+
+      }, error => {
+        this.msg.error('服务异常');
+      }
+    );
+  }
+
+  handleCancelEdit(): void {
     this.isVisibleEdit = false;
   }
 
-  handleOkEdit():void{
+  handleOkEdit(): void {
     this.isVisibleEdit = false;
     this.resumeService.editResume(this.idCardE, this.phoneE, this.nameE, this.sexE, this.birthYearE, this.birthE, this.schoolE, 0, this.educationNameE,
       this.mailE, this.professionE, 0, this.workYearE, this.exPositionE, this.exSalaryE, this.exCityE, this.habitationE, this.houseLocationE,
@@ -287,7 +335,7 @@ export class ResumeComponent implements OnInit {
     );
   }
 
-  editResume(idCard,phone):void{
+  editResume(idCard, phone): void {
     this.isVisibleEdit = true;
     this.resumeService.getDetail(idCard, phone).subscribe(
       res => {
@@ -319,8 +367,6 @@ export class ResumeComponent implements OnInit {
       }
     );
   }
-
-
 
 
 }

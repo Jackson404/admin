@@ -59,10 +59,10 @@ export class ResumeService {
     return this.http.doPostFormData(url, formData);
   }
 
-  updateRecord(recordId,recordName, remark, posKey, exWorkLocation, workExp, educationName, minAge, maxAge, sex): Observable<any> {
+  updateRecord(recordId, recordName, remark, posKey, exWorkLocation, workExp, educationName, minAge, maxAge, sex): Observable<any> {
     const url = '/api/v1.admin.ResumeData/updateRecord';
     const formData = new FormData();
-    formData.append('recordId',recordId);
+    formData.append('recordId', recordId);
     formData.append('recordName', recordName);
     formData.append('remark', remark);
     formData.append('posKey', posKey);
@@ -118,6 +118,16 @@ export class ResumeService {
     formData.append('habitation', habitation);
     formData.append('houseLocation', houseLocation);
     formData.append('workUnit', workUnit);
+    formData.append('id_token', this.idToken);
+    return this.http.doPostFormData(url, formData);
+  }
+
+  editResumeRemark(idCard, phone, remark): Observable<any> {
+    const url = '/api/v1.admin.ResumeData/editResumeRemark';
+    const formData = new FormData();
+    formData.append('idCard', idCard);
+    formData.append('phone', phone);
+    formData.append('remark', remark);
     formData.append('id_token', this.idToken);
     return this.http.doPostFormData(url, formData);
   }
